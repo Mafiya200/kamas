@@ -1,24 +1,23 @@
 import styleMyPosts from "./MyPosts.module.css";
+import Post from "./Post/Post";
 
 const MyPosts = function () {
   return (
     <div className={styleMyPosts.content}>
+              <h2>My posts</h2>
+
       <div className={styleMyPosts.content__body}>
-        <h2>My posts</h2>
 
         <textarea className={styleMyPosts.content__textarea} name="posts" placeholder="your news..."></textarea>
+        <div className={styleMyPosts.content__BlockButton}>
         <button className={styleMyPosts.content__button}>Send</button>
+
+        </div>
         <div className={styleMyPosts.content__posts}>
 
-          <div className={styleMyPosts.content__post}>asd</div>
-
-          <div className={styleMyPosts.content__post}>bbbbbb</div>
-
-          <div className={styleMyPosts.content__post}>vcvvvv</div>
-
-          <div className={styleMyPosts.content__post}>a44</div>
-
-          <div className={styleMyPosts.content__post}>hghg</div>
+          <Post />
+          <Post />
+          <Post />
 
         </div>
       </div>
