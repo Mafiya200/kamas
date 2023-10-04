@@ -1,0 +1,10 @@
+
+.nav{
+  background-color: aqua;
+  grid-column: 0 / 1;
+grid-row: 2 / 3;
+
+}
+.item > a{
+  color: white;
+}
