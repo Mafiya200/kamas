@@ -6,7 +6,7 @@
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
     grid-template-columns:2fr 10fr;
-    row-gap: 10px;
+    gap: 10px;
 
     /* justify-items: center; */
 }
