@@ -15,9 +15,9 @@ const MyPosts = function () {
         </div>
         <div className={styleMyPosts.content__posts}>
 
-          <Post />
-          <Post />
-          <Post />
+          <Post message = 'lorem1 lorem lorem lorem' like = '15' />
+          <Post message = 'lorem2 lorem lorem lorem' like = '25' />
+          <Post message = 'lorem3 lorem lorem lorem' like = '35' />
 
         </div>
       </div>

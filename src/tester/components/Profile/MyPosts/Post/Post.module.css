@@ -43,8 +43,12 @@
     object-fit: cover;
     width: 100%;
     height: 100%;
+cursor: pointer;
+transition: transform 0.3s;
 }
-
+.post__image:hover img{
+   transform: scale(1.1);
+}
 .post__title{
     margin-bottom: 15px;
     color: black;
@@ -54,12 +58,44 @@
 }
 .post__text{}
 .post__text > p{
-    font-size: 18px;
-
+    font-size: 20px;
+margin-bottom: 10px;
+}
+.post__like{
+    font-size: 19px;
+    font-weight: 500;
+    color: white;
 }
 
+.fonts{
+    margin-left: 10px;
+    display: inline-block;
+cursor: pointer;
+}
+.font{
+    transition: 0.2s;
+}
 
+.font:not(:last-child){
+   margin-right: 10px;
+}
 
+.like{
+    color: white;
+    
+}
+.like:hover{
+    color: green;
+}
+.dislike{
+    color: rgb(201, 201, 201);
+opacity: 0.5;
+}
+.dislike:hover{
+    opacity: 1;
+
+    color: red;
+}
 
 
 
