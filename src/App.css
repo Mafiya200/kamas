@@ -12,6 +12,12 @@
     /* justify-items: center; */
 }
 
+.body-content{
+    background-color: rgb(117, 84, 34);
+    grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
 
 
 

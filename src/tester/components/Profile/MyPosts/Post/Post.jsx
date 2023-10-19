@@ -1,7 +1,7 @@
 import stylePost from "./Post.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-
+ import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+ 
 
 
 const Post = function (props) {
@@ -16,7 +16,7 @@ const Post = function (props) {
             </div>
           </div>
           <div className={`${stylePost.post__item} ${stylePost.post__item_text}`}>
-            <div className={stylePost.post__title}>Lorem, ipsum dolor.</div>
+            <div className={stylePost.post__title}>{props.name}</div>
             <div className={stylePost.post__text}>
               <p>{props.message}
               </p>
@@ -30,6 +30,7 @@ const Post = function (props) {
                   <span className={`${stylePost.dislike} ${stylePost.font}`}>
                     <FontAwesomeIcon icon={faThumbsDown} />
                     </span>
+                   
 
                 </div>
               </div>

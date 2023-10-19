@@ -1,21 +1,27 @@
+import { NavLink } from "react-router-dom";
 import styleNavBar from "./NavBar.module.css";
 
-const NavBar = function(){
-    return(
-<nav className={styleNavBar.nav}>
-        <div className={styleNavBar.item}>
-          <a href='#'> Profile </a>
-        </div>
-        <div className={styleNavBar.item}>
-          <a href='#'>News</a>
-        </div>
-        <div className={styleNavBar.item}>
-          <a href='#'>Music</a>
-        </div>
-        <div className={styleNavBar.item}>
-          <a href='#'>Settings</a>
-        </div>
-      </nav>
-    );
+
+
+const NavBar = function (props) {
+
+  let newNavBar = props.NavBarLinksNames.map(function (item, index, array) {
+    return (
+
+    <div className={styleNavBar.item} key={item}>
+        <NavLink className={({ isActive }) => isActive ? styleNavBar.active : ' '} to={`/${item.toLowerCase()}`} >{item}</NavLink>
+    </div>
+    )
+  });
+
+
+
+
+  return (
+    <nav className={styleNavBar.nav}>
+
+     {newNavBar}
+    </nav>
+  );
 }
 export default NavBar;

@@ -6,5 +6,12 @@ grid-row: 2 / 3;
 
 }
 .item > a{
+  transition: 0.3s;
   color: white;
+}
+/* .item > a:hover{
+  color: gold;
+} */
+.item > a.active{
+  color: gold;
 }

@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import state from './redux/state.js';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App /* postArr={state.postArr} namesArray={state.namesArray}
+      NavBarLinksNames={state.NavBarLinksNames}
+      messageArr={state.messageArr}  */ appState = {state}/>
   </React.StrictMode>
 );
 

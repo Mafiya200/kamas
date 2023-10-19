@@ -1,0 +1,38 @@
+.chat{
+    background-color: white;
+    min-height: 100%; 
+    display: flex;
+    flex-direction: column;
+
+}
+.chat__container{
+    display: flex;
+    flex-direction: column;
+
+    flex: 1 1 auto;
+}
+
+.chat__body{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+.chat__title{
+    font-size: 25px;
+    font-weight: 500;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+.chat__dialogs{
+    flex: 1 1 auto;
+    display: flex;
+    
+}
+.chat__names{
+    
+    flex: 0 0 40%;
+    border-right: 2px solid #6d8994;
+}
+.chat__userMessages{
+    flex: 1 1 auto;
+}
