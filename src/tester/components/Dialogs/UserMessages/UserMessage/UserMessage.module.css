@@ -1,0 +1,46 @@
+.userMessage{
+    padding: 25px 0;
+
+}
+.userMessage__body{
+    display: inline-block;
+    padding: 10px;
+    background-color: rgb(157, 245, 191);
+max-width: 70%;
+}
+.userMessage__item{
+
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+}
+.userMessage__avatar{
+    grid-row: 1/3;
+    grid-column: 1/2;
+}
+.userMessage__image{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+.userMessage__image img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.userMessage__name{
+    text-align: start;
+    margin-bottom: 5px;
+}
+.userMessage__text{
+    text-align: start;
+    padding-right: 5px;
+    font-size: 18px;
+/*     align-self: center;
+ */}

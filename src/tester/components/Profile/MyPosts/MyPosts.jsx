@@ -1,14 +1,20 @@
+import React from "react";
 import styleMyPosts from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 
+let link = React.createRef();
 
 
 
 const MyPosts = function (props) {
 
-  let newMyPosts = props.postArr.map(function (item, index, array) {
+  let addPost = function () {
+props.addMessageUser(link.current.value);
 
+  }
+  let newMyPosts = props.postArr.map(function (item, index, array) {
+    
     return (
       <Post key={item.id} message={item.message} like={item.likes} name={item.name} />
 
@@ -22,9 +28,9 @@ const MyPosts = function (props) {
 
       <div className={styleMyPosts.content__body}>
 
-        <textarea className={styleMyPosts.content__textarea} name="posts" placeholder="your news..."></textarea>
-        <div className={styleMyPosts.content__BlockButton}>
-          <button className={styleMyPosts.content__button}>Send</button>
+        <textarea ref={link} className='content__textarea' name="posts" placeholder="your news..."></textarea>
+        <div className="content__BlockButton">
+          <button  onClick={addPost} className="content__button">Send</button>
 
         </div>
         <div className={styleMyPosts.content__posts}>

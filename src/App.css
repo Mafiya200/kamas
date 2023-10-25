@@ -6,7 +6,7 @@
     display: grid;
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns:2fr 10fr;
+    grid-template-columns:minmax(200px,280px) 1fr;
     gap: 10px;
 
     /* justify-items: center; */
@@ -17,7 +17,35 @@
     grid-column: 2 / 3;
   grid-row: 2 / 3;
 }
+.content__textarea{
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  height: 150px;
+  resize: none;
+  margin-bottom: 20px;
+  background-color: rgb(212, 211, 211);
 
 
+}
+.content__BlockButton{
+  text-align: end;
+}
+.content__button{
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 0 40px;
+  line-height: 305%;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.3s;
+  background-color: green;
+}
+.content__button:hover{
+  
+  background-color: rgb(1, 77, 1);
+
+}
 
 

@@ -1,24 +1,36 @@
 
+import { render } from '../render';
 import UserMessage from '../tester/components/Dialogs/UserMessages/UserMessage/UserMessage';
- 
+
 
 
 let messages = ['Делегируйте вопрос написания качественных тек',
-        'ные статьи на сайт, продающие', 'Зарабатывайте на текстах удаленно',
-        'спам, воду и другие важные параметры качества.',
-        'ого контента. Ежедневно на Сервисе проверяются и создаются разные форматы: описания карточек товара, статьи и письменные работы. Мы создали пр',
-        'нителями, чтобы к',];
+    'ные статьи на сайт, продающие', 'Зарабатывайте на текстах удаленно',
+    'спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества.',
+    'ого контента. Ежедневно на Сервисе проверяются и создаются разные форматы: описания карточек товара, статьи и письменные работы. Мы создали пр',
+    'нителями, чтобы к',];
 
 
 let state = {
 
-    NavBarLinksNames: [
-        'Profile',
-        'Dialogs',
-        'News',
-        'Music',
-        'Settings',
-    ],
+    NavBar: {
+        NavBarLinks: [
+            'Profile',
+            'Dialogs',
+            'News',
+            'Music',
+            'Settings',
+        ],
+        friends: [
+            { id: 1, name: 'Lera', photo: 'https://zamena-lobovogo-stekla.ru/img/otziv/1.jpg', },
+            { id: 2, name: 'Andrew', photo: 'https://cojo.ru/wp-content/uploads/2022/12/pepe-retroveiv-3.webp', },
+            { id: 3, name: 'Vova', photo: 'https://pichold.ru/wp-content/uploads/2021/02/image_562610131056464036330.jpg', },
+            { id: 4, name: 'Vova', photo: 'https://pichold.ru/wp-content/uploads/2021/02/image_562610131056464036330.jpg', },
+        ],
+
+    },
+
+
 
     postArr: [
         { id: 1, message: 'lorem lorem lorem1', likes: 15, name: `jora` },
@@ -26,18 +38,15 @@ let state = {
         { id: 3, message: 'lorem lorem lorem3', likes: 35, name: `жора` },
         { id: 4, message: 'lorem lorem lorem4', likes: 45, name: `Жопа` },
         { id: 5, message: 'lorem lorem lorem5', likes: 55, name: `Писька` },
-        { id: 7, message: 'lorem lorem lorem6', likes: 65, name: `Члениська` },
-        { id: 8, message: 'lorem lorem lorem6', likes: 65, name: `Члениська` },
-        { id: 9, message: 'lorem lorem lorem6', likes: 65, name: `Члениська` },
-        { id: 10, message: 'lorem lorem lorem6', likes: 65, name: `Члениська` },
+       
 
 
     ],
     messageArr: {
         'andrew': (
             <>
-            
-            <UserMessage key='0' message={messages[0]} />
+
+                <UserMessage key='0' message={messages[0]} />
             </>
         ),
         'vova': (<>
@@ -78,8 +87,8 @@ let state = {
 
 
     },
-    
-    namesArray: [
+
+    namesArray: [ 
         { name: 'andrew', id: 1, },
         { name: 'vova', id: 2, },
         { name: 'roma', id: 3, },
@@ -92,6 +101,14 @@ let state = {
 
 
     ],
+
 };
+
+export let addMessageUser = function (userMessage) {
+    let messageUser = { id: 5, message: userMessage, likes: 0, name: `ЧлениськаВжух` };
+    state.postArr.push(messageUser);
+    /*     { id: 4, message: 'lorem lorem lorem4', likes: 45, name: `Жопа` }, */
+render(state);
+}
 
 export default state;

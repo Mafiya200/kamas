@@ -1,0 +1,23 @@
+.userMessages{
+    padding: 0 40px;
+
+}
+.userMessages textarea{
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+
+}
+.messageBlock{
+    margin-bottom: 20px;
+}
+.messageBlock > div:nth-of-type(even){
+text-align: end;
+}
+.userMessages__message{
+text-align: center;
+
+}
+.content__textarea{
+
+}

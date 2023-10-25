@@ -15,3 +15,20 @@ grid-row: 2 / 3;
 .item > a.active{
   color: gold;
 }
+.nav__links{
+  margin-bottom: 60px;
+}
+.nav__friends.friends{
+  padding: 10px;
+}
+
+.friends__items{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.friends__title{
+  font-size: 26px;
+  color: white;
+margin-bottom: 10px;
+}

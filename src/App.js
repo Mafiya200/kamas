@@ -19,18 +19,18 @@ import Settings from './tester/components/Settings/Settings';
 
 
 function App(props) {
-  return (<BrowserRouter>
+return (<BrowserRouter>
 
 
 
     <div className='app-wrapper'>
 
       <Header />
-      <NavBar NavBarLinksNames = {props.appState.NavBarLinksNames} />
+      <NavBar NavBar = {props.appState.NavBar} />
       <div className='body-content'>
 
         <Routes>
-          <Route path='/profile/*' element={<><Profile postArr={props.appState.postArr} />   </>} />
+          <Route path='/profile/*' element={<><Profile addMessageUser={props.addMessageUser} postArr={props.appState.postArr} />   </>} />
           <Route path='/dialogs/*' element={<><Dialogs namesArray={props.appState.namesArray} messageArr={props.appState.messageArr} />   </>} />
           <Route path='/news/*' element={<><News />   </>} />
           <Route path='/music/*' element={<><Music />   </>} />
