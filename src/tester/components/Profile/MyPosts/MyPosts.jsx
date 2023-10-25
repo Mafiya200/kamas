@@ -5,16 +5,29 @@ import Post from "./Post/Post";
 
 let link = React.createRef();
 
-
+/* addSymbol={props.addSymbol}
+ */
 
 const MyPosts = function (props) {
 
-  let addPost = function () {
-props.addMessageUser(link.current.value);
 
+  let addPost = function () {
+
+
+    props.addMessageUser();
   }
-  let newMyPosts = props.postArr.map(function (item, index, array) {
-    
+
+
+
+
+  let addLetter = function () {
+    props.addSymbol(link.current.value);
+  }
+
+
+
+  let newMyPosts = props.myPosts.postArr.map(function (item, index, array) {
+
     return (
       <Post key={item.id} message={item.message} like={item.likes} name={item.name} />
 
@@ -28,9 +41,9 @@ props.addMessageUser(link.current.value);
 
       <div className={styleMyPosts.content__body}>
 
-        <textarea ref={link} className='content__textarea' name="posts" placeholder="your news..."></textarea>
+        <textarea value={props.myPosts.textareaValue} onChange={addLetter} ref={link} className='content__textarea' name="posts" placeholder="your news..."></textarea>
         <div className="content__BlockButton">
-          <button  onClick={addPost} className="content__button">Send</button>
+          <button onClick={addPost} className="content__button">Send</button>
 
         </div>
         <div className={styleMyPosts.content__posts}>

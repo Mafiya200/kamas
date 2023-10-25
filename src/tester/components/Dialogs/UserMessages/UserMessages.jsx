@@ -1,6 +1,7 @@
 import { Route, Router, Routes } from 'react-router-dom';
 import styleUserMessages from './UserMessages.module.css';
 import React from 'react';
+import UserMessage from './UserMessage/UserMessage';
 
 
 
@@ -13,8 +14,19 @@ import React from 'react';
 
 
 const UserMessages = function (props) {
+    let textarLink = React.createRef();
+
+    const addLetter = function () {
+        let text = textarLink.current.value;
+        props.addMessageDialogF(text);
+    }
+
+    
+    const createMessage = function () {
 
 
+
+    }
 
 
     let newAllMesages = props.namesArray.map(function (item) {
@@ -22,10 +34,11 @@ const UserMessages = function (props) {
 
         let nameItem = String(item.name);
 
-        let textarLink = React.createRef();
-       function showTextarea() {
-            alert(textarLink.current.value);
-        }
+        
+
+
+        
+
         return (
 
             <Route key={1} path={nameItem} element={
@@ -33,12 +46,17 @@ const UserMessages = function (props) {
 
                     <div className={styleUserMessages.messageBlock}>
                         {props.messageArr[nameItem]}
+
+
+                        {/* <UserMessage  id={props.id} message={props.message} /> */}
+                    
+                    
                     </div>
 
                     <div className={styleUserMessages.userMessages__message}>
-                        <textarea ref={textarLink} className="content__textarea" name="textareaMessage" placeholder='your news...'></textarea>
+                        <textarea onInput={addLetter} ref={textarLink} className="content__textarea" name="textareaMessage" placeholder='your news...'></textarea>
                         <div className="content__BlockButton">
-                            <button onClick={showTextarea} className="content__button">Send</button>
+                            <button onClick={createMessage} className="content__button">Send</button>
 
                         </div>
 

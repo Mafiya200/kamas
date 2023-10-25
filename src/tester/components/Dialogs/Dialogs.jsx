@@ -22,7 +22,7 @@ const Dialogs = function (props) {
                         </div>
 
                         <div className={styleDialogs.chat__userMessages}>
-                            <UserMessages namesArray={props.namesArray} messageArr={props.messageArr} />
+                            <UserMessages namesArray={props.namesArray} addMessageDialogF={props.addMessageDialogF} messageArr={props.messageArr} />
 
                         </div>
                     </div>

@@ -30,8 +30,10 @@ return (<BrowserRouter>
       <div className='body-content'>
 
         <Routes>
-          <Route path='/profile/*' element={<><Profile addMessageUser={props.addMessageUser} postArr={props.appState.postArr} />   </>} />
-          <Route path='/dialogs/*' element={<><Dialogs namesArray={props.appState.namesArray} messageArr={props.appState.messageArr} />   </>} />
+          <Route path='/profile/*' element={<><Profile addSymbol={props.addSymbol} addMessageUser={props.addMessageUser} myPosts={props.appState.myPosts} />   </>} />
+
+
+          <Route path='/dialogs/*' element={<><Dialogs addMessageDialogF={props.addMessageDialogF} namesArray={props.appState.namesArray} messageArr={props.appState.messageArr} />   </>} />
           <Route path='/news/*' element={<><News />   </>} />
           <Route path='/music/*' element={<><Music />   </>} />
           <Route path='/settings/*' element={<><Settings />   </>} />

@@ -1,7 +1,6 @@
 
-import { render } from '../render';
-import UserMessage from '../tester/components/Dialogs/UserMessages/UserMessage/UserMessage';
-
+/* import { renderion } from '../render';
+ */import UserMessage from '../tester/components/Dialogs/UserMessages/UserMessage/UserMessage';
 
 
 let messages = ['Делегируйте вопрос написания качественных тек',
@@ -31,24 +30,36 @@ let state = {
     },
 
 
-
-    postArr: [
-        { id: 1, message: 'lorem lorem lorem1', likes: 15, name: `jora` },
-        { id: 2, message: 'lorem lorem lorem2', likes: 25, name: `jopa` },
-        { id: 3, message: 'lorem lorem lorem3', likes: 35, name: `жора` },
-        { id: 4, message: 'lorem lorem lorem4', likes: 45, name: `Жопа` },
-        { id: 5, message: 'lorem lorem lorem5', likes: 55, name: `Писька` },
-       
+    dialogs: {
 
 
-    ],
+
+        message: '',
+    },
+
+
+
+    myPosts: {
+        postArr: [
+            { id: 1, message: 'lorem lorem lorem1', likes: 15, name: `jora` },
+            { id: 2, message: 'lorem lorem lorem2', likes: 25, name: `jopa` },
+            { id: 3, message: 'lorem lorem lorem3', likes: 35, name: `жора` },
+            { id: 4, message: 'lorem lorem lorem4', likes: 45, name: `Жопа` },
+            { id: 5, message: 'lorem lorem lorem5', likes: 55, name: `Писька` },
+
+
+
+        ],
+
+        textareaValue: '123',
+    },
+
     messageArr: {
-        'andrew': (
-            <>
+        'andrew': (<>
+            <UserMessage key='0' message={messages[0]} />
+        </>),    /* [{ key: 0, message: messages[0] },] */
 
-                <UserMessage key='0' message={messages[0]} />
-            </>
-        ),
+
         'vova': (<>
             <UserMessage key='0' message={messages[0]} />
             <UserMessage key='1' message={messages[1]} />
@@ -88,7 +99,7 @@ let state = {
 
     },
 
-    namesArray: [ 
+    namesArray: [
         { name: 'andrew', id: 1, },
         { name: 'vova', id: 2, },
         { name: 'roma', id: 3, },
@@ -102,13 +113,54 @@ let state = {
 
     ],
 
+
 };
 
-export let addMessageUser = function (userMessage) {
-    let messageUser = { id: 5, message: userMessage, likes: 0, name: `ЧлениськаВжух` };
-    state.postArr.push(messageUser);
-    /*     { id: 4, message: 'lorem lorem lorem4', likes: 45, name: `Жопа` }, */
-render(state);
+
+
+
+
+export let addSymbol = function (textAreaValue) {
+    state.myPosts.textareaValue = textAreaValue;
+    renderion(state);
 }
+export let addMessageUser = function () {
+    let messageUser = { id: 5, message: state.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
+    state.myPosts.postArr.push(messageUser);
+    addSymbol('');
+
+    renderion(state);
+}
+
+
+
+////////////////////////
+let renderion = function() {
+    alert(`error`);
+}
+/////////////////////////////////////
+
+
+export let activeFunction = function (func) {
+    renderion = func;
+}
+
+
+
+export const addMessageDialog = function (message) {
+
+
+
+    state.dialogs.message = message;
+
+
+
+}
+export const createMessage = function () {
+
+}
+
+
+
 
 export default state;

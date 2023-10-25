@@ -9,16 +9,17 @@ const NavBar = function (props) {
     return (
 
       <div className={styleNavBar.item} key={item}>
-        <NavLink className={({ isActive }) => isActive ? styleNavBar.active : ' '} to={`/${item.toLowerCase()}`} >{item}</NavLink>
+        <NavLink className={function ({isActive}) {return isActive ? styleNavBar.active : ' ';
+        }} to={`/${item.toLowerCase()}`} >{item}</NavLink>
       </div>
     )
   });
   let friends = props.NavBar.friends.map(function (item, index, array) {
     const name = item.name;
     const photo = item.photo;
-const id = item.id;
-    return(
-    <Friend key = {id} name={name} photo={photo} />
+    const id = item.id;
+    return (
+      <Friend key={id} name={name} photo={photo} />
 
     );
 
