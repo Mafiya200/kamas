@@ -9,15 +9,22 @@ import App from './App';
 import { addSymbol } from './redux/state.js';
 import { addMessageDialog } from './redux/state.js';
 import { activeFunction } from './redux/state.js';
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
+
+
+import { addUserMessage } from './redux/state.js';
+import { createMessage } from './redux/state.js';
+
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
  let renderion = function (state) {
 
   root.render(
     <React.StrictMode>
-      <App addMessageDialogF={addMessageDialog} appState={state} addSymbol={addSymbol} addMessageUser={addMessageUser} />
+      <App addMessageDialogF={addMessageDialog} appState={state} addSymbol={addSymbol} addMessageUser={addMessageUser}     addUserMessage={addUserMessage} createMessage={createMessage}/>
     </React.StrictMode>
   );
 }

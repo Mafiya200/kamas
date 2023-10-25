@@ -33,7 +33,7 @@ return (<BrowserRouter>
           <Route path='/profile/*' element={<><Profile addSymbol={props.addSymbol} addMessageUser={props.addMessageUser} myPosts={props.appState.myPosts} />   </>} />
 
 
-          <Route path='/dialogs/*' element={<><Dialogs addMessageDialogF={props.addMessageDialogF} namesArray={props.appState.namesArray} messageArr={props.appState.messageArr} />   </>} />
+          <Route path='/dialogs/*' element={<><Dialogs appState={props.appState}  addMessageDialogF={props.addMessageDialogF} namesArray={props.appState.namesArray} messageArr={props.appState.messageArr}   addUserMessage={props.addUserMessage} createMessage={props.createMessage} />   </>} />
           <Route path='/news/*' element={<><News />   </>} />
           <Route path='/music/*' element={<><Music />   </>} />
           <Route path='/settings/*' element={<><Settings />   </>} />

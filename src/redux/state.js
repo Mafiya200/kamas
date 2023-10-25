@@ -1,14 +1,4 @@
 
-/* import { renderion } from '../render';
- */import UserMessage from '../tester/components/Dialogs/UserMessages/UserMessage/UserMessage';
-
-
-let messages = ['Делегируйте вопрос написания качественных тек',
-    'ные статьи на сайт, продающие', 'Зарабатывайте на текстах удаленно',
-    'спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества. спам, воду и другие важные параметры качества.',
-    'ого контента. Ежедневно на Сервисе проверяются и создаются разные форматы: описания карточек товара, статьи и письменные работы. Мы создали пр',
-    'нителями, чтобы к',];
-
 
 let state = {
 
@@ -51,50 +41,19 @@ let state = {
 
         ],
 
-        textareaValue: '123',
+        textareaValue: '',
     },
 
     messageArr: {
-        'andrew': (<>
-            <UserMessage key='0' message={messages[0]} />
-        </>),    /* [{ key: 0, message: messages[0] },] */
+        'andrew': [{ key: 0, message: '0000' },],    /* [{ key: 0, message: messages[0] },] */
 
 
-        'vova': (<>
-            <UserMessage key='0' message={messages[0]} />
-            <UserMessage key='1' message={messages[1]} />
+        'vova': [{ key: 0, message: '0000' }, { key: 1, message: '1111' },],
 
-        </>),
-
-        'roma': (<>
-            <UserMessage key='0' message={messages[0]} />
-            <UserMessage key='1' message={messages[1]} />
-            <UserMessage key='2' message={messages[2]} />
-        </>),
-        'vika': (<>
-            <UserMessage key='0' message={messages[0]} />
-            <UserMessage key='1' message={messages[1]} />
-            <UserMessage key='2' message={messages[2]} />
-            <UserMessage key='3' message={messages[3]} />
-
-        </>),
-        'golubika': (<>
-            <UserMessage key='0' message={messages[0]} />
-            <UserMessage key='1' message={messages[1]} />
-            <UserMessage key='2' message={messages[2]} />
-            <UserMessage key='3' message={messages[3]} />
-            <UserMessage key='4' message={messages[4]} />
-
-        </>),
-        'rewert': (<>
-            <UserMessage key='0' message={messages[0]} />
-            <UserMessage key='1' message={messages[1]} />
-            <UserMessage key='2' message={messages[2]} />
-            <UserMessage key='3' message={messages[3]} />
-            <UserMessage key='4' message={messages[4]} />
-            <UserMessage key='5' message={messages[5]} />
-
-        </>),
+        'roma': [{ key: 0, message: '0000' }, { key: 1, message: '1111' }, { key: 2, message: '2222' },],
+        'vika': [{ key: 0, message: '0000' }, { key: 1, message: '1111' }, { key: 2, message: '2222' }, { key: 3, message: '3333' },],
+        'golubika': [{ key: 0, message: '0000' }, { key: 1, message: '1111' }, { key: 2, message: '2222' }, { key: 3, message: '3333' }, { key: 4, message: '4444' },],
+        'rewert': [{ key: 0, message: '0000' }, { key: 1, message: '1111' }, { key: 2, message: '2222' }, { key: 3, message: '3333' }, { key: 4, message: '4444' }, { key: 5, message: '5555' },],
 
 
     },
@@ -105,10 +64,7 @@ let state = {
         { name: 'roma', id: 3, },
         { name: 'vika', id: 4, },
         { name: 'golubika', id: 5, },
-        /* { name: 're44', id: 6, },
-        { name: 'rewe31rt', id: 7, },
-        { name: 'rewe55rt', id: 8, },
-        { name: 'rewer7t', id: 9, }, */
+
 
 
     ],
@@ -122,6 +78,7 @@ let state = {
 
 export let addSymbol = function (textAreaValue) {
     state.myPosts.textareaValue = textAreaValue;
+
     renderion(state);
 }
 export let addMessageUser = function () {
@@ -135,7 +92,7 @@ export let addMessageUser = function () {
 
 
 ////////////////////////
-let renderion = function() {
+let renderion = function () {
     alert(`error`);
 }
 /////////////////////////////////////
@@ -156,10 +113,28 @@ export const addMessageDialog = function (message) {
 
 
 }
-export const createMessage = function () {
 
+
+
+
+
+export const createMessage = function (nameItem) {
+    let messes = state.dialogs.message;
+    console.log(state.dialogs.message);
+    let add = { id: 0, key: 0, message: messes };
+    state.messageArr[nameItem].push(add);
+    state.dialogs.message = '';
+    
+
+    renderion(state);
 }
 
+
+
+export const addUserMessage = function (text) {
+    state.dialogs.message = text;
+    renderion(state);
+}
 
 
 
