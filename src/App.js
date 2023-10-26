@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './tester/components/Header/Header';
 import NavBar from './tester/components/NavBar/NavBar';
@@ -30,10 +29,22 @@ return (<BrowserRouter>
       <div className='body-content'>
 
         <Routes>
-          <Route path='/profile/*' element={<><Profile addSymbol={props.addSymbol} addMessageUser={props.addMessageUser} myPosts={props.appState.myPosts} />   </>} />
+          <Route path='profile/*' element={<><Profile  profile={props.appState.profile} />   </>} />
 
 
-          <Route path='/dialogs/*' element={<><Dialogs appState={props.appState}  addMessageDialogF={props.addMessageDialogF} namesArray={props.appState.namesArray} messageArr={props.appState.messageArr}   addUserMessage={props.addUserMessage} createMessage={props.createMessage} />   </>} />
+
+
+
+
+
+
+
+
+
+
+
+
+          <Route path='dialogs/*' element={<><Dialogs dialogs={props.appState.dialogs}  />   </>} />
           <Route path='/news/*' element={<><News />   </>} />
           <Route path='/music/*' element={<><Music />   </>} />
           <Route path='/settings/*' element={<><Settings />   </>} />

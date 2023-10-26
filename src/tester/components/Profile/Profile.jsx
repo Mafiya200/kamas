@@ -10,7 +10,7 @@ const Profile = function (props) {
         <img src='https://mykaleidoscope.ru/x/uploads/posts/2022-10/1666206262_37-mykaleidoscope-ru-p-kartinka-na-zastavku-oboi-37.jpg' />
       </div>
       
-      <MyPosts addMessageUser={props.addMessageUser} addSymbol={props.addSymbol} myPosts={props.myPosts}/>
+      <MyPosts myPosts={props.profile.myPosts}/>
       
     </div>
   );

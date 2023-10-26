@@ -30,7 +30,7 @@ const UserMessages = function (props) {
 
         let text = textarLink.current.value;
 
-        props.addUserMessage(text);
+        props.userMessages.addUserMessage(text);
 
     }
 
@@ -49,20 +49,20 @@ const UserMessages = function (props) {
 
 
 
-    let newAllMesages = props.namesArray.map(function (item) {
+    let newAllMesages = props.names.map(function (item) {
 
 
         let nameItem = item.name;
         //2//////
         const addMessage = function () {
             let text = textarLink.current.value;
-            props.createMessage(nameItem);
+            props.userMessages.createMessage(nameItem);
         }
 
 
 
 
-        let createMessage = props.messageArr[nameItem].map(function (item) {
+        let createMessage = props.userMessages.messageArr[nameItem].map(function (item) {
             return (<UserMessage message={item.message} name={nameItem} />);
         })
 
@@ -82,7 +82,7 @@ const UserMessages = function (props) {
                     </div>
 
                     <div className={styleUserMessages.userMessages__message}>
-                        <textarea placeholder='your news...' value={props.nowMessage} onInput={addLetter} ref={textarLink} className="content__textarea" name="textareaMessage" ></textarea>
+                        <textarea placeholder='your news...' value={props.userMessages.message} onInput={addLetter} ref={textarLink} className="content__textarea" name="textareaMessage" ></textarea>
                         <div className="content__BlockButton">
                             <button onClick={addMessage} className="content__button">Send</button>
 

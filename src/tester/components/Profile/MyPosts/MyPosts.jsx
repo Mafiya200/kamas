@@ -5,8 +5,7 @@ import Post from "./Post/Post";
 
 let link = React.createRef();
 
-/* addSymbol={props.addSymbol}
- */
+
 
 const MyPosts = function (props) {
 
@@ -14,14 +13,14 @@ const MyPosts = function (props) {
   let addPost = function () {
 
 
-    props.addMessageUser();
+    props.myPosts.addMessageUser();
   }
 
 
 
 
   let addLetter = function () {
-    props.addSymbol(link.current.value);
+    props.myPosts.addSymbol(link.current.value);
   }
 
 
@@ -37,7 +36,7 @@ const MyPosts = function (props) {
 
   return (
     <div className={styleMyPosts.content}>
-      <h2>My posts</h2>
+      <h2>My posts1</h2>
 
       <div className={styleMyPosts.content__body}>
 
