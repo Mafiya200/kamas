@@ -8,19 +8,17 @@ let link = React.createRef();
 
 
 const MyPosts = function (props) {
-
-
   let addPost = function () {
 
 
-    props.myPosts.addMessageUser();
+    props.addMessageUser();
   }
 
 
 
 
   let addLetter = function () {
-    props.myPosts.addSymbol(link.current.value);
+    props.addSymbol(link.current.value);
   }
 
 

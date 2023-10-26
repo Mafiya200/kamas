@@ -5,24 +5,13 @@ import UserMessage from './UserMessage/UserMessage';
 
 
 
-
-
-
-
-
-
-
-
 const UserMessages = function (props) {
     let textarLink = React.createRef();
 
     /* addUserMessage={props.addUserMessage} props.createMessage={createMessage} */
 
-
-
-
-
-
+    /* createMessage={props.}
+    addUserMessage={props.addUserMessage} */
 
 
     ////1///
@@ -30,18 +19,9 @@ const UserMessages = function (props) {
 
         let text = textarLink.current.value;
 
-        props.userMessages.addUserMessage(text);
+        props.addUserMessage(text);
 
     }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -56,7 +36,7 @@ const UserMessages = function (props) {
         //2//////
         const addMessage = function () {
             let text = textarLink.current.value;
-            props.userMessages.createMessage(nameItem);
+            props.createMessage(nameItem);
         }
 
 

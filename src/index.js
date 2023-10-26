@@ -1,6 +1,6 @@
 
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state.js';
+import store from './redux/state.js';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -12,25 +12,31 @@ import App from './App';
 
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
- let renderion = function (state) {
+let renderion = function (state) {
+
+
+
 
   root.render(
     <React.StrictMode>
-      <App  appState={state} />
+      <App appState={state}
+       createMessage={store.createMessage.bind(store)}
+       addUserMessage={store.addUserMessage.bind(store)}
+       addSymbol={store.addSymbol.bind(store)}
+       addMessageUser= {store.addMessageUser.bind(store)} />
     </React.StrictMode>
   );
 }
 
 
 
-state.activeFunction(renderion);
+store.activeFunction(renderion);
 
 
-state.renderion(state);
+renderion(store.getState());
 
 
 

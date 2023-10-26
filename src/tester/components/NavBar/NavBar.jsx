@@ -4,6 +4,7 @@ import Friend from "./Friend/Friend";
 
 
 const NavBar = function (props) {
+  
 
   let newNavBar = props.NavBar.NavBarLinks.map(function (item, index, array) {
     return (
@@ -14,6 +15,11 @@ const NavBar = function (props) {
       </div>
     )
   });
+
+
+
+
+  
   let friends = props.NavBar.friends.map(function (item, index, array) {
     const name = item.name;
     const photo = item.photo;

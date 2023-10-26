@@ -18,18 +18,23 @@ import Settings from './tester/components/Settings/Settings';
 
 
 function App(props) {
-return (<BrowserRouter>
+  return (<BrowserRouter>
 
 
 
     <div className='app-wrapper'>
 
       <Header />
-      <NavBar NavBar = {props.appState.NavBar} />
+      <NavBar NavBar={props.appState.NavBar} />
       <div className='body-content'>
 
         <Routes>
-          <Route path='profile/*' element={<><Profile  profile={props.appState.profile} />   </>} />
+          <Route path='profile/*' element={<>
+
+            <Profile profile={props.appState.profile} addSymbol={props.addSymbol}
+              addMessageUser={props.addMessageUser} />
+
+          </>} />
 
 
 
@@ -44,7 +49,8 @@ return (<BrowserRouter>
 
 
 
-          <Route path='dialogs/*' element={<><Dialogs dialogs={props.appState.dialogs}  />   </>} />
+          <Route path='dialogs/*' element={<><Dialogs dialogs={props.appState.dialogs} createMessage={props.createMessage}
+            addUserMessage={props.addUserMessage} />   </>} />
           <Route path='/news/*' element={<><News />   </>} />
           <Route path='/music/*' element={<><Music />   </>} />
           <Route path='/settings/*' element={<><Settings />   </>} />
