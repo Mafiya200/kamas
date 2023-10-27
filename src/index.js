@@ -22,11 +22,11 @@ let renderion = function (state) {
 
   root.render(
     <React.StrictMode>
-      <App appState={state}
-       createMessage={store.createMessage.bind(store)}
+      <App appState={state} dispatch={store.dispatch.bind(store)}
+       /* createMessage={store.createMessage.bind(store)}
        addUserMessage={store.addUserMessage.bind(store)}
        addSymbol={store.addSymbol.bind(store)}
-       addMessageUser= {store.addMessageUser.bind(store)} />
+       addMessageUser= {store.addMessageUser.bind(store)} */ />
     </React.StrictMode>
   );
 }

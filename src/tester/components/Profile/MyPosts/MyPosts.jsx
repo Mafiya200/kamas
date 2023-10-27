@@ -8,17 +8,21 @@ let link = React.createRef();
 
 
 const MyPosts = function (props) {
+  
   let addPost = function () {
 
-
-    props.addMessageUser();
+let active = {type:`add-Message-User`}
+props.dispatch(active);
+   /*  props.addMessageUser(); */
   }
 
 
 
 
   let addLetter = function () {
-    props.addSymbol(link.current.value);
+    /* props.addSymbol(link.current.value); */
+    let active = {type:`add-Symbol`,textAreaValue:[link.current.value],}
+    props.dispatch(active);
   }
 
 

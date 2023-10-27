@@ -31,8 +31,8 @@ function App(props) {
         <Routes>
           <Route path='profile/*' element={<>
 
-            <Profile profile={props.appState.profile} addSymbol={props.addSymbol}
-              addMessageUser={props.addMessageUser} />
+            <Profile profile={props.appState.profile} dispatch={props.dispatch} /* addSymbol={props.addSymbol}
+              addMessageUser={props.addMessageUser} */ />
 
           </>} />
 
@@ -49,8 +49,8 @@ function App(props) {
 
 
 
-          <Route path='dialogs/*' element={<><Dialogs dialogs={props.appState.dialogs} createMessage={props.createMessage}
-            addUserMessage={props.addUserMessage} />   </>} />
+          <Route path='dialogs/*' element={<><Dialogs dialogs={props.appState.dialogs} dispatch={props.dispatch} /* createMessage={props.createMessage}
+            addUserMessage={props.addUserMessage} */ />   </>} />
           <Route path='/news/*' element={<><News />   </>} />
           <Route path='/music/*' element={<><Music />   </>} />
           <Route path='/settings/*' element={<><Settings />   </>} />

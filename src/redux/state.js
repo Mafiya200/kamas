@@ -1,3 +1,4 @@
+import { act } from "react-dom/test-utils";
 
 
 
@@ -88,40 +89,40 @@ let store = {
 
 
     },
+    dispatch(active) {
+        if (active.type === `create-Message`) {
+            let add = { id: 0, key: 0, message: this._state.dialogs.userMessages.message };
+            this._state.dialogs.userMessages.messageArr[active.nameItem].push(add);
+            /* this._state.dialogs.userMessages.message = ''; */
+            this._state.dialogs.userMessages.message='';
 
-    /////1
-    createMessage(nameItem) {
+            this.renderion(this._state);
+        }
+        else if (active.type === `add-User-Message`) {
 
-        let add = { id: 0, key: 0, message: this._state.dialogs.userMessages.message };
-        this._state.dialogs.userMessages.messageArr[nameItem].push(add);
-        /* this._state.dialogs.userMessages.message = ''; */
-        this.addUserMessage('');
+            this._state.dialogs.userMessages.message = active.text;
+            this.renderion(this._state);
 
-        this.renderion(this._state);
+        }
+
+        
+
+
+        //////////////////////////
+        else if (active.type === `add-Symbol`) {
+            this._state.profile.myPosts.textareaValue = active.textAreaValue;
+            this.renderion(this._state);
+        }
+        else if (active.type === `add-Message-User`) {
+            let messageUser = { id: 5, message: this._state.profile.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
+            this._state.profile.myPosts.postArr.push(messageUser);
+            this._state.profile.myPosts.textareaValue = '';
+
+            this.renderion(this._state);
+        }
+
     },
-    addUserMessage(text) {
-        this._state.dialogs.userMessages.message = text;
-        this.renderion(this._state);
-    },
-    /////1
 
-
-
-    /////2profile
-
-    addSymbol(textAreaValue) {
-        this._state.profile.myPosts.textareaValue = textAreaValue;
-        this.renderion(this._state);
-    },
-    addMessageUser() {
-        let messageUser = { id: 5, message: this._state.profile.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
-        this._state.profile.myPosts.postArr.push(messageUser);
-        this.addSymbol('');
-
-        this.renderion(this._state);
-    },
-
-    /////2
     renderion() {
         alert(`error`);
     },

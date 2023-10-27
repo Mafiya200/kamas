@@ -7,7 +7,6 @@ import UserMessages from './UserMessages/UserMessages';
 
 
 const Dialogs = function (props) {
-
     return (
         <div className={`${styleDialogs.chat}`}>
             <div className={`${styleDialogs.chat__container} `}>
@@ -22,10 +21,10 @@ const Dialogs = function (props) {
                         </div>
 
                         <div className={styleDialogs.chat__userMessages}>
-                            <UserMessages  names={props.dialogs.namesArray} userMessages={props.dialogs.userMessages}  createMessage={props.createMessage}
-addUserMessage={props.addUserMessage}/* nowMessage={props.dialogs.message} */
+                            <UserMessages names={props.dialogs.namesArray} userMessages={props.dialogs.userMessages} dispatch={props.dispatch} /* createMessage={props.createMessage}
+                                addUserMessage={props.addUserMessage} *//* nowMessage={props.dialogs.message} */
                               /* addMessageDialogF={props.addMessageDialogF} */
-                             /* messageArr={props.dialogs.messageArr} */ /* createMessage={props.createMessage} *//>
+                             /* messageArr={props.dialogs.messageArr} */ /* createMessage={props.createMessage} */ />
 
                         </div>
                     </div>
