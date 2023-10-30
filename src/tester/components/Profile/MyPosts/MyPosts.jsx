@@ -1,6 +1,12 @@
 import React from "react";
 import styleMyPosts from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { addLetterActiveCreator, addMessageUserActiveCreator } from "../../../../redux/state";
+
+
+
+
+
 
 
 let link = React.createRef();
@@ -8,22 +14,24 @@ let link = React.createRef();
 
 
 const MyPosts = function (props) {
-  
+
   let addPost = function () {
 
-let active = {type:`add-Message-User`}
-props.dispatch(active);
-   /*  props.addMessageUser(); */
+    props.dispatch(addMessageUserActiveCreator());
   }
-
 
 
 
   let addLetter = function () {
     /* props.addSymbol(link.current.value); */
-    let active = {type:`add-Symbol`,textAreaValue:[link.current.value],}
-    props.dispatch(active);
+    props.dispatch(addLetterActiveCreator(link.current.value));
   }
+
+
+
+
+
+
 
 
 
@@ -34,6 +42,9 @@ props.dispatch(active);
 
     )
   });
+
+
+
 
 
   return (

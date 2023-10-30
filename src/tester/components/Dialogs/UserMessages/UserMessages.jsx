@@ -2,6 +2,7 @@ import { Route, Router, Routes } from 'react-router-dom';
 import styleUserMessages from './UserMessages.module.css';
 import React from 'react';
 import UserMessage from './UserMessage/UserMessage';
+import { addUserMessageActionCreator, createMessageActionCreator } from '../../../../redux/state';
 
 
 
@@ -11,13 +12,14 @@ const UserMessages = function (props) {
 
 
 
+
     ////1///
     const addLetter = function () {
 
 
 
-        let active = { type: `add-User-Message`, text: textarLink.current.value, };
-        props.dispatch(active);
+
+        props.dispatch(addUserMessageActionCreator(textarLink.current.value));
 
 
 
@@ -37,8 +39,8 @@ const UserMessages = function (props) {
         const addMessage = function () {
 
 
-            let active = {type:`create-Message`,nameItem:[nameItem],};
-            props.dispatch(active);
+
+            props.dispatch(createMessageActionCreator(nameItem));
 
 
 
