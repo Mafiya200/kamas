@@ -1,7 +1,7 @@
 import React from "react";
 import styleMyPosts from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { addLetterActiveCreator, addMessageUserActiveCreator } from "../../../../redux/state";
+import { addLetterActiveCreator, addMessageUserActiveCreator } from "../../../../redux/profile-reducer";
 
 
 

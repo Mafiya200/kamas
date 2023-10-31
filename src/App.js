@@ -4,7 +4,7 @@ import NavBar from './tester/components/NavBar/NavBar';
 import Profile from './tester/components/Profile/Profile';
 import Dialogs from './tester/components/Dialogs/Dialogs';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import News from './tester/components/News/News';
 import Music from './tester/components/Music/Music';
 import Settings from './tester/components/Settings/Settings';
@@ -17,9 +17,10 @@ import Settings from './tester/components/Settings/Settings';
 
 
 
-function App(props) {
-  return (<BrowserRouter>
 
+function App(props) {
+
+  return (<BrowserRouter>
 
 
     <div className='app-wrapper'>
@@ -35,7 +36,6 @@ function App(props) {
               addMessageUser={props.addMessageUser} */ />
 
           </>} />
-
 
 
 

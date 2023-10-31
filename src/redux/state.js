@@ -1,7 +1,13 @@
-const add_Message_User = `add-Message-User`;
+import NavBarReducer from "./NavBar-reducer";
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+
+
+/* const add_Message_User = `add-Message-User`;
 const add_Symbol = `add-Symbol`;
 const add_User_Message = `add-User-Message`;
-const create_Message = `create-Message`;
+const create_Message = `create-Message`; */
+
 
 
 
@@ -94,37 +100,11 @@ let store = {
 
     },
     dispatch(active) {
-        if (active.type === create_Message) {
-            let add = { id: 0, key: 0, message: this._state.dialogs.userMessages.message };
-            this._state.dialogs.userMessages.messageArr[active.nameItem].push(add);
-            /* this._state.dialogs.userMessages.message = ''; */
-            this._state.dialogs.userMessages.message = '';
+        this._state.NavBar = NavBarReducer(this._state.NavBar, active);
+        this._state.dialogs = dialogsReducer(this._state.dialogs, active);
+        this._state.profile = profileReducer(this._state.profile, active);
 
-            this.renderion(this._state);
-        }
-        else if (active.type === add_User_Message) {
-
-            this._state.dialogs.userMessages.message = active.text;
-            this.renderion(this._state);
-
-        }
-
-
-
-
-        //////////////////////////
-        else if (active.type === add_Symbol) {
-            this._state.profile.myPosts.textareaValue = active.textAreaValue;
-            this.renderion(this._state);
-        }
-        else if (active.type === add_Message_User) {
-            let messageUser = { id: 5, message: this._state.profile.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
-            this._state.profile.myPosts.postArr.push(messageUser);
-            this._state.profile.myPosts.textareaValue = '';
-
-            this.renderion(this._state);
-        }
-
+        this.renderion(this._state);
     },
 
     renderion() {
@@ -141,31 +121,15 @@ let store = {
 
 
 
-
 }
 
 
 
-export const addMessageUserActiveCreator = function () {
-    return (
-        { type: add_Message_User }
-    );
-}
-export const addLetterActiveCreator = function(text){
-    return(
-      { type: add_Symbol, textAreaValue: [text], }
-    );
-  }
 
 
 
- export const addUserMessageActionCreator = function(text){
-    return({ type: add_User_Message, text: [text], });
-}
 
-export const createMessageActionCreator = function (nameItem) {
-    return ({ type: create_Message, nameItem: [nameItem], });
-}
+
 
 
 

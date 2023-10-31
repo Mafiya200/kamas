@@ -1,6 +1,6 @@
 
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state.js';
+import store from './redux/store-redux';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -16,8 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 let renderion = function (state) {
-
-
+console.log(state);
 
 
   root.render(
@@ -32,11 +31,15 @@ let renderion = function (state) {
 }
 
 
-
-store.activeFunction(renderion);
-
-
 renderion(store.getState());
+
+
+store.subscribe(function(){
+  renderion(store.getState());
+});
+
+
+
 
 
 

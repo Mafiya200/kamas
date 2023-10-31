@@ -2,24 +2,22 @@ import { Route, Router, Routes } from 'react-router-dom';
 import styleUserMessages from './UserMessages.module.css';
 import React from 'react';
 import UserMessage from './UserMessage/UserMessage';
-import { addUserMessageActionCreator, createMessageActionCreator } from '../../../../redux/state';
+import { addUserMessageActionCreator, createMessageActionCreator } from '../../../../redux/dialogs-reducer';
 
 
 
 const UserMessages = function (props) {
-    let textarLink = React.createRef();
-
+         /* let textarLink = React.createRef(); */
+     console.log(props.dispatch);
 
 
 
 
     ////1///
-    const addLetter = function () {
+    const addLetter = function (event) {
 
-
-
-
-        props.dispatch(addUserMessageActionCreator(textarLink.current.value));
+        let text = event.target.value;
+        props.dispatch(addUserMessageActionCreator(text));
 
 
 
@@ -72,7 +70,7 @@ const UserMessages = function (props) {
                     </div>
 
                     <div className={styleUserMessages.userMessages__message}>
-                        <textarea placeholder='your news...' value={props.userMessages.message} onInput={addLetter} ref={textarLink} className="content__textarea" name="textareaMessage" ></textarea>
+                        <textarea placeholder='your news...' value={props.userMessages.message} onInput={addLetter}  /* ref={textarLink} */  className="content__textarea" name="textareaMessage" ></textarea>
                         <div className="content__BlockButton">
                             <button onClick={addMessage} className="content__button">Send</button>
 

@@ -4,7 +4,6 @@ import Friend from "./Friend/Friend";
 
 
 const NavBar = function (props) {
-  
 
   let newNavBar = props.NavBar.NavBarLinks.map(function (item, index, array) {
     return (
