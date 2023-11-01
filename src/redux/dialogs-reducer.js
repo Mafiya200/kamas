@@ -16,13 +16,10 @@ let initialState = {
     ],
 
     userMessages: {
-        ///function
-
-        ///function
-        /////
+       
 
         messageArr: {
-            'andrew': [{ key: 0, message: '0000' },],    /* [{ key: 0, message: messages[0] },] */
+            'andrew': [{ key: 0, message: '0000' },],    
 
 
             'vova': [{ key: 0, message: '0000' }, { key: 1, message: '1111' },],
@@ -50,7 +47,6 @@ const dialogsReducer = function (state = initialState, active) {
         case create_Message:
             let add = { id: 0, key: 0, message: state.userMessages.message };
             state.userMessages.messageArr[active.nameItem].push(add);
-            /* this._state.dialogs.userMessages.message = ''; */
             state.userMessages.message = '';
             return state;
 

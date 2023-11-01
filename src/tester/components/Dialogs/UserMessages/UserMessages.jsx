@@ -63,7 +63,7 @@ const UserMessages = function (props) {
                         {createMessage}
 
 
-                        {/* <UserMessage  id={props.id} message={props.message} /> */}
+                       
 
 
                     </div>
