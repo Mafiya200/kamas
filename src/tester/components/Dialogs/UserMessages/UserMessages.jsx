@@ -8,16 +8,15 @@ import { addUserMessageActionCreator, createMessageActionCreator } from '../../.
 
 const UserMessages = function (props) {
          /* let textarLink = React.createRef(); */
-     console.log(props.dispatch);
 
 
 
 
     ////1///
-    const addLetter = function (event) {
+    const onAddLetter = function (event) {
 
         let text = event.target.value;
-        props.dispatch(addUserMessageActionCreator(text));
+        props.addLetter(text);
 
 
 
@@ -34,11 +33,11 @@ const UserMessages = function (props) {
 
         let nameItem = item.name;
         //2//////
-        const addMessage = function () {
+        const onAddMessage = function () {
 
 
 
-            props.dispatch(createMessageActionCreator(nameItem));
+            props.addMessage(nameItem);
 
 
 
@@ -70,9 +69,9 @@ const UserMessages = function (props) {
                     </div>
 
                     <div className={styleUserMessages.userMessages__message}>
-                        <textarea placeholder='your news...' value={props.userMessages.message} onInput={addLetter}  /* ref={textarLink} */  className="content__textarea" name="textareaMessage" ></textarea>
+                        <textarea placeholder='your news...' value={props.userMessages.message} onInput={onAddLetter}  /* ref={textarLink} */  className="content__textarea" name="textareaMessage" ></textarea>
                         <div className="content__BlockButton">
-                            <button onClick={addMessage} className="content__button">Send</button>
+                            <button onClick={onAddMessage} className="content__button">Send</button>
 
                         </div>
 

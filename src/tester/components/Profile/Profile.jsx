@@ -1,5 +1,6 @@
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import styleProfile from "./Profile.module.css";
+
 
 
 
@@ -10,7 +11,7 @@ const Profile = function (props) {
         <img src='https://mykaleidoscope.ru/x/uploads/posts/2022-10/1666206262_37-mykaleidoscope-ru-p-kartinka-na-zastavku-oboi-37.jpg' />
       </div>
       
-      <MyPosts /*addSymbol={props.addSymbol} dispatch={props.dispatch}  addMessageUser={props.addMessageUser}*/ dispatch={props.dispatch} myPosts={props.profile.myPosts} />
+      <MyPostsContainer store={props.store} /*addSymbol={props.addSymbol} dispatch={props.dispatch}  addMessageUser={props.addMessageUser}*/ /* dispatch={props.dispatch} myPosts={props.profile.myPosts} */ />
       
     </div>
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import styleMyPosts from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { addLetterActiveCreator, addMessageUserActiveCreator } from "../../../../redux/profile-reducer";
 
 
 
@@ -15,16 +14,17 @@ let link = React.createRef();
 
 const MyPosts = function (props) {
 
-  let addPost = function () {
-
-    props.dispatch(addMessageUserActiveCreator());
+  let onAddPost = function () { 
+    props.addPost();
+   /*  props.dispatch(addMessageUserActiveCreator()); */
   }
 
 
 
-  let addLetter = function () {
+  let onAddLetter = function (e) {
     /* props.addSymbol(link.current.value); */
-    props.dispatch(addLetterActiveCreator(link.current.value));
+    props.addLetter(e.target.value);
+    /* props.dispatch(addLetterActiveCreator(link.current.value)); */
   }
 
 
@@ -53,9 +53,9 @@ const MyPosts = function (props) {
 
       <div className={styleMyPosts.content__body}>
 
-        <textarea value={props.myPosts.textareaValue} onChange={addLetter} ref={link} className='content__textarea' name="posts" placeholder="your news..."></textarea>
+        <textarea value={props.myPosts.textareaValue} onChange={onAddLetter} ref={link} className='content__textarea' name="posts" placeholder="your news..."></textarea>
         <div className="content__BlockButton">
-          <button onClick={addPost} className="content__button">Send</button>
+          <button onClick={onAddPost} className="content__button">Send</button>
 
         </div>
         <div className={styleMyPosts.content__posts}>

@@ -1,6 +1,6 @@
 import styleDialogs from './Dialogs.module.css';
-import Names from './Names/Names';
-import UserMessages from './UserMessages/UserMessages';
+import NamesContainer from './Names/NamesContainer';
+import UserMessagesContainer from './UserMessages/UserMessageContainer';
 
 
 
@@ -17,11 +17,11 @@ const Dialogs = function (props) {
 
                         <div className={styleDialogs.chat__names}>
 
-                            <Names namesArray={props.dialogs.namesArray} />
+                            <NamesContainer store={props.store} /* namesArray={props.dialogs.namesArray} */ />
                         </div>
 
                         <div className={styleDialogs.chat__userMessages}>
-                            <UserMessages names={props.dialogs.namesArray} userMessages={props.dialogs.userMessages} dispatch={props.dispatch} /* createMessage={props.createMessage}
+                            <UserMessagesContainer store={props.store} /* names={props.dialogs.namesArray} userMessages={props.dialogs.userMessages} dispatch={props.dispatch} */ /* createMessage={props.createMessage}
                                 addUserMessage={props.addUserMessage} *//* nowMessage={props.dialogs.message} */
                               /* addMessageDialogF={props.addMessageDialogF} */
                              /* messageArr={props.dialogs.messageArr} */ /* createMessage={props.createMessage} */ />

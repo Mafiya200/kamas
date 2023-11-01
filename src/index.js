@@ -16,12 +16,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 let renderion = function (state) {
-console.log(state);
 
 
   root.render(
     <React.StrictMode>
-      <App appState={state} dispatch={store.dispatch.bind(store)}
+      <App store={store} appState={state} /* dispatch={store.dispatch.bind(store)} */
        /* createMessage={store.createMessage.bind(store)}
        addUserMessage={store.addUserMessage.bind(store)}
        addSymbol={store.addSymbol.bind(store)}
@@ -33,7 +32,7 @@ console.log(state);
 
 renderion(store.getState());
 
-
+///как только меняется _state срабатывает эта функция
 store.subscribe(function(){
   renderion(store.getState());
 });
