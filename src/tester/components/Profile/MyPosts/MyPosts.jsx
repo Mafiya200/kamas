@@ -13,7 +13,6 @@ let link = React.createRef();
 
 
 const MyPosts = function (props) {
-
   let onAddPost = function () { 
     props.addPost();
    /*  props.dispatch(addMessageUserActiveCreator()); */
@@ -23,7 +22,8 @@ const MyPosts = function (props) {
 
   let onAddLetter = function (e) {
     /* props.addSymbol(link.current.value); */
-    props.addLetter(e.target.value);
+    let text = e.target.value;
+    props.addLetter(text);
     /* props.dispatch(addLetterActiveCreator(link.current.value)); */
   }
 

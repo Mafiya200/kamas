@@ -1,6 +1,7 @@
 import React from "react";
 import { addLetterActiveCreator, addMessageUserActiveCreator } from "../../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
+import { connect } from "react-redux";
 
 
 
@@ -11,7 +12,7 @@ import MyPosts from "./MyPosts";
 
 
 
-const MyPostsContainer = function (props) {
+/* const MyPostsContainer = function (props) {
 
     let state = props.store.getState().profile.myPosts;
 
@@ -23,7 +24,7 @@ const MyPostsContainer = function (props) {
 
 
   let addLetterContainer = function (text) {
-    /* props.addSymbol(link.current.value); */
+    
     props.store.dispatch(addLetterActiveCreator(text));
   }
 
@@ -32,6 +33,27 @@ const MyPostsContainer = function (props) {
 
   return (<MyPosts addPost={addPostContainer} addLetter={addLetterContainer} myPosts={state}/>);
 
+} */
+
+const mapStateToProps = function (state) {
+  return ({
+    myPosts: state.profile.myPosts,
+  });
 }
+const mapDispatchToProps = function (dispatch) {
+  return ({
+
+
+    addPost: function () {
+      dispatch(addMessageUserActiveCreator());
+    },
+
+    addLetter: function (text) {
+      dispatch(addLetterActiveCreator(text));
+    },
+  });
+}
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 export default MyPostsContainer;

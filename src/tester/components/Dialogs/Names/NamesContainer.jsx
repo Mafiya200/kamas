@@ -1,18 +1,16 @@
+import { connect } from 'react-redux';
 import Names from './Names';
 
 
 
-const NamesContainer = function (props) {
 
-    let state = props.store.getState().dialogs.namesArray;
-
-    
-
-
-    return ( <Names namesArray={state}/>
-       
-    );
+const mapStateToProps = function(state){
+    return({
+        namesArray:state.dialogs.namesArray,
+    });
 }
+
+const NamesContainer = connect(mapStateToProps)(Names);
 
 
 export default NamesContainer;

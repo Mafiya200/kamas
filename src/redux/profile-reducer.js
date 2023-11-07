@@ -21,15 +21,32 @@ let initialState = {
 };
 const profileReducer = function (state = initialState, active) {
     switch (active.type) {
-        case add_Symbol:
-            state.myPosts.textareaValue = active.textAreaValue;
-            return state;
+        case add_Symbol: {
 
-        case add_Message_User:
-            let messageUser = { id: 5, message: state.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
-           state.myPosts.postArr.push(messageUser);
-            state.myPosts.textareaValue = '';
-            return state;
+            let stateCopy = { ...state };
+
+            stateCopy.myPosts = { ...state.myPosts };
+            stateCopy.myPosts.textareaValue = { ...state.myPosts.textareaValue };
+            stateCopy.myPosts.textareaValue = active.textAreaValue;
+
+            return stateCopy;
+        }
+
+
+        case add_Message_User: {
+
+            let stateCopy = { ...state };
+
+            stateCopy.myPosts = { ...state.myPosts };
+            stateCopy.myPosts.postArr = [ ...state.myPosts.postArr ];
+            let messageUser = { id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
+            stateCopy.myPosts.postArr.push(messageUser);
+
+            stateCopy.myPosts.textareaValue = '';
+
+            return stateCopy;
+
+        }
 
         default:
             return state;
