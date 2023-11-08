@@ -56,10 +56,10 @@ let mapDispatchToProps = function (dispatch) {
 
 
         addMessage: function (nameItem) {
-            dispatch(createMessageActionCreator(nameItem))
+            dispatch(createMessageActionCreator(nameItem));
         },
         addLetter: function (text) {
-            dispatch(addUserMessageActionCreator(text))
+            dispatch(addUserMessageActionCreator(text));
         },
     });
 };

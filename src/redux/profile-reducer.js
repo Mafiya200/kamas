@@ -19,6 +19,7 @@ let initialState = {
         textareaValue: '',
     },
 };
+
 const profileReducer = function (state = initialState, active) {
     switch (active.type) {
         case add_Symbol: {
@@ -35,12 +36,16 @@ const profileReducer = function (state = initialState, active) {
 
         case add_Message_User: {
 
-            let stateCopy = { ...state };
+            let stateCopy = { ...state,
+            
+                
+            };
 
             stateCopy.myPosts = { ...state.myPosts };
-            stateCopy.myPosts.postArr = [ ...state.myPosts.postArr ];
-            let messageUser = { id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
-            stateCopy.myPosts.postArr.push(messageUser);
+            stateCopy.myPosts.postArr = [ ...state.myPosts.postArr,{ id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` } ];
+
+           /*  let messageUser = { id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
+            stateCopy.myPosts.postArr.push(messageUser); */
 
             stateCopy.myPosts.textareaValue = '';
 

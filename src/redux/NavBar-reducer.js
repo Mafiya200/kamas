@@ -2,6 +2,7 @@ let initialState = {
     NavBarLinks: [
         'Profile',
         'Dialogs',
+        'Users',
         'News',
         'Music',
         'Settings',

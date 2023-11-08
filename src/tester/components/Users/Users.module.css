@@ -1,0 +1,35 @@
+.users {
+    padding: 5px;
+}
+
+.users__container {}
+
+.users__body {}
+
+.users__title {
+    font-size    : 24px;
+    font-weight  : 700;
+    margin-bottom: 40px;
+
+}
+
+.users__content {}
+
+.users__items {}
+
+
+
+.show__more {
+    text-align: center;
+}
+
+.show__button {
+    background-color: rgb(19, 102, 19);
+    color           : greenyellow;
+    font-weight     : 700;
+    font-size       : 25px;
+    padding         : 15px 35px;
+}
+
+
+

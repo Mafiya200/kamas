@@ -42,18 +42,22 @@ let initialState = {
 
 const dialogsReducer = function (state = initialState, active) {
 
-
     switch (active.type) {
+
+        
         case create_Message: {
+            let stateCopy= { ...state,
+                userMessages:{...state.userMessages,messageArr:{ ...state.userMessages.messageArr }, message:''},
+            
+            };
 
-            let add = { id: 0, key: 0, message: state.userMessages.message };
+            /* let add = { id: 0, key: 0, message: state.userMessages.message }; */
             /* state.userMessages.messageArr[active.nameItem].push(add); */
-            let stateCopy = { ...state };
-            stateCopy.userMessages = {...state.userMessages};
-            stateCopy.userMessages.messageArr = { ...state.userMessages.messageArr };
-
-            stateCopy.userMessages.messageArr[active.nameItem].push(add);
-            stateCopy.userMessages.message = '';
+            /* stateCopy.userMessages = {...state.userMessages};
+            stateCopy.userMessages.messageArr = { ...state.userMessages.messageArr }; */
+            stateCopy.userMessages.messageArr[active.nameItem] = [ ...state.userMessages.messageArr[active.nameItem],{ id: 0, key: 0, message: state.userMessages.message } ];
+           /*  stateCopy.userMessages.messageArr[active.nameItem].push(add); */
+            /* stateCopy.userMessages.message = ''; */
 
             return stateCopy;
         }
