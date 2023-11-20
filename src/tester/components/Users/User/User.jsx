@@ -1,31 +1,38 @@
 import UserStyle from './User.module.css';
-
+import avatar from './../../../../inspect/image/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg';
 
 const User = function(props){
 
+const follow  = function(e){
+    props.checkFollowe(props.userId);
+}
+const unFollow  = function(e){
+    
+    props.checkUnFollowe(props.userId);
+}
     return(
     <div className={UserStyle.user}>
         <div className={UserStyle.user__body}>
             <div className={UserStyle.subscribe__block}>
                 <div className={UserStyle.avatar}>
                     <div className={UserStyle.avatar__image}>
-                        <img src={props.userAvatar} alt="avatar" />
+                        <img src={props.userAvatar ? props.userAvatar : avatar} alt="avatar" />
                     </div>
                 </div>
-                <button onClick={function () { console.log(123); }} className={UserStyle.follow}>Follow</button>
+                {props.followed ? <button onClick={unFollow} className={UserStyle.follow}>unFollow</button>:<button onClick={follow} className={UserStyle.follow}>Follow</button>}
             </div>
             <div className={UserStyle.user__information}>
                 <div className={UserStyle.user_information__body}>
 
                     <div className={UserStyle.user__data}>  
-                    <div className={UserStyle.user__name}>{props.userName}</div>
-                        <div className={UserStyle.user__city}>{props.userCountry}, {props.userCity}</div>
+                    <div className={UserStyle.user__name}>{props.name}</div>
+                        <div className={UserStyle.user__city}>{props.userCountry ? props.userCountry : `RF`}, {props.userCity ? props.userCity: `Krasnodar`}</div>
                     </div>
                     <div className={UserStyle.user__aboutMe}>
-                        {props.userAboutMe}
+                        {props.userAboutMe ? props.userAboutMe:`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora mollitia assumenda consectetur voluptatum fugiat doloribus, vitae dicta eum excepturi nesciunt ullam voluptatem facilis obcaecati? Reiciendis sapiente labore illo aperiam obcaecati.
+`} {/* текст */}
                     
                     </div>
-
 
 
                 </div>

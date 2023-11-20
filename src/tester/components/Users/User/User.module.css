@@ -13,6 +13,8 @@
 
 .subscribe__block {
     margin-right: 15px;
+    min-width: 115px;
+    text-align: center;
 }
 
 .avatar {

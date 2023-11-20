@@ -1,44 +1,12 @@
-
-
+const FOLLOWE = `followe`;
+const unFOLLOWE = `unfollowe`;
+const SET_USERS = `set_users`;
 
 let initialState = {
+    User: {
+        UsersArray: [],
+    },
 
-    UsersArray: [{
-        userName: 'Dmitry K.',
-        userCountry: 'Belarus',
-        userCity: 'Minsk',
-        userAvatar: 'https://papik.pro/grafic/uploads/posts/2023-04/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg',
-        userAboutMe: 'i am looking for a Job right now... i am looking for a Job right now... i am looking for a Job right now... i am looking for a Job right now... i am looking for a Job right now... i am looking for a Job right now... i am looking for a Job right now...',
-    },
-    
-    {
-        userName: 'Svetlana D.',
-        userCountry: 'Belarus',
-        userCity: 'Minsk',
-        userAvatar: 'https://papik.pro/grafic/uploads/posts/2023-04/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg',
-        userAboutMe: 'i am looking for a Job right now...',
-    },
-    {
-        userName: 'Andrew SH.',
-        userCountry: 'Russian',
-        userCity: 'Krasnodar',
-        userAvatar: 'https://papik.pro/grafic/uploads/posts/2023-04/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg',
-        userAboutMe: 'i am not looking for a Job right now...',
-    },
-    {
-        userName: 'Sergey S.',
-        userCountry: 'Belarus',
-        userCity: 'Minsk',
-        userAvatar: 'https://papik.pro/grafic/uploads/posts/2023-04/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg',
-        userAboutMe: 'i am right now...',
-    },
-    {
-        userName: 'Andrew SH.',
-        userCountry: 'Russian',
-        userCity: 'Krasnodar',
-        userAvatar: 'https://papik.pro/grafic/uploads/posts/2023-04/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg',
-        userAboutMe: 'i am not looking for a Job right now...',
-    },],
 
 
 
@@ -50,16 +18,95 @@ const UsersReducer = function (state = initialState, action) {
 
 
     switch (action.type) {
-       
+
+        case FOLLOWE: {
+            let stateCopy = {
+                ...state,
+                User: { ...state.User },
+
+            };
+
+            stateCopy.User.UsersArray = [...state.User.UsersArray].map(function (item, index, array) {
+
+                if (item.id == action.id) {
+                    let itemCopy = {
+                        ...item,
+                        followed: true,
+
+                    };
+                    return itemCopy;
+
+                };
+                return item;
+
+            });
+
+
+
+            return stateCopy;
+        }
+
+        case unFOLLOWE: {
+            let stateCopy = {
+                ...state,
+                User: { ...state.User },
+
+            };
+
+            stateCopy.User.UsersArray = [...state.User.UsersArray].map(function (item, index, array) {
+
+                if (item.id == action.id) {
+
+                    let itemCopy = {
+                        ...item,
+                        followed: false,
+
+                    };
+
+                    return itemCopy;
+
+                };
+                return item;
+
+            });
+
+
+
+            return stateCopy;
+        }
+        case SET_USERS: {
+
+            let stateCopy = { ...state };
+            stateCopy.User = { ...state.User };
+            stateCopy.User.UsersArray = action.users; 
+            
+            /* stateCopy.User.UsersArray = []; */
+            return stateCopy;
+        }
         default:
             return state;
     }
 }
 
-
 export default UsersReducer;
 
 
 
+export const followeAC = function (userId) {
 
+    return ({
+        type: FOLLOWE, id: userId,
+    });
+}
+export const unfolloweAC = function (userId) {
 
+    return ({
+        type: unFOLLOWE, id: userId,
+    });
+}
+
+export const UsersAC = function (usersArray) {
+    return {
+        type: SET_USERS, users: usersArray,
+    };
+}

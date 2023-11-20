@@ -2,7 +2,8 @@
     padding: 5px;
 }
 
-.users__container {}
+.users__container {
+}
 
 .users__body {}
 
@@ -13,7 +14,11 @@
 
 }
 
-.users__content {}
+.users__content {
+    margin-bottom: 15px;
+
+}
+
 
 .users__items {}
 
