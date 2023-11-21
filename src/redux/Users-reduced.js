@@ -1,11 +1,17 @@
 const FOLLOWE = `followe`;
 const unFOLLOWE = `unfollowe`;
 const SET_USERS = `set_users`;
-
+const SET_PAGE_ACTIVE = `set_page_active`;
+const SET_TOTAL_USERS=  `setTotalUsers`;
 let initialState = {
     User: {
         UsersArray: [],
+        pageSize:100,
+        totalUsersCount:0,
+        pageActive:1,
     },
+
+    
 
 
 
@@ -83,6 +89,18 @@ const UsersReducer = function (state = initialState, action) {
             /* stateCopy.User.UsersArray = []; */
             return stateCopy;
         }
+        case SET_PAGE_ACTIVE:{
+            let stateCopy = {...state};
+            stateCopy.User={...state.User,pageActive:action.numberList};
+
+            return stateCopy;
+        }
+        case SET_TOTAL_USERS:{
+           let stateCopy = {...state};
+           stateCopy.User={...state.User,totalUsersCount:action.totalUsers};
+           return stateCopy;
+        }
+
         default:
             return state;
     }
@@ -109,4 +127,10 @@ export const UsersAC = function (usersArray) {
     return {
         type: SET_USERS, users: usersArray,
     };
+}
+export const changeListAC = function(numberList){
+    return {type:`set_page_active`,numberList};
+}
+export const setTotalUsersAC = function(totalUsers){
+return{type:SET_TOTAL_USERS,totalUsers}
 }

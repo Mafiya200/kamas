@@ -13,10 +13,10 @@
 }
 
 .body-content{
-    background-color: rgb(117, 84, 34);
-    grid-column: 2 / 3;
+    background-color: rgb(226, 43, 89);
+     grid-column: 2 / 3;
   grid-row: 2 / 3;
-  padding: 20px 0px;
+  padding: 0px 0px;
 }
 .content__textarea{
   width: 100%;

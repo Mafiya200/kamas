@@ -1,59 +1,59 @@
-import axios from 'axios';
 import User from './User/User';
 import UsersStyle from './Users.module.css';
+import React from 'react';
+////changeListUsers
 
 
 
 
-const Users = function (props) {
+const Users = function(props){
 
-    if (props.UsersArray.length === 0) {
-        let getArrayUsers = axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then(function (responce) {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-            return props.updateUsers(responce.data.items);
-        });
+    let pages = [];
+    
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
 
-        
     }
 
-    /* if (props.UsersArray.length === 0) {
-        
-        let getArrayUsers = axios.get("https://social-network.samuraijs.com/api/1.0/users").then(function (responce) {
-            console.log(responce.data.items);
-        });
-    
-    } */
 
+    let newPages = pages.map(item => {
 
-
-
-    let users = props.UsersArray.map(function (item) {
-
-        return (<><User key={item.id} followed={item.followed} /* user={item} */ userId={item.id} checkUnFollowe={props.checkUnFollowe} checkFollowe={props.checkFollowe} userAvatar={item.userAvatar} name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe} /></>);
+        return (
+            <li className={(props.pageActive === item ? UsersStyle.page_number__active : '') + ' ' + UsersStyle.page_number}>{item}</li>
+        )
+    });
+    let users = props.UsersArray.map((item) => {
+        return (<><User key={item.id} followed={item.followed} /* user={item} */ userId={item.id} checkUnFollowe={props.checkUnFollowe} checkFollowe={props.checkFollowe} userAvatar={item.userAvatar} name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe}/></>);
 
 
     });
 
 
-    return (
-        <div className={UsersStyle.users}>
-            <div className={UsersStyle.users__container}>
-                <div className={UsersStyle.users__body}>
-                    <h2 className={UsersStyle.users__title}>Users</h2>
-                    <div className={UsersStyle.users__content}>
-                        <div className={UsersStyle.users__items}>
-                            {users}
-                        </div>
 
+    return (<div className={UsersStyle.users}>
+        <div className={UsersStyle.page_block}></div>
+        <ul onClick={props.updateList} className={UsersStyle.page_list}>
+            {newPages}
+        </ul>
+        <div className={UsersStyle.users__container}>
+            <div className={UsersStyle.users__body}>
+                <h2 className={UsersStyle.users__title}>Users</h2>
+                <div className={UsersStyle.users__content}>
+                    <div className={UsersStyle.users__items}>
+                        {users}
                     </div>
-                    <div className={UsersStyle.show__more}>
-                        <button onClick={function (e) { console.log(e.target); }} className={UsersStyle.show__button}>Show more</button>
 
-                    </div>
+                </div>
+                <div className={UsersStyle.show__more}>
+                    <button onClick={function (e) { console.log(e.target); }} className={UsersStyle.show__button}>Show more</button>
+
                 </div>
             </div>
         </div>
-    );
+    </div>);
 }
+
+
 export default Users;

@@ -5,7 +5,9 @@
 .users__container {
 }
 
-.users__body {}
+.users__body {
+    padding-bottom: 15px;
+}
 
 .users__title {
     font-size    : 24px;
@@ -38,3 +40,21 @@
 
 
 
+/* page  */
+
+.page_block{
+
+}
+.page_list{
+
+}
+.page_number{   /* selectedPage */
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.page_number__active{
+    font-weight: 700;
+
+}

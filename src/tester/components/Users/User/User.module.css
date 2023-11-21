@@ -1,5 +1,10 @@
 
+.user{
+    background-color: rgb(119, 3, 46);
+    border-radius: 20px;
+    padding: 8px;
 
+}
 .user:not(:last-of-type) {
     margin-bottom: 12px;
 }
@@ -50,7 +55,7 @@
 .user__information {}
 
 .user_information__body {
-    border       : 2px solid gray;
+    border       : 2px solid rgb(179, 81, 110);
     border-radius: 10px;
     padding      : 10px;
 
@@ -68,12 +73,12 @@
     font-size  : 20px;
     font-weight: 600;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    color      : gray;
+    color      : rgb(230, 120, 162);
 }
 
 .user__city {
     font-weight: 600;
-    color      : gray;
+    color      : rgb(150, 150, 150);
     line-height: 135%;
     font-size  : 17px;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -83,7 +88,7 @@
 
 .user__aboutMe {
     font-size: 16px;
-    color: rgb(165, 164, 164);
+    color: rgb(255, 255, 255);
 }
 
 
