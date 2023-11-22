@@ -25,7 +25,9 @@ const Users = function(props){
         )
     });
     let users = props.UsersArray.map((item) => {
-        return (<><User key={item.id} followed={item.followed} /* user={item} */ userId={item.id} checkUnFollowe={props.checkUnFollowe} checkFollowe={props.checkFollowe} userAvatar={item.userAvatar} name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe}/></>);
+        return (<><User key={item.id} followed={item.followed} /* user={item} */ userId={item.id}
+        unFollow={props.unFollow} follow={props.follow} userAvatar={item.userAvatar}
+         name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe}/></>);
 
 
     });

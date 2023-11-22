@@ -3,12 +3,12 @@ import avatar from './../../../../inspect/image/1682520890_papik-pro-p-smaili-sk
 
 const User = function(props){
 
-const follow  = function(e){
-    props.checkFollowe(props.userId);
+const subscribe  = function(e){
+    props.follow(props.userId);
 }
-const unFollow  = function(e){
+const unSubscribe  = function(e){
     
-    props.checkUnFollowe(props.userId);
+    props.unFollow(props.userId);
 }
     return(
     <div className={UserStyle.user}>
@@ -19,7 +19,7 @@ const unFollow  = function(e){
                         <img src={props.userAvatar ? props.userAvatar : avatar} alt="avatar" />
                     </div>
                 </div>
-                {props.followed ? <button onClick={unFollow} className={UserStyle.follow}>unFollow</button>:<button onClick={follow} className={UserStyle.follow}>Follow</button>}
+                {props.followed ? <button onClick={unSubscribe} className={UserStyle.follow}>unFollow</button>:<button onClick={subscribe} className={UserStyle.follow}>Follow</button>}
             </div>
             <div className={UserStyle.user__information}>
                 <div className={UserStyle.user_information__body}>

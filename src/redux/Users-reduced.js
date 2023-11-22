@@ -1,14 +1,16 @@
-const FOLLOWE = `followe`;
-const unFOLLOWE = `unfollowe`;
+const FOLLOW = `follow`;
+const unFOLLOW = `unFollow`;
 const SET_USERS = `set_users`;
 const SET_PAGE_ACTIVE = `set_page_active`;
 const SET_TOTAL_USERS=  `setTotalUsers`;
+const TOGGLE_IS_FEATCHING = 'TOGGLE_IS_FEATCHING';
 let initialState = {
     User: {
         UsersArray: [],
         pageSize:100,
         totalUsersCount:0,
         pageActive:1,
+        isFeatching:false,
     },
 
     
@@ -25,7 +27,7 @@ const UsersReducer = function (state = initialState, action) {
 
     switch (action.type) {
 
-        case FOLLOWE: {
+        case FOLLOW: {
             let stateCopy = {
                 ...state,
                 User: { ...state.User },
@@ -52,7 +54,7 @@ const UsersReducer = function (state = initialState, action) {
             return stateCopy;
         }
 
-        case unFOLLOWE: {
+        case unFOLLOW: {
             let stateCopy = {
                 ...state,
                 User: { ...state.User },
@@ -100,6 +102,14 @@ const UsersReducer = function (state = initialState, action) {
            stateCopy.User={...state.User,totalUsersCount:action.totalUsers};
            return stateCopy;
         }
+        case TOGGLE_IS_FEATCHING:{
+            let stateCopy = {...state};
+            stateCopy.User = {...state.User, isFeatching:action.isFeatching};
+
+
+
+            return stateCopy;
+        } 
 
         default:
             return state;
@@ -110,27 +120,31 @@ export default UsersReducer;
 
 
 
-export const followeAC = function (userId) {
+export const follow = function (userId) {
 
     return ({
-        type: FOLLOWE, id: userId,
+        type: FOLLOW, id: userId,
     });
 }
-export const unfolloweAC = function (userId) {
+export const unFollow = function (userId) {
 
     return ({
-        type: unFOLLOWE, id: userId,
+        type: unFOLLOW, id: userId,
     });
 }
 
-export const UsersAC = function (usersArray) {
+export const updateUsers = function (usersArray) {
     return {
         type: SET_USERS, users: usersArray,
     };
 }
-export const changeListAC = function(numberList){
-    return {type:`set_page_active`,numberList};
-}
-export const setTotalUsersAC = function(totalUsers){
+ export const changeListUsers = function(numberList){
+    return {type:SET_PAGE_ACTIVE,numberList};
+} 
+export const setTotalUsers = function(totalUsers){
 return{type:SET_TOTAL_USERS,totalUsers}
+}
+export const setFeatching = function(isActive){
+    console.log(isActive);
+    return{type:TOGGLE_IS_FEATCHING,isFeatching:isActive,}
 }
