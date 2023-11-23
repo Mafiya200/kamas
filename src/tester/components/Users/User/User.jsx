@@ -1,5 +1,6 @@
 import UserStyle from './User.module.css';
 import avatar from './../../../../inspect/image/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg';
+import { NavLink } from 'react-router-dom';
 
 const User = function(props){
 
@@ -14,11 +15,12 @@ const unSubscribe  = function(e){
     <div className={UserStyle.user}>
         <div className={UserStyle.user__body}>
             <div className={UserStyle.subscribe__block}>
-                <div className={UserStyle.avatar}>
-                    <div className={UserStyle.avatar__image}>
+                <div className={UserStyle.avatar} >
+                <NavLink to={`/profile/${props.userId}`}><div className={UserStyle.avatar__image}>
                         <img src={props.userAvatar ? props.userAvatar : avatar} alt="avatar" />
-                    </div>
+                    </div></NavLink>
                 </div>
+                
                 {props.followed ? <button onClick={unSubscribe} className={UserStyle.follow}>unFollow</button>:<button onClick={subscribe} className={UserStyle.follow}>Follow</button>}
             </div>
             <div className={UserStyle.user__information}>

@@ -145,6 +145,5 @@ export const setTotalUsers = function(totalUsers){
 return{type:SET_TOTAL_USERS,totalUsers}
 }
 export const setFeatching = function(isActive){
-    console.log(isActive);
     return{type:TOGGLE_IS_FEATCHING,isFeatching:isActive,}
 }

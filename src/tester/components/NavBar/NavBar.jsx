@@ -10,7 +10,7 @@ const NavBar = function (props) {
 
       <div className={styleNavBar.item} key={item}>
         <NavLink className={function ({isActive}) {return isActive ? styleNavBar.active : ' ';
-        }} to={`/${item.toLowerCase()}`} > {item}</NavLink>
+        }} to={`/${item.toLowerCase()}`} >{item}</NavLink>
       </div>
     )
   });

@@ -38,20 +38,15 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        
 
 
-        return (
-            <>
+
+        return( <>
 
             {this.props.isFeatching ? <Spiner /> : ""}
             <Users isFeatching={this.props.isFeatching} updateList={this.updateList} setTotalUsers={this.props.setTotalUsers} updateUsers={this.props.updateUsers} totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize} pageActive={this.props.pageActive} UsersArray={this.props.UsersArray}
-             follow={this.props.follow} unFollow={this.props.unFollow} />
-            </>
-            
-
-
-
+                follow={this.props.follow} unFollow={this.props.unFollow} />
+        </>
         );
 
 
@@ -99,10 +94,10 @@ let mapStateToProps = function (state) {
 
 
 export default connect(mapStateToProps, {
-    follow,
+     follow,
     unFollow,
     updateUsers,
-    /* changeListUsers, */
+    changeListUsers,
     setTotalUsers,
     setFeatching,
 })(UsersContainer);

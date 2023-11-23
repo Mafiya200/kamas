@@ -1,10 +1,13 @@
 const add_Message_User = `add-Message-User`;
 const add_Symbol = `add-Symbol`;
+const SET_USER_PROFILE = `setUserProfile`;
+
 
 let initialState = {
-    myPosts: {/////
+    profileUser:{},
+    myPosts: {
 
-        /////
+        
         postArr: [
             { id: 1, message: 'lorem lorem lorem1', likes: 15, name: `jora` },
             { id: 2, message: 'lorem lorem lorem2', likes: 25, name: `jopa` },
@@ -15,20 +18,21 @@ let initialState = {
 
 
         ],
-
+        
         textareaValue: '',
     },
 };
 
-const profileReducer = function (state = initialState, active) {
-    switch (active.type) {
+const profileReducer = function (state = initialState, action) {
+
+    switch (action.type) {
         case add_Symbol: {
 
             let stateCopy = { ...state };
 
             stateCopy.myPosts = { ...state.myPosts };
             stateCopy.myPosts.textareaValue = { ...state.myPosts.textareaValue };
-            stateCopy.myPosts.textareaValue = active.textAreaValue;
+            stateCopy.myPosts.textareaValue = action.textAreaValue;
 
             return stateCopy;
         }
@@ -36,23 +40,29 @@ const profileReducer = function (state = initialState, active) {
 
         case add_Message_User: {
 
-            let stateCopy = { ...state,
-            
-                
+            let stateCopy = {
+                ...state,
+
+
             };
 
             stateCopy.myPosts = { ...state.myPosts };
-            stateCopy.myPosts.postArr = [ ...state.myPosts.postArr,{ id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` } ];
+            stateCopy.myPosts.postArr = [...state.myPosts.postArr, { id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` }];
 
-           /*  let messageUser = { id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
-            stateCopy.myPosts.postArr.push(messageUser); */
+            /*  let messageUser = { id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
+             stateCopy.myPosts.postArr.push(messageUser); */
 
             stateCopy.myPosts.textareaValue = '';
 
             return stateCopy;
 
         }
+        case SET_USER_PROFILE: {
+            let stateCopy = { ...state,profileUser:action.userProfile };
+        
 
+            return stateCopy;
+        }
         default:
             return state;
 
@@ -78,5 +88,9 @@ export const addLetterActiveCreator = function (text) {
         { type: add_Symbol, textAreaValue: text, }
     );
 }
-
+export const setUserProfile = function (userProfile) {
+    return (
+        { type: SET_USER_PROFILE, userProfile, }
+    );
+}
 export default profileReducer;

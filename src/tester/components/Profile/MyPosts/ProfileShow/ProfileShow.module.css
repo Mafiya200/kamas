@@ -1,0 +1,76 @@
+.profile_show {
+    padding: 20px 15px;
+}
+.profile_show__body {
+}
+.profile_show__items {
+    display: flex;
+
+}
+.profile_show__picture {
+    margin-right: 30px;
+    flex-basis: 50%;
+}
+@media (min-width:801px) {
+    .profile_show__picture {
+        flex-basis: 25%;
+
+    }   
+    
+}
+.profile_show__image {
+position: relative;
+width: 100%;
+padding-bottom: 100%;
+}
+.profile_show__image img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.user_data {
+    display: flex;
+    justify-content: center;
+flex-direction: column;
+    flex-basis: 50%;
+}
+@media (min-width:801px) {
+    .user_data {
+flex-basis: 75%;
+    }   
+}
+.user_name {
+    margin-bottom: 10px;
+}
+.user_find_job {
+    margin-bottom: 10px;
+
+}
+
+
+
+.user_contacts {
+}
+.user_contacts > div:not(:last-child){
+    margin-bottom: 5px;
+
+}
+.user_facebook {
+}
+.user_website {
+}
+.user_VK {
+}
+.twitter {
+}
+.instagram {
+}
+.youtube {
+}
+.github {
+}
