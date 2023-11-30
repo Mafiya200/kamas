@@ -132,7 +132,6 @@ export const unFollow = function (userId) {
         type: unFOLLOW, id: userId,
     });
 }
-
 export const updateUsers = function (usersArray) {
     return {
         type: SET_USERS, users: usersArray,

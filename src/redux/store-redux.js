@@ -3,6 +3,7 @@ import NavBarReducer from "./NavBar-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import UsersReducer from "./Users-reduced";
+import authReducer from "./auth-reducer";
 
 
 
@@ -10,6 +11,7 @@ import UsersReducer from "./Users-reduced";
 
 ///поидее тут создаётся _state
 let reducers = combineReducers({
+    auth:authReducer,
     NavBar:NavBarReducer,
     dialogs:dialogsReducer,
     profile:profileReducer,

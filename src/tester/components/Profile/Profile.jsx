@@ -7,7 +7,6 @@ import ProfilePicture from "./ProfilePicture/ProfilePicture";
 
 
 const Profile = function (props) {
-
   return (
     <div >
       

@@ -1,5 +1,4 @@
 import './App.css';
-import Header from './tester/components/Header/Header';
 import NavBarContainer from './tester/components/NavBar/NavBarContainer';
 import Dialogs from './tester/components/Dialogs/Dialogs';
 
@@ -9,6 +8,7 @@ import Music from './tester/components/Music/Music';
 import Settings from './tester/components/Settings/Settings';
 import UsersContainer from './tester/components/Users/UsersContainer';
 import ProfileContainer from './tester/components/Profile/ProfileContainer';
+import HeaderContainer from './tester/components/Header/HeaderContainer';
 
 
 
@@ -26,16 +26,17 @@ function App(props) {
 
     <div className='app-wrapper'>
 
-      <Header />
+      <HeaderContainer />
       <NavBarContainer /* NavBar={props.appState.NavBar} */ />
       <div className='body-content'>
 
         <Routes>
-          <Route path='profile/*' element={<>
+          <Route path='profile/:userId?' element={<>
 
             <ProfileContainer /* store={props.store} */ />
 
           </>} />
+
           <Route path='dialogs/*' element={<><Dialogs /* store={props.store} */ />   </>} />
           {<Route path='/users/*' element={<><UsersContainer /></>} />
           }          <Route path='news/*' element={<><News />   </>} />
