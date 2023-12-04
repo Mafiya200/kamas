@@ -7,21 +7,35 @@ import { usersAPI } from '../../../../api/api';
 const User = function (props) {
 
 
+
+
     const userDoFollow = function () {
-        usersAPI.userFollow(props.userId)
-            .then((response) => {
-                if (response.resultCode === 0) {
-                    props.follow(props.userId);
-                }
-            });
+        props.doFollow(props.userId);
+        /*         debugger
+         */     /*    props.setProgressing(true, props.userId);
+       
+       
+               usersAPI.userFollow(props.userId)
+                   .then((response) => {
+                       if (response.resultCode === 0) {
+                           props.follow(props.userId);
+                       }
+                       props.setProgressing(false, props.userId);
+       
+                   }); */
     }
     const userDoUnFollow = function () {
-        usersAPI.userUnFollow(props.userId).then((response) => {
-            if (response.resultCode === 0) {
-                props.unFollow(props.userId);
-            }
-        });
-
+        props.doUnFollow(props.userId);
+        /*   props.setProgressing(true, props.userId);
+  
+          usersAPI.userUnFollow(props.userId).then((response) => {
+              if (response.resultCode === 0) {
+                  props.unFollow(props.userId);
+              }
+              props.setProgressing(false, props.userId);
+  
+          });
+   */
     }
 
 
@@ -35,8 +49,11 @@ const User = function (props) {
         userDoUnFollow(props.userId);
 
     } */
+
     return (
+
         <div className={UserStyle.user}>
+
             <div className={UserStyle.user__body}>
                 <div className={UserStyle.subscribe__block}>
                     <div className={UserStyle.avatar} >
@@ -45,7 +62,9 @@ const User = function (props) {
                         </div></NavLink>
                     </div>
 
-                    {props.followed ? <button onClick={userDoUnFollow} className={UserStyle.follow}>unFollow</button> : <button onClick={userDoFollow} className={UserStyle.follow}>Follow</button>}
+                    {props.followed ?
+                        <button disabled={props.isProcessing.some((id) => { if (id === props.userId) return true })} onClick={userDoUnFollow} className={UserStyle.follow}>unFollow</button>
+                        : <button disabled={props.isProcessing.some((id) => { if (id === props.userId) return true })} onClick={userDoFollow} className={UserStyle.follow}>Follow</button>}
                 </div>
                 <div className={UserStyle.user__information}>
                     <div className={UserStyle.user_information__body}>
@@ -65,6 +84,7 @@ const User = function (props) {
                 </div>
             </div>
         </div>);
+
 }
 
 export default User;

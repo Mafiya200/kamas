@@ -7,12 +7,11 @@ import React from 'react';
 
 
 
-const Users = function(props){
-
+const Users = function (props) {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
-    
+
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
 
@@ -26,9 +25,10 @@ const Users = function(props){
         )
     });
     let users = props.UsersArray.map((item) => {
-        return (<><User key={item.id} followed={item.followed} /* user={item} */ userId={item.id}
-        unFollow={props.unFollow} follow={props.follow} userAvatar={item.userAvatar}
-         name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe}/></>);
+
+        return (<><User key={item.id} followed={item.followed} /* user={item} */ userId={item.id} doUnFollow={props.doUnFollow} doFollow={props.doFollow} 
+            unFollow={props.unFollow} follow={props.follow} userAvatar={item.userAvatar} userProcessing={props.userProcessing} userIdProcessing={props.userIdProcessing}
+            name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe} setProgressing={props.setProgressing} isProcessing={props.isProcessing} /> </>);
 
 
     });
@@ -50,7 +50,7 @@ const Users = function(props){
 
                 </div>
                 <div className={UsersStyle.show__more}>
-                    <button onClick={function (e) { console.log(e.target); }} className={UsersStyle.show__button}>Show more</button>
+                    <button onClick={function (e) {  }} className={UsersStyle.show__button}>Show more</button>
 
                 </div>
             </div>
