@@ -1,43 +1,8 @@
-
+/* 
 import UserMessages from "./UserMessages";
 
 import { addUserMessageActionCreator, createMessageActionCreator } from '../../../../redux/dialogs-reducer';
 import { connect } from "react-redux";
-
-
-/* const UserMessagesContainer = function (props) {
-         
-
-
-
-
-    ////1///
-    const addLetterContainer = function (text) {
-
-        props.store.dispatch(addUserMessageActionCreator(text));
-
-
-
-    }
-
-
-
-
-
-
-
-  
-    const addMessageContainer = function (nameItem) {
-
-
-        props.store.dispatch(createMessageActionCreator(nameItem));
-
-        }
-
-
-
-    return ( <UserMessages userMessages={state.userMessages} names={state.namesArray} addMessage={addMessageContainer} addLetter={addLetterContainer}/> );
-} */
 
 
 
@@ -67,4 +32,4 @@ let mapDispatchToProps = function (dispatch) {
 const UserMessagesContainer = connect(mapStateToProps, mapDispatchToProps)(UserMessages);
 
 
-export default UserMessagesContainer;
+export default UserMessagesContainer; */

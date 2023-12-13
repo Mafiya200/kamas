@@ -5,7 +5,7 @@ import { updateUsers, follow, setTotalUsers, unFollow, setProgressing, getUsers,
 import Spiner from "../Generalis/Spiner/Spiner";
 
 class UsersContainer extends React.Component {
-    
+
 
     componentDidMount() {
 
@@ -26,7 +26,7 @@ class UsersContainer extends React.Component {
             return;
         }
         let numberListActive = +e.target.innerHTML;
-
+        
         this.props.getUsers(numberListActive, this.props.pageSize);
 
 
@@ -52,7 +52,7 @@ class UsersContainer extends React.Component {
             {this.props.isFeatching ? <Spiner /> : ""}
             <Users isFeatching={this.props.isFeatching} updateList={this.updateList} setTotalUsers={this.props.setTotalUsers}
                 updateUsers={this.props.updateUsers} totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize} pageActive={this.props.pageActive}
-                UsersArray={this.props.UsersArray} userIdProcessing={this.props.userIdProcessing} doUnFollow={this.props.doUnFollow} doFollow={this.props.doFollow} 
+                UsersArray={this.props.UsersArray} userIdProcessing={this.props.userIdProcessing} doUnFollow={this.props.doUnFollow} doFollow={this.props.doFollow}
                 follow={this.props.follow} unFollow={this.props.unFollow} setProgressing={this.props.setProgressing} isProcessing={this.props.isProcessing} />
         </>
         );
@@ -82,7 +82,6 @@ let mapStateToProps = function (state) {
 
 
 export default connect(mapStateToProps, {
-    
     follow,
     unFollow,
     updateUsers,

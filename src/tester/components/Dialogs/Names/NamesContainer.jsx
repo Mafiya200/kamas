@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+/* import { connect } from 'react-redux';
 import Names from './Names';
 
 
@@ -13,4 +13,4 @@ const mapStateToProps = function(state){
 const NamesContainer = connect(mapStateToProps)(Names);
 
 
-export default NamesContainer;
+export default NamesContainer; */

@@ -1,8 +1,12 @@
 @import url('../src/nul_style.css');
 
-
+body{
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 .app-wrapper{
+  
     display: grid;
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;

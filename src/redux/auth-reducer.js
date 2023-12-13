@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { authAPI, usersAPI } from "../api/api";
 
 ///var
 const SET_USER_DATA = "SET_USER_DATA";
@@ -25,6 +25,7 @@ const authReducer = function (state = initialState, action) {
     switch (action.type) {
         case SET_USER_DATA:
             let stateCopy = { ...state, ...action.data, isAuth: true, };
+            
             return stateCopy;
 
 
@@ -34,19 +35,23 @@ const authReducer = function (state = initialState, action) {
     }
 }
 
-export function setAuthUserData(data) {
+export const setAuthUserData = function (data) {
     return { type: SET_USER_DATA, data, };
 }
-export const authMe = () => {
-    return (dispatch) => {
-        usersAPI.authMe()
+export const getAuthUserData = function () {
+    return function (dispatch) {
+        authAPI.me()
             .then(data => {
-                if (!data.resultCode) {
+                
+                if (data.resultCode == 0) {
+                    
                     dispatch(setAuthUserData(data.data));
                 }
             });
+
     }
 
 }
+
 
 export default authReducer;

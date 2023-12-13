@@ -1,39 +1,10 @@
-import React from "react";
-import { addLetterActiveCreator, addMessageUserActiveCreator } from "../../../../redux/profile-reducer";
+import { /* addLetterActiveCreator, */ addMessageUserActionCreator } from "../../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import { connect } from "react-redux";
+import { compose } from "redux";
 
 
 
-
-
-
-
-
-
-
-/* const MyPostsContainer = function (props) {
-
-    let state = props.store.getState().profile.myPosts;
-
-  let addPostContainer = function () { 
-
-    props.store.dispatch(addMessageUserActiveCreator());
-  }
-
-
-
-  let addLetterContainer = function (text) {
-    
-    props.store.dispatch(addLetterActiveCreator(text));
-  }
-
-
-
-
-  return (<MyPosts addPost={addPostContainer} addLetter={addLetterContainer} myPosts={state}/>);
-
-} */
 
 const mapStateToProps = function (state) {
   return ({
@@ -42,18 +13,15 @@ const mapStateToProps = function (state) {
 }
 const mapDispatchToProps = function (dispatch) {
   return ({
-
-
-    addPost: function () {
-      dispatch(addMessageUserActiveCreator());
+    addPost: function (textNewMessage) {
+      dispatch(addMessageUserActionCreator(textNewMessage));
     },
 
-    addLetter: function (text) {
+   /*  addLetter: function (text) {
       dispatch(addLetterActiveCreator(text));
-    },
+    }, */
   });
 }
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
-export default MyPostsContainer;
+export default compose(connect(mapStateToProps, mapDispatchToProps))(MyPosts);

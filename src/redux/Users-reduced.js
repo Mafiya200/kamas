@@ -155,8 +155,6 @@ const UsersReducer = function (state = initialState, action) {
 
 export default UsersReducer;
 
-
-
 export const follow = function (userId) {
 
     return ({
@@ -183,19 +181,13 @@ export const setTotalUsers = function (totalUsers) {
 export const setFeatching = function (isActive) {
     return { type: TOGGLE_IS_FEATCHING, isFeatching: isActive, }
 }
-
-
-
 export const setProgressing = function (isProcessing, userId) {
     return { type: TOGGLE_SET_PROCESSING, isProcessing, userId, }
 }
-
-
-
-
 export const getUsers = (pageActive, pageSize) => {
 
     return function (dispatch) {
+        dispatch(changeListUsers(pageActive));
         dispatch(setFeatching(true));
         usersAPI.getUsers(pageActive, pageSize)
             .then(data => {
@@ -209,11 +201,6 @@ export const getUsers = (pageActive, pageSize) => {
 
 
 }
-
-
-
-
-
 export const doUnFollow = (userId) => {
 
     return (dispatch) => {
@@ -229,6 +216,9 @@ export const doUnFollow = (userId) => {
 
     }
 };
+
+
+
 export const doFollow = (userId) => {
     return (dispatch) => {
         dispatch(setProgressing(true, userId));

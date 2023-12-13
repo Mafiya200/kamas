@@ -52,6 +52,9 @@
     display: inline-block;
     cursor: pointer;
     padding: 5px;
+    width: 30px;
+    height: 20px;
+    text-align: center;
 }
 
 .page_number__active{

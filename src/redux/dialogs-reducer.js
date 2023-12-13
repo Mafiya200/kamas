@@ -40,9 +40,9 @@ let initialState = {
 };
 
 
-const dialogsReducer = function (state = initialState, active) {
+const dialogsReducer = function (state = initialState, action) {
 
-    switch (active.type) {
+    switch (action.type) {
 
         
         case create_Message: {
@@ -52,11 +52,12 @@ const dialogsReducer = function (state = initialState, active) {
             };
 
             /* let add = { id: 0, key: 0, message: state.userMessages.message }; */
-            /* state.userMessages.messageArr[active.nameItem].push(add); */
+            /* state.userMessages.messageArr[action.nameItem].push(add); */
             /* stateCopy.userMessages = {...state.userMessages};
             stateCopy.userMessages.messageArr = { ...state.userMessages.messageArr }; */
-            stateCopy.userMessages.messageArr[active.nameItem] = [ ...state.userMessages.messageArr[active.nameItem],{ id: 0, key: 0, message: state.userMessages.message } ];
-           /*  stateCopy.userMessages.messageArr[active.nameItem].push(add); */
+            console.log(action.textareaMessage);
+            stateCopy.userMessages.messageArr[action.nameItem] = [ ...state.userMessages.messageArr[action.nameItem],{ id: 0, key: 0, message: action.textareaMessage } ];
+           /*  stateCopy.userMessages.messageArr[action.nameItem].push(add); */
             /* stateCopy.userMessages.message = ''; */
 
             return stateCopy;
@@ -64,7 +65,7 @@ const dialogsReducer = function (state = initialState, active) {
         case add_User_Message: {
             let stateCopy = { ...state };
             stateCopy.userMessages = {...state.userMessages};
-            stateCopy.userMessages.message = active.text;
+            stateCopy.userMessages.message = action.text;
             return stateCopy;
 
         }
@@ -87,12 +88,12 @@ const dialogsReducer = function (state = initialState, active) {
 
 
 
-
 export const addUserMessageActionCreator = function (text) {
     return ({ type: add_User_Message, text: text, });
 }
 
-export const createMessageActionCreator = function (nameItem) {
-    return ({ type: create_Message, nameItem: nameItem, });
+export const createMessageActionCreator = function (nameItem,textareaMessage) {
+    
+    return ({ type: create_Message, nameItem: nameItem, textareaMessage, });
 }
 export default dialogsReducer;

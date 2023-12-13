@@ -2,25 +2,40 @@ import { Route, Router, Routes } from 'react-router-dom';
 import styleUserMessages from './UserMessages.module.css';
 import React from 'react';
 import UserMessage from './UserMessage/UserMessage';
-import { addUserMessageActionCreator, createMessageActionCreator } from '../../../../redux/dialogs-reducer';
+import { Field, reduxForm } from 'redux-form';
 
 
 
 const UserMessages = function (props) {
-         /* let textarLink = React.createRef(); */
+    
+    /* let textarLink = React.createRef(); */
+
+
+    const DialogsForm = (props) => {
+
+        return (
+            <form onSubmit={props.handleSubmit} >
+                <Field component={'textarea'} placeholder='your news...'  /* onInput={onAddLetter} */  /* ref={textarLink} */ className="content__textarea" name="textareaMessage" />
+                <div className="content__BlockButton">
+                    <button /* onClick={onAddMessage} */ className="content__button">Send</button>
+                </div>
+            </form>
+        );
+    }
+    const DialogsReduxForm = reduxForm({ form: 'dialogsForm' })(DialogsForm);
 
 
 
 
     ////1///
-    const onAddLetter = function (event) {
+    /* const onAddLetter = function (event) {
 
         let text = event.target.value;
-        props.addLetter(text);
+        props.addUserMessageActionCreator(text);
 
 
 
-    }
+    } */
 
 
 
@@ -33,11 +48,12 @@ const UserMessages = function (props) {
 
         let nameItem = item.name;
         //2//////
-        const onAddMessage = function () {
+        const onAddMessage = function (data) {
+
+            
 
 
-
-            props.addMessage(nameItem);
+            props.createMessageActionCreator(nameItem,data.textareaMessage);
 
 
 
@@ -63,22 +79,19 @@ const UserMessages = function (props) {
                         {createMessage}
 
 
-                       
+
 
 
                     </div>
 
                     <div className={styleUserMessages.userMessages__message}>
-                        <textarea placeholder='your news...' value={props.userMessages.message} onInput={onAddLetter}  /* ref={textarLink} */  className="content__textarea" name="textareaMessage" ></textarea>
-                        <div className="content__BlockButton">
-                            <button onClick={onAddMessage} className="content__button">Send</button>
 
-                        </div>
+                        <DialogsReduxForm onSubmit={onAddMessage}/>
 
                     </div>
 
-                </>}>
-            </Route>
+                </>} >
+            </Route >
 
         );
     });
@@ -106,6 +119,7 @@ const UserMessages = function (props) {
         </div>
     );
 }
+
 
 
 export default UserMessages;

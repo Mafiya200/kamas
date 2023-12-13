@@ -1,6 +1,7 @@
 import React from "react";
 import styleMyPosts from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { Field, reduxForm } from "redux-form";
 
 
 
@@ -13,27 +14,26 @@ let link = React.createRef();
 
 
 const MyPosts = function (props) {
-  let onAddPost = function () { 
-    props.addPost();
-   /*  props.dispatch(addMessageUserActiveCreator()); */
+
+
+  const onSubmit = (data) => {
+    props.addPost(data.posts);
   }
 
 
+/* 
+  let onAddPost = function () {
+
+    props.addPost();
+    
+  }
 
   let onAddLetter = function (e) {
-    /* props.addSymbol(link.current.value); */
+
+
     let text = e.target.value;
     props.addLetter(text);
-    /* props.dispatch(addLetterActiveCreator(link.current.value)); */
-  }
-
-
-
-
-
-
-
-
+  } */
 
   let newMyPosts = props.myPosts.postArr.map(function (item, index, array) {
 
@@ -44,20 +44,14 @@ const MyPosts = function (props) {
   });
 
 
-
-
-
   return (
     <div className={styleMyPosts.content}>
       <h2>My posts1</h2>
 
       <div className={styleMyPosts.content__body}>
 
-        <textarea value={props.myPosts.textareaValue} onChange={onAddLetter} ref={link} className='content__textarea' name="posts" placeholder="your news..."></textarea>
-        <div className="content__BlockButton">
-          <button onClick={onAddPost} className="content__button">Send</button>
-
-        </div>
+        {/*  <MyPostForm onAddLetter={onAddLetter} onAddPost={onAddPost} textareaValue={props.myPosts.textareaValue} /> */}
+        <MyPostReduxForm onSubmit={onSubmit} /*onAddLetter={onAddLetter} onAddPost={onAddPost} textareaValue={props.myPosts.textareaValue} */ />
         <div className={styleMyPosts.content__posts}>
 
           {newMyPosts}
@@ -67,5 +61,21 @@ const MyPosts = function (props) {
     </div>
   );
 }
+
+
+const MyPostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field name={'posts'} component={'textarea'} /* value={props.textareaValue} onChange={props.onAddLetter} ref={link} */ className='content__textarea' placeholder="your news..." />
+      <div className="content__BlockButton">
+        <button type="submit" /* onClick={props.onAddPost} */ className="content__button">Send</button>
+      </div>
+    </form>
+  );
+}
+
+const MyPostReduxForm = reduxForm({ form: 'MyPost', })(MyPostForm);
+
+
 
 export default MyPosts;
