@@ -22,19 +22,19 @@ export const setMessage = (message) => {
     return { type: SET_MESSAGE, message, }
 }
 
-export const checkInputData = (email, pass, rememberMe) => {
+/* export const checkInputData = (email, pass, rememberMe) => {
     return function (dispatch) {
         authAPI.login(email, pass, rememberMe).then((data) => {
 
 
                 if(data.resultCode == 0){
-                    
+                      dispatch(setMessage(data.messages));
                 }
-            dispatch(setMessage(data.messages));
+          
 
         });
     }
 
-}
+} */
 
 export default LoginPageReducer;

@@ -19,9 +19,16 @@ let reducers = combineReducers({
     Users: UsersReducer,
     LoginPage: LoginPageReducer,
     /* form: formReducer, */
-    form:formReducer,
+    form: formReducer,
 });
 
 let store = createStore(reducers, applyMiddleware(thunk));
+
+/* let arra = { name: 'вася', age: 12, };
+
+let {age:ages,r0} = arra;
+
+console.log(ages,r0); */
+
 
 export default store;

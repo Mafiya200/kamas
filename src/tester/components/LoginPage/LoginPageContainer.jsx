@@ -1,7 +1,9 @@
 import { connect } from "react-redux";
 import LoginPage from "./LoginPage";
 import React from "react";
-import { checkInputData } from "../../../redux/loginPage-reducer";
+import { login } from "../../../redux/auth-reducer";
+
+
 
 class LoginPageContainer extends React.Component {
 
@@ -16,10 +18,11 @@ let mapStateToProps = (state) => {
 
     return {
         message:state.LoginPage.message,
+        isAuth:state.auth.isAuth,
     };
 };
 
 
 
 
-export default connect(mapStateToProps, { checkInputData, })(LoginPageContainer);
+export default connect(mapStateToProps, { login, })(LoginPageContainer);

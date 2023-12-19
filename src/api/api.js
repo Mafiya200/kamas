@@ -26,7 +26,6 @@ export const usersAPI = {
     },
 
     getProfile(userId) {
-        console.log('warn');
         return profileAPI.getProfile(userId);
 
     },
@@ -69,12 +68,19 @@ export const authAPI = {
             })
         );
     },
-    login(email, password, rememberMe) {
+    login(email, password, rememberMe=false) {
         return (instance.post('auth/login', {
             email,
             password,
             rememberMe,
         }).then((response)=>{
+            
+            return response.data;
+        }));
+    },
+    logout() {
+        return (instance.delete('auth/login')
+        .then((response)=>{
             
             return response.data;
         }));

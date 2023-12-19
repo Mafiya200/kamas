@@ -3,19 +3,24 @@ import styleUserMessages from './UserMessages.module.css';
 import React from 'react';
 import UserMessage from './UserMessage/UserMessage';
 import { Field, reduxForm } from 'redux-form';
+import { maxLengthCreator, required } from '../../../../utils/validators/validators';
+import { TextArea } from '../../Common/FormsControls/FormsControls';
 
 
 
 const UserMessages = function (props) {
-    
+
     /* let textarLink = React.createRef(); */
 
 
     const DialogsForm = (props) => {
-
+        let maxLength = maxLengthCreator(3);
         return (
             <form onSubmit={props.handleSubmit} >
-                <Field component={'textarea'} placeholder='your news...'  /* onInput={onAddLetter} */  /* ref={textarLink} */ className="content__textarea" name="textareaMessage" />
+                <div className={styleUserMessages.textareaBlock}>
+                    <Field validate={[required, maxLength]} component={TextArea} placeholder='your news...'  /* onInput={onAddLetter} */  /* ref={textarLink} */ className={styleUserMessages.content__textarea} name="textareaMessage" />
+
+                </div>
                 <div className="content__BlockButton">
                     <button /* onClick={onAddMessage} */ className="content__button">Send</button>
                 </div>
@@ -50,10 +55,10 @@ const UserMessages = function (props) {
         //2//////
         const onAddMessage = function (data) {
 
-            
 
 
-            props.createMessageActionCreator(nameItem,data.textareaMessage);
+
+            props.createMessageActionCreator(nameItem, data.textareaMessage);
 
 
 
@@ -86,7 +91,7 @@ const UserMessages = function (props) {
 
                     <div className={styleUserMessages.userMessages__message}>
 
-                        <DialogsReduxForm onSubmit={onAddMessage}/>
+                        <DialogsReduxForm onSubmit={onAddMessage} />
 
                     </div>
 

@@ -1,0 +1,33 @@
+.errorTextArea{
+    position: relative;
+
+}
+.error{
+    box-shadow: 0px 0px 3px 2px red;
+    /* border: 1px solid red; */
+}
+.errorTextArea  .inputContainer{
+    display: inline-block;
+    position: relative;
+}
+.inputContainer span{
+    color: red;
+    top: 50%;
+    left: 110%;
+ font-weight: 500;
+ width: 100%;
+    transform: translate(-0,-50%);
+line-height:200%;
+    height: 30px;
+position: absolute;
+}
+.errorTextArea span{
+    color: red;
+    top: 50%;
+    right: 10px;
+ font-weight: 500;
+    transform: translate(-0,-50%);
+line-height:200%;
+    height: 30px;
+position: absolute;
+}

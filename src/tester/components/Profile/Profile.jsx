@@ -15,7 +15,7 @@ const Profile = function (props) {
 
       <ProfilePicture  />
       <ProfileStatus isAuth={props.isAuth} userId={ props.match.params.userId}  updateProfileStatus={props.updateProfileStatus}  getProfileStatus={props.getProfileStatus} profileStatus={props.profileStatus} status={props.userStatus} /> {/* props.status */}
-      <ProfileShow profileUser={props.profileUser} />
+      <ProfileShow isAuth={props.isAuth} profileUser={props.profileUser} />
       <MyPostsContainer />
       
     </div>

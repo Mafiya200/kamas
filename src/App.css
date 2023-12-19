@@ -23,17 +23,7 @@ body{
   padding: 0px 0px;
   position: relative;
 }
-.content__textarea{
-  width: 100%;
-  font-size: 16px;
-  padding: 10px;
-  height: 150px;
-  resize: none;
-  margin-bottom: 20px;
-  background-color: rgb(212, 211, 211);
 
-
-}
 .content__BlockButton{
   text-align: end;
 }
