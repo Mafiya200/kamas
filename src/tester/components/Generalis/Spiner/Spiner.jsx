@@ -9,7 +9,6 @@ const Spiner = function () {
             <div className={spinerStyle.spiner_container}>
                 <div className={spinerStyle.spiner_image}>
                     <img className={spinerStyle.spiner} src={loadSpiner} />
-
                 </div>
 
             </div>

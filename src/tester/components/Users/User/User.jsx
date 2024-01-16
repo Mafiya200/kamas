@@ -1,7 +1,6 @@
 import UserStyle from './User.module.css';
 import avatar from './../../../../inspect/image/1682520890_papik-pro-p-smaili-skobkami-i-tochkami-png-27.jpg';
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../../../api/api';
 
 
 const User = function (props) {

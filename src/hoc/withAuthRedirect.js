@@ -29,7 +29,7 @@ export const withAuthRedirect = (Component) => {
 export const withRouter=function (Children) {
     return (props) => {
   
-      const match = { params: useParams() };
+      const match = { params: useParams() }; 
       return <Children {...props} match={match} />
     }
   } /* - добавить это перед классовой компонентой  */

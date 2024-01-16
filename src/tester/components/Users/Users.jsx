@@ -36,7 +36,7 @@ const Users = function (props) {
 
 
     return (<div className={UsersStyle.users}>
-        <div className={UsersStyle.page_block}></div>
+        <div className={UsersStyle.page_block}></div> 
         <ul onClick={props.updateList} className={UsersStyle.page_list}>
             {newPages}
         </ul>

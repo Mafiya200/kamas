@@ -9,7 +9,7 @@ const NavBar = function (props) {
     return (
 
       <div className={styleNavBar.item} key={item}>
-        <NavLink className={function ({isActive}) {return isActive ? styleNavBar.active : ' ';
+        <NavLink block className={function ({isActive}) {return isActive ? styleNavBar.active : ' ';
         }} to={`/${item.toLowerCase()}`} >{item}</NavLink>
       </div>
     )

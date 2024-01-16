@@ -3,6 +3,7 @@ import React from 'react';
 import Users from './Users';
 import { updateUsers, follow, setTotalUsers, unFollow, setProgressing, getUsers, doUnFollow, doFollow } from "../../../redux/Users-reduced";
 import Spiner from "../Generalis/Spiner/Spiner";
+import { getIsFeatching, getIsProcessing, getPageActive, getPageSize, getTotalUsersCount, getUserIdProcessing, getUserProcessing, getUsersStateSelector } from "../../../redux/user-selectors";
 
 class UsersContainer extends React.Component {
 
@@ -26,7 +27,7 @@ class UsersContainer extends React.Component {
             return;
         }
         let numberListActive = +e.target.innerHTML;
-        
+
         this.props.getUsers(numberListActive, this.props.pageSize);
 
 
@@ -63,7 +64,7 @@ class UsersContainer extends React.Component {
 };
 
 
-let mapStateToProps = function (state) {
+/* let mapStateToProps = function (state) {
     return ({
         UsersArray: state.Users.User.UsersArray,
         pageSize: state.Users.User.pageSize,
@@ -76,9 +77,22 @@ let mapStateToProps = function (state) {
 
     });
 
+}; */
+
+let mapStateToProps = function (state) {
+    return ({
+
+        pageSize: getPageSize(state),
+        UsersArray: getUsersStateSelector(state),
+        pageActive: getPageActive(state),
+        isFeatching: getIsFeatching(state),
+        isProcessing: getIsProcessing(state),
+        userProcessing: getUserProcessing(state),
+        totalUsersCount: getTotalUsersCount(state),
+        userIdProcessing: getUserIdProcessing(state),
+
+    });
 };
-
-
 
 
 export default connect(mapStateToProps, {

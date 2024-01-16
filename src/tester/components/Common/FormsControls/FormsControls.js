@@ -1,7 +1,7 @@
 
 import styleValidators from './FormsControls.module.css';
 
- export const TextArea = ({ input, meta, className, ...props }) => {
+export const TextArea = ({ input, meta, className, ...props }) => {
 
     return (
         <>
