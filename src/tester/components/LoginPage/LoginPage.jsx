@@ -1,16 +1,36 @@
 import { Field, reduxForm } from "redux-form";
-import { Input } from "../Common/FormsControls/FormsControls";
+import { Input, createField } from "../Common/FormsControls/FormsControls";
 import { required } from "../../../utils/validators/validators";
-import { Navigate } from "react-router-dom";
 import styleLoginPage from './LoginPageStyle.module.css';
 
 
 const LoginForm = function (props) {
     return (<form onSubmit={props.handleSubmit} action="" method="post">
-        <div><Field validate={[required]} placeholder={"Email"} name="email" component={Input} /></div>
-        <div><Field validate={[required]} placeholder={"Password"} type="password" name="password" component={Input} /></div>
         <div>
-            <Field name="rememberMe" type="checkbox" component={Input} /> remember me
+            <div className={styleLoginPage.field_email + " " + styleLoginPage.field}>
+
+                {/* <Field validate={[required]} type="text" placeholder={"Email"} name="email" component={Input} /> */}
+
+                {createField(Input, { type: 'text' }, "email", "Email", [required])}
+
+            </div>
+        </div>
+        <div>
+            <div className={styleLoginPage.field_password + " " + styleLoginPage.field}>
+
+                {createField(Input, { type: 'password' }, "password", "Password", [required])}
+
+                {/* <Field validate={[required]} placeholder={"Password"} type="password" name="password" component={Input} /> */}
+
+            </div>
+
+        </div>
+        <div>
+            {/* <Field name="rememberMe" type="checkbox" component={Input} /> */}
+            <div className={styleLoginPage.items}>
+                {createField(Input, { type: 'checkbox' }, "rememberMe")} <span>remember me </span>
+            </div>
+
         </div>
         {props.error && <div className={styleLoginPage.warningBlock}>
             <span className={styleLoginPage.warning}>{props.errorMessage}</span>
@@ -45,8 +65,6 @@ const LoginPage = function (props) {
     }
 
 }
-
-
 
 
 export default LoginPage;

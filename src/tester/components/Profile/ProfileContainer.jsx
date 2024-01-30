@@ -5,12 +5,11 @@ import { getMyProfile, getProfileStatus, getUserProfile, updateProfileStatus } f
 import { withRouter } from "../../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
-let userId;
 
 class ProfileContainer extends React.Component {
 
   componentDidMount() {
-    userId = this.props.match.params.userId;
+    let userId = this.props.match.params.userId;
     if (!userId) {
       this.props.getMyProfile();//////////
     }
@@ -32,7 +31,6 @@ class ProfileContainer extends React.Component {
   }
   
   render() {
-    
     
     
     return <>

@@ -1,21 +1,25 @@
 import './App.css';
 import NavBarContainer from './tester/components/NavBar/NavBarContainer';
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import News from './tester/components/News/News';
 import Music from './tester/components/Music/Music';
 import Settings from './tester/components/Settings/Settings';
 import UsersContainer from './tester/components/Users/UsersContainer';
-import ProfileContainer from './tester/components/Profile/ProfileContainer';
-import HeaderContainer from './tester/components/Header/HeaderContainer';
 import LoginPageContainer from './tester/components/LoginPage/LoginPageContainer';
-import DialogsContainer from './tester/components/Dialogs/DialogsContainer';
+/* import DialogsContainer from './tester/components/Dialogs/DialogsContainer';
+ */
+/* import ProfileContainer from './tester/components/Profile/ProfileContainer';*/
+import HeaderContainer from './tester/components/Header/HeaderContainer';
 import { connect } from 'react-redux';
 
 import { compose } from 'redux';
 import { initializeApp } from './redux/app-reducer';
 import Spiner from './tester/components/Generalis/Spiner/Spiner';
+import { Suspense } from 'react';
 
+const DialogsContainer = React.lazy(() => import('./tester/components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./tester/components/Profile/ProfileContainer'));
 
 
 class App extends React.Component {
@@ -41,30 +45,45 @@ class App extends React.Component {
           <NavBarContainer /* NavBar={props.appState.NavBar} */ />
           <div className='body-content'>
 
-            <Routes>
-              <Route path='mainPage' element={<>
 
-                {/* <MainPage   */}
+            <Suspense fallback={<Spiner />}>
+              <Routes>
 
-              </>} />
-              <Route path='profile' element={<>
+                <Route path='mainPage' element={<>
 
-                <ProfileContainer /* store={props.store} */ />
+                  {/* <MainPage   */}
 
-              </>} />
-              <Route path='profile/:userId/*' element={<>
+                </>} />
+                <Route path='profile' element={<>
 
-                <ProfileContainer /* store={props.store} */ />
+                  <ProfileContainer /* store={props.store} */ />
 
-              </>} />
+                </>} />
+                <Route path='profile/:userId/*' element={<>
+                  {/*  <React.Suspense fallback={<div>`load`</div>}> */}
+                  <ProfileContainer /* store={props.store} */ />
+                  {/* </React.Suspense> */}
+                </>} />
 
-              <Route path='dialogs/*' element={<><DialogsContainer /* store={props.store} */ />   </>} />
-              {<Route path='/users/*' element={<><UsersContainer /></>} />
-              }          <Route path='news/*' element={<><News />   </>} />
-              <Route path='music/*' element={<><Music />   </>} />
-              <Route path='settings/*' element={<><Settings />   </>} />
-              <Route path='login/*' element={<><LoginPageContainer /></>} />
-            </Routes>
+                <Route path='dialogs/*' element={<>  <DialogsContainer /* store={props.store} */ /> </>} />
+
+
+                {/* <React.Suspense fallback={<div>`text`</div>}>
+              
+              </React.Suspense>  */}
+
+
+
+
+
+                {<Route path='/users/*' element={<><UsersContainer /></>} />
+                }          <Route path='news/*' element={<><News />   </>} />
+                <Route path='music/*' element={<><Music />   </>} />
+                <Route path='settings/*' element={<><Settings />   </>} />
+                <Route path='login/*' element={<><LoginPageContainer /></>} />
+              </Routes>
+            </Suspense>
+
 
           </div>
 

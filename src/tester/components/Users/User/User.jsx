@@ -3,28 +3,27 @@ import avatar from './../../../../inspect/image/1682520890_papik-pro-p-smaili-sk
 import { NavLink } from 'react-router-dom';
 
 
-const User = function (props) {
-
+const User = function ({ userId, userAvatar, followed, isProcessing, name, userCountry, userCity, userAboutMe, doFollow,doUnFollow,...props }) {
 
 
 
     const userDoFollow = function () {
-        props.doFollow(props.userId);
+       doFollow(userId);
         /*         debugger
          */     /*    props.setProgressing(true, props.userId);
-       
-       
-               usersAPI.userFollow(props.userId)
-                   .then((response) => {
-                       if (response.resultCode === 0) {
-                           props.follow(props.userId);
-                       }
-                       props.setProgressing(false, props.userId);
-       
-                   }); */
+      
+      
+              usersAPI.userFollow(props.userId)
+                  .then((response) => {
+                      if (response.resultCode === 0) {
+                          props.follow(props.userId);
+                      }
+                      props.setProgressing(false, props.userId);
+      
+                  }); */
     }
     const userDoUnFollow = function () {
-        props.doUnFollow(props.userId);
+        doUnFollow(userId);
         /*   props.setProgressing(true, props.userId);
   
           usersAPI.userUnFollow(props.userId).then((response) => {
@@ -56,24 +55,25 @@ const User = function (props) {
             <div className={UserStyle.user__body}>
                 <div className={UserStyle.subscribe__block}>
                     <div className={UserStyle.avatar} >
-                        <NavLink to={`/profile/${props.userId}`}><div className={UserStyle.avatar__image}>
-                            <img src={props.userAvatar ? props.userAvatar : avatar} alt="avatar" />
+                        <NavLink to={`/profile/${userId}`}><div className={UserStyle.avatar__image}>
+                            <img src={userAvatar ? userAvatar : avatar} alt="avatar" />
+                            
                         </div></NavLink>
                     </div>
 
-                    {props.followed ?
-                        <button disabled={props.isProcessing.some((id) => { if (id === props.userId) return true })} onClick={userDoUnFollow} className={UserStyle.follow}>unFollow</button>
-                        : <button disabled={props.isProcessing.some((id) => { if (id === props.userId) return true })} onClick={userDoFollow} className={UserStyle.follow}>Follow</button>}
+                    {followed ?
+                        <button disabled={isProcessing.some((id) => { if (id === userId) return true })} onClick={userDoUnFollow} className={UserStyle.follow}>unFollow</button>
+                        : <button disabled={isProcessing.some((id) => { if (id === userId) return true })} onClick={userDoFollow} className={UserStyle.follow}>Follow</button>}
                 </div>
                 <div className={UserStyle.user__information}>
                     <div className={UserStyle.user_information__body}>
 
                         <div className={UserStyle.user__data}>
-                            <div className={UserStyle.user__name}>{props.name}</div>
-                            <div className={UserStyle.user__city}>{props.userCountry ? props.userCountry : `RF`}, {props.userCity ? props.userCity : `Krasnodar`}</div>
+                            <div className={UserStyle.user__name}>{name}</div>
+                            <div className={UserStyle.user__city}>{userCountry ? userCountry : `RF`}, {userCity ? userCity : `Krasnodar`}</div>
                         </div>
                         <div className={UserStyle.user__aboutMe}>
-                            {props.userAboutMe ? props.userAboutMe : `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora mollitia assumenda consectetur voluptatum fugiat doloribus, vitae dicta eum excepturi nesciunt ullam voluptatem facilis obcaecati? Reiciendis sapiente labore illo aperiam obcaecati.
+                            {userAboutMe ? userAboutMe : `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora mollitia assumenda consectetur voluptatum fugiat doloribus, vitae dicta eum excepturi nesciunt ullam voluptatem facilis obcaecati? Reiciendis sapiente labore illo aperiam obcaecati.
 `} {/* текст */}
 
                         </div>

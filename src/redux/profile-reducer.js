@@ -4,7 +4,8 @@ const add_Message_User = `add-Message-User`;
 /* const add_Symbol = `add-Symbol`; */
 const SET_USER_PROFILE = `setUserProfile`;
 const PROFILE_STATUS = `ProfileStatus`;
-
+const DELETE_MESSAGE_USER = `DELETE_MESSAGE_USER`;
+const DELETE_POST = 'DELETE_POST';
 let initialState = {
     profileUser: {},
     userStatus: "",
@@ -22,11 +23,12 @@ let initialState = {
 
         ],
 
-        
+
     },
 };
 
 const profileReducer = function (state = initialState, action) {
+
 
     switch (action.type) {
         /* case add_Symbol: {
@@ -55,10 +57,18 @@ const profileReducer = function (state = initialState, action) {
             /*  let messageUser = { id: 5, message: stateCopy.myPosts.textareaValue, likes: 0, name: `ЧлениськаВжух` };
              stateCopy.myPosts.postArr.push(messageUser); */
 
-            
+
 
             return stateCopy;
 
+        }
+        case DELETE_MESSAGE_USER: {
+            let stateCopy = { ...state, };
+            stateCopy.myPosts = { ...state.myPosts };
+            stateCopy.myPosts.postArr = [...state.myPosts.postArr];
+            stateCopy.myPosts.postArr.pop();
+
+            return stateCopy;
         }
         case SET_USER_PROFILE: {
             let stateCopy = { ...state, profileUser: action.userProfile };
@@ -68,6 +78,21 @@ const profileReducer = function (state = initialState, action) {
         }
         case PROFILE_STATUS: {
             let stateCopy = { ...state, userStatus: action.status };
+            return stateCopy;
+        }
+        case DELETE_POST: {
+
+            let stateCopy = { ...state };
+
+            stateCopy.myPosts = { ...state.myPosts };
+
+            stateCopy.myPosts.postArr = state.myPosts.postArr.filter(item => {
+                if (item.id != action.idPost) {
+                    return true;
+                }
+            });
+
+            console.log(stateCopy);
             return stateCopy;
         }
         default:
@@ -84,26 +109,32 @@ const profileReducer = function (state = initialState, action) {
 
 export const addMessageUserActionCreator = function (textNewMessage) {
     return (
-        { type: add_Message_User,textNewMessage, }
+        { type: add_Message_User, textNewMessage, }
     );
 }
-/* export const addLetterActiveCreator = function (text) {
+
+export const deleteMessageUserActionCreator = function () {
     return (
-        { type: add_Symbol, textAreaValue: text, }
+        { type: DELETE_MESSAGE_USER, }
     );
-} */
+}
+export const deletePost = function (idPost) {
+    return (
+        { type: DELETE_POST, idPost, }
+    );
+}
 export const setUserProfile = function (userProfile) {
     return (
         { type: SET_USER_PROFILE, userProfile, }
     );
 }
 export const getUserProfile = function (userId) {
-    return function (dispatch) {
-        usersAPI.getProfile(userId)
-            .then(data => {
-                dispatch(setUserProfile(data));
+    return async (dispatch) => {
+        let data = await usersAPI.getProfile(userId);
 
-            });
+        dispatch(setUserProfile(data));
+
+
     }
 }
 export const getMyProfile = function () {
@@ -136,7 +167,7 @@ export const getMyProfile = function () {
                     }
                 }))
             }
-            else {  return usersAPI.getProfile(data.data.id) }
+            else { return usersAPI.getProfile(data.data.id) }
         }).then((me) => {
             if (me) {
                 dispatch(setUserProfile(me));
@@ -156,21 +187,25 @@ export const setProfileStatus = (status) => {
 
 
 export const getProfileStatus = (userId) => {
-    return function (dispatch) {
-        profileAPI.getStatus(userId).then((data) => {
+    return async (dispatch) => {
+        let data = await profileAPI.getStatus(userId);
 
-            dispatch(setProfileStatus(data));
-        });
+        dispatch(setProfileStatus(data));
+
     }
 }
 export const updateProfileStatus = (status) => {
-    return function (dispatch) {
-        profileAPI.updateStatus(status).then((data) => {
-            if (data.data.resultCode == 0) {
-                dispatch(setProfileStatus(status));
+    return async (dispatch) => {
 
-            }
-        });
+
+        let datar = await profileAPI.updateStatus(status);
+
+
+        if (datar.data.resultCode == 0) {
+            dispatch(setProfileStatus(status));
+
+        }
+
     }
 }
 export default profileReducer;

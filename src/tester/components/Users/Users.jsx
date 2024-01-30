@@ -1,4 +1,5 @@
 
+import Paginator from '../Common/Paginator/Paginator';
 import User from './User/User';
 import UsersStyle from './Users.module.css';
 import React from 'react';
@@ -8,7 +9,7 @@ import React from 'react';
 
 
 const Users = function (props) {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    /* let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
 
@@ -23,22 +24,17 @@ const Users = function (props) {
         return (
             <li className={(props.pageActive === item ? UsersStyle.page_number__active : '') + ' ' + UsersStyle.page_number}>{item}</li>
         )
-    });
+    }); */
     let users = props.UsersArray.map((item) => {
-
-        return (<><User key={item.id} followed={item.followed} /* user={item} */ userId={item.id} doUnFollow={props.doUnFollow} doFollow={props.doFollow} 
-            unFollow={props.unFollow} follow={props.follow} userAvatar={item.userAvatar} userProcessing={props.userProcessing} userIdProcessing={props.userIdProcessing}
-            name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe} setProgressing={props.setProgressing} isProcessing={props.isProcessing} /> </>);
-
-
+        return (<><User  key={item.id} followed={item.followed} /* user={item} */ userId={item.id} doUnFollow={props.doUnFollow} doFollow={props.doFollow} 
+            /* unFollow={props.unFollow} follow={props.follow}  */userAvatar={item.photos.small} /* userProcessing={props.userProcessing} userIdProcessing={props.userIdProcessing} */
+            name={item.name} userCity={item.userCity} userCountry={item.userCountry} userAboutMe={item.userAboutMe} /* setProgressing={props.setProgressing} */ isProcessing={props.isProcessing} /> </>);
     });
-
-
 
     return (<div className={UsersStyle.users}>
         <div className={UsersStyle.page_block}></div> 
         <ul onClick={props.updateList} className={UsersStyle.page_list}>
-            {newPages}
+            <Paginator sizeLengthPaginationUser={props.sizeLengthPaginationUser} totalItemsCount={props.totalItemsCount} pageSize={props.pageSize} pageActive={props.pageActive}/>
         </ul>
         <div className={UsersStyle.users__container}>
             <div className={UsersStyle.users__body}>

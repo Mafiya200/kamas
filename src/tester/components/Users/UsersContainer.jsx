@@ -19,7 +19,8 @@ class UsersContainer extends React.Component {
     
                 });
      */
-        this.props.getUsers(this.props.pageActive, this.props.pageSize);
+    let {pageActive,pageSize} = this.props;
+        this.props.getUsers(pageActive, pageSize);
     }
 
     updateList = (e) => {
@@ -27,8 +28,8 @@ class UsersContainer extends React.Component {
             return;
         }
         let numberListActive = +e.target.innerHTML;
-
-        this.props.getUsers(numberListActive, this.props.pageSize);
+        let {pageSize,getUsers} = this.props;
+        getUsers(numberListActive, pageSize);
 
 
 
@@ -51,8 +52,8 @@ class UsersContainer extends React.Component {
         return (<>
 
             {this.props.isFeatching ? <Spiner /> : ""}
-            <Users isFeatching={this.props.isFeatching} updateList={this.updateList} setTotalUsers={this.props.setTotalUsers}
-                updateUsers={this.props.updateUsers} totalUsersCount={this.props.totalUsersCount} pageSize={this.props.pageSize} pageActive={this.props.pageActive}
+            <Users isFeatching={this.props.isFeatching} updateList={this.updateList} setTotalUsers={this.props.setTotalUsers} sizeLengthPaginationUser={this.props.sizeLengthPaginationUser}
+                updateUsers={this.props.updateUsers} totalItemsCount={this.props.totalItemsCount} pageSize={this.props.pageSize} pageActive={this.props.pageActive}
                 UsersArray={this.props.UsersArray} userIdProcessing={this.props.userIdProcessing} doUnFollow={this.props.doUnFollow} doFollow={this.props.doFollow}
                 follow={this.props.follow} unFollow={this.props.unFollow} setProgressing={this.props.setProgressing} isProcessing={this.props.isProcessing} />
         </>
@@ -88,9 +89,9 @@ let mapStateToProps = function (state) {
         isFeatching: getIsFeatching(state),
         isProcessing: getIsProcessing(state),
         userProcessing: getUserProcessing(state),
-        totalUsersCount: getTotalUsersCount(state),
+        totalItemsCount: getTotalUsersCount(state),
         userIdProcessing: getUserIdProcessing(state),
-
+        sizeLengthPaginationUser:state.Users.User.sizeLengthPaginationUser,
     });
 };
 

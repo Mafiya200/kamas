@@ -2,9 +2,9 @@ import { stopSubmit } from "redux-form";
 import { authAPI, usersAPI } from "../api/api";
 
 ///var
-const SET_USER_DATA = "SET_USER_DATA";
-const SET_DEFAULT_DATA = "SET_DEFAULT_DATA";
-const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE";
+const SET_USER_DATA = "kamas/auth/SET_USER_DATA";
+const SET_DEFAULT_DATA = "kamas/auth/SET_DEFAULT_DATA";
+const SET_ERROR_MESSAGE = "kamas/auth/SET_ERROR_MESSAGE";
 
 
 
@@ -72,27 +72,25 @@ export const getAuthUserData = function () {
 
 }
 export const login = (email, password, rememberMe) => {
-    return (function (dispatch) {
-        authAPI.login(email, password, rememberMe).then((data) => {
+    return (async (dispatch) => {
+        let data = await authAPI.login(email, password, rememberMe);
 
-            if (data.resultCode == 0) {
-                dispatch(getAuthUserData());
-                dispatch(setErrorMessage(''));
+        if (data.resultCode == 0) {
+            dispatch(getAuthUserData());
+            dispatch(setErrorMessage(''));
+        }
+        else {
+            if (data.messages.length > 0) {
+                dispatch(stopSubmit('login', { _error: `${data.messages}` }));
+                dispatch(setErrorMessage(data.messages));
             }
             else {
-
-                if (data.messages.length > 0) {
-                    dispatch(stopSubmit('login', { _error: `${data.messages}` }));
-                    dispatch(setErrorMessage(data.messages));
-                }
-                else {
-                    dispatch(stopSubmit('login', { _error: 'some warning' }));
-                    dispatch(setErrorMessage('some warning'));
-
-                }
-
+                dispatch(stopSubmit('login', { _error: 'some warning' }));
+                dispatch(setErrorMessage('some warning'));
             }
-        });
+
+        }
+
     });
 }
 export const logout = () => {

@@ -1,11 +1,11 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import NavBarReducer from "./NavBar-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import UsersReducer from "./Users-reduced";
 import authReducer from "./auth-reducer";
 import { thunk } from "redux-thunk";
-import { reducer as formReducer, reducer } from "redux-form";
+import { reducer as formReducer } from "redux-form";
 import LoginPageReducer from "./loginPage-reducer";
 import AppReducer from "./app-reducer";
 
@@ -23,13 +23,13 @@ let reducers = combineReducers({
     form: formReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
-/* let arra = { name: 'вася', age: 12, };
 
-let {age:ages,r0} = arra;
+/* let store = createStore(reducers, applyMiddleware(thunk)); */
 
-console.log(ages,r0); */
+
 
 
 export default store;

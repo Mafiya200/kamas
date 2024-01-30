@@ -9,3 +9,24 @@ margin: 10px 0;
     color: red;
     padding: 10px;
 }
+.field{
+    display: inline-block;
+}
+.field input {
+    font-size: 20px;
+}
+.field  input span{
+    font-size: 10px;
+}
+.field_email{
+    margin: 5px 0px 15px 0;
+}
+.field_password{
+    margin-bottom: 5px;
+}
+.items{
+    display: flex;
+}
+.items > div{
+margin-right: 0.5em;
+}

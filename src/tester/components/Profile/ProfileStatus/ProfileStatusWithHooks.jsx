@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { createStoreHook } from "react-redux";
-
+/* import { createStoreHook } from "react-redux";
+ */
 
 
 const ProfileStatusWithHooks = (props) => {
@@ -11,7 +11,13 @@ const ProfileStatusWithHooks = (props) => {
     let [inputContent, setInputContent] = useState(props.status);
 
 
+
+
+
+
     let [editMode, setEditMode] = useState(false);
+
+
     const activateEditMode = (e) => {
 
         setInputContent(props.status);
@@ -25,7 +31,7 @@ const ProfileStatusWithHooks = (props) => {
     }
     const closeEditMode = (e) => {
         setEditMode(false);
-        console.log(e.target.value);
+
         props.updateProfileStatus(e.target.value);
 
     }
@@ -33,13 +39,13 @@ const ProfileStatusWithHooks = (props) => {
 
 
     let active = (props.status && !(props.status.startsWith(' ')));
-
+    let caseActive = active ? <span onBlur={closeEditMode} onDoubleClick={activateEditMode}>{props.status}</span> : <span onDoubleClick={activateEditMode}>Статуса нет</span>;
     return (
         <div>{props.isAuth ? editMode
             ? <div><input onInput={onStatusChange} autoFocus onBlur={closeEditMode} value={inputContent} type="text"></input></div>
             : <div>
-                {active ? <span onDoubleClick={activateEditMode}>{props.status}</span> : <span onDoubleClick={activateEditMode}>Статуса нет</span>}
-            </div> : active ? <span onDoubleClick={activateEditMode}>{props.status}</span> : <span onDoubleClick={activateEditMode}>Статуса нет</span>}
+                {caseActive}
+            </div> : caseActive}
             {/*  {this.state.editMode
                     ? <div><input onInput={this.onStatusChange} autoFocus onBlur={this.closeEditMode} value={this.state.status} type="text"></input></div>
                     : <div>

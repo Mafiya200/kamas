@@ -1,0 +1,106 @@
+.page_number {
+    /* selectedPage */
+    display   : inline-block;
+    cursor    : pointer;
+    padding   : 5px;
+    width     : 30px;
+    height    : 20px;
+    text-align: center;
+}
+
+.page_number__active {
+    font-weight: 700;
+    color      : yellow;
+
+}
+
+.button_paginator {
+    position        : relative;
+    font-size       : 10px;
+    color           : gray;
+    font-family     : 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    line-height     : 200%;
+    transition: 0.3s;
+font-weight: 700;
+    border-radius: 2px;
+    background-color: #00203f;
+}
+
+.button_paginator:hover {
+    
+    color: gold;
+    border-radius: 20px;
+
+}
+.button_paginator__left:hover::before,.button_paginator__left:hover::after,.button_paginator__right:hover::before,.button_paginator__right:hover::after {
+    background-color: rgb(75, 74, 74);
+}
+
+.button_paginator:active {
+    color: rgb(170, 130, 30);
+    border-radius: 20px;
+
+}
+
+
+
+.button_paginator__left{
+    
+    padding         : 0 1.5em 0 2em;
+
+}
+.button_paginator__right{
+    
+    padding         : 0 2em 0 1.5em;
+
+}
+
+
+.button_paginator::after,
+.button_paginator::before {
+    transition: inherit;
+    content         : "";
+    width           : 10px;
+    height          : 2px;
+    position        : absolute;
+
+    background-color: aliceblue;
+
+    transform       : translate(-50%, -50%) rotate(0deg);
+
+}
+
+.button_paginator::before {
+}
+.button_paginator::after {
+}
+.button_paginator__left::before,.button_paginator__left::after{
+    left            : 10%;
+
+}
+.button_paginator__left::before{
+    transform: translate(0%, -0%) rotate(45deg);
+    top             : 57%;
+}
+.button_paginator__left::after {
+    top             : 33%;
+    transform: translate(0%, -50%) rotate(-45deg);
+}
+
+
+
+
+
+.button_paginator__right::before,.button_paginator__right::after{
+    left: 73%;
+}
+.button_paginator__right::before{
+    transform: translate(0%, -0%) rotate(-45deg);
+    top             : 57%;  
+    
+}
+.button_paginator__right::after {
+
+    top             : 33%;
+    transform: translate(0%, -50%) rotate(45deg);
+}

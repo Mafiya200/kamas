@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/api";
+import { updateObjectArray } from "../utils/validators/object-helpers";
 
 const FOLLOW = `follow`;
 const unFOLLOW = `unFollow`;
@@ -11,10 +12,11 @@ let initialState = {
     User: {
         UsersArray: [],
         pageSize: 100,
-        totalUsersCount: 0,
+        totalItemsCount: 0,
         pageActive: 1,
         isFeatching: false,
-
+        ///сюда 10
+        sizeLengthPaginationUser:5,///сколько цифр в строке навигации
         isProcessing: [],
         /* userProcessing:[], */
     },
@@ -40,7 +42,7 @@ const UsersReducer = function (state = initialState, action) {
 
             };
 
-            stateCopy.User.UsersArray = [...state.User.UsersArray].map(function (item, index, array) {
+            stateCopy.User.UsersArray = updateObjectArray(stateCopy.User.UsersArray, action.id, 'id', { followed: true }); /* [...state.User.UsersArray].map(function (item, index, array) {
 
                 if (item.id == action.id) {
                     let itemCopy = {
@@ -53,7 +55,7 @@ const UsersReducer = function (state = initialState, action) {
                 };
                 return item;
 
-            });
+            }); */
 
 
 
@@ -67,7 +69,7 @@ const UsersReducer = function (state = initialState, action) {
 
             };
 
-            stateCopy.User.UsersArray = [...state.User.UsersArray].map(function (item, index, array) {
+            /* stateCopy.User.UsersArray = [...state.User.UsersArray].map(function (item, index, array) {
 
                 if (item.id == action.id) {
 
@@ -82,8 +84,8 @@ const UsersReducer = function (state = initialState, action) {
                 };
                 return item;
 
-            });
-
+            }); */
+            stateCopy.User.UsersArray = updateObjectArray(stateCopy.User.UsersArray, action.id, 'id', { followed: false });
 
 
             return stateCopy;
@@ -105,7 +107,7 @@ const UsersReducer = function (state = initialState, action) {
         }
         case SET_TOTAL_USERS: {
             let stateCopy = { ...state };
-            stateCopy.User = { ...state.User, totalUsersCount: action.totalUsers };
+            stateCopy.User = { ...state.User, totalItemsCount: action.totalItems };
             return stateCopy;
         }
         case TOGGLE_IS_FEATCHING: {
@@ -129,9 +131,8 @@ const UsersReducer = function (state = initialState, action) {
 
                 stateCopy.User = {
                     ...state.User, isProcessing: state.User.isProcessing.filter((item, index, array) => {
-                        console.log(!(item == action.userId));
+
                         if (!(item == action.userId)) {
-                            console.log(123);
                             return item;
                         }
                     })
@@ -153,7 +154,6 @@ const UsersReducer = function (state = initialState, action) {
     }
 }
 
-export default UsersReducer;
 
 export const follow = function (userId) {
 
@@ -175,8 +175,8 @@ export const updateUsers = function (usersArray) {
 export const changeListUsers = function (numberList) {
     return { type: SET_PAGE_ACTIVE, numberList };
 }
-export const setTotalUsers = function (totalUsers) {
-    return { type: SET_TOTAL_USERS, totalUsers }
+export const setTotalUsers = function (totalItems) {
+    return { type: SET_TOTAL_USERS, totalItems }
 }
 export const setFeatching = function (isActive) {
     return { type: TOGGLE_IS_FEATCHING, isFeatching: isActive, }
@@ -187,18 +187,21 @@ export const setProgressing = function (isProcessing, userId) {
 
 
 
+
 export const getUsers = (pageActive, pageSize) => {
 
-    return function (dispatch) {
+    return async (dispatch) => {
+
         dispatch(changeListUsers(pageActive));
         dispatch(setFeatching(true));
-        usersAPI.getUsers(pageActive, pageSize)
-            .then(data => {
-                dispatch(updateUsers(data.items));
-                dispatch(setTotalUsers(data.totalCount));
-                dispatch(setFeatching(false));
 
-            });
+        let data = await usersAPI.getUsers(pageActive, pageSize);
+
+        dispatch(updateUsers(data.items));
+        dispatch(setTotalUsers(data.totalCount));
+        dispatch(setFeatching(false));
+
+
 
     }
 
@@ -206,16 +209,17 @@ export const getUsers = (pageActive, pageSize) => {
 }
 export const doUnFollow = (userId) => {
 
-    return (dispatch) => {
-        dispatch(setProgressing(true, userId));
+    return async (dispatch) => {
+        /*  dispatch(setProgressing(true, userId));
+ 
+         let data = await usersAPI.userUnFollow(userId);
+         if (data.resultCode === 0) {
+             dispatch(unFollow(userId));
+         }
+         dispatch(setProgressing(false, userId)); */
 
-        usersAPI.userUnFollow(userId).then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(unFollow(userId));
-            }
-            dispatch(setProgressing(false, userId));
+        followUnfollowFlow(dispatch, userId, usersAPI.userUnFollow.bind(usersAPI), unFollow);
 
-        })
 
     }
 };
@@ -223,17 +227,36 @@ export const doUnFollow = (userId) => {
 
 
 export const doFollow = (userId) => {
-    return (dispatch) => {
-        dispatch(setProgressing(true, userId));
+    return async (dispatch) => {
+        /* dispatch(setProgressing(true, userId));
 
+        let data = await usersAPI.userFollow(userId);
+        if (data.resultCode === 0) {
+            dispatch(follow(userId));
+        }
+        dispatch(setProgressing(false, userId)); */
 
-        usersAPI.userFollow(userId)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(follow(userId));
-                }
-                dispatch(setProgressing(false, userId));
-
-            });
+        followUnfollowFlow(dispatch, userId, usersAPI.userFollow.bind(usersAPI), follow);
     }
+
 }
+
+
+
+
+const followUnfollowFlow = async (dispatch, userId, method, AC) => {
+
+    dispatch(setProgressing(true, userId));
+
+    let data = await method(userId);
+    if (data.resultCode === 0) {
+        dispatch(AC(userId));
+    }
+
+    dispatch(setProgressing(false, userId));
+
+}
+
+
+
+export default UsersReducer;
