@@ -18,6 +18,9 @@ import { initializeApp } from './redux/app-reducer';
 import Spiner from './tester/components/Generalis/Spiner/Spiner';
 import { Suspense } from 'react';
 
+
+
+
 const DialogsContainer = React.lazy(() => import('./tester/components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./tester/components/Profile/ProfileContainer'));
 
