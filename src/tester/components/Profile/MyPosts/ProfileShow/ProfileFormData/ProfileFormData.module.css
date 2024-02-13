@@ -1,0 +1,56 @@
+
+
+
+.user_data {
+    display: flex;
+    justify-content: center;
+flex-direction: column;
+    flex-basis: 50%;
+}
+@media (min-width:801px) {
+    .user_data {
+flex-basis: 75%;
+    }   
+}
+
+
+.user_contacts {
+}
+.user_contacts > div:not(:last-child){
+    margin-bottom: 5px;
+
+}
+.about_me{
+    margin-bottom: 10px;
+font-weight: 700;
+font-size: 17px;
+}
+.user_facebook {
+}
+.user_website {
+}
+.user_VK {
+}
+.twitter {
+}
+.instagram {
+}
+.youtube {
+}
+.github {
+}
+.user_find_job input{
+font-size: 50px;
+background-color: blueviolet;
+}
+.user_find_job>p{
+    margin-right: 7px;
+}
+.user_find_job{
+    display: flex;
+    align-items: center;
+}
+input[type='checkbox']{
+    width: 20px;
+    height: 20px;
+}

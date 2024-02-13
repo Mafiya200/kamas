@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 import LoginPage from "./LoginPage";
 import React from "react";
-import { login,  } from "../../../redux/auth-reducer";
+import { login, } from "../../../redux/auth-reducer.ts";
 
 
 
 class LoginPageContainer extends React.Component {
 
     render() {
+
         return (
             <LoginPage {...this.props} />
         );
@@ -17,9 +18,10 @@ class LoginPageContainer extends React.Component {
 let mapStateToProps = (state) => {
 
     return {
-        message:state.LoginPage.message,
-        isAuth:state.auth.isAuth,
-        errorMessage:state.auth.errorMessage,
+        message: state.LoginPage.message,
+        isAuth: state.auth.isAuth,
+        errorMessage: state.auth.errorMessage,
+        captchaUrl: state.auth.captchaUrl,
     };
 };
 

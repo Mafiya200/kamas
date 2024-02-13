@@ -1,10 +1,11 @@
 import { stopSubmit } from "redux-form";
-import { authAPI, usersAPI } from "../api/api";
+import { authAPI, securityAPI, usersAPI } from "../api/api";
 
 ///var
 const SET_USER_DATA = "kamas/auth/SET_USER_DATA";
 const SET_DEFAULT_DATA = "kamas/auth/SET_DEFAULT_DATA";
 const SET_ERROR_MESSAGE = "kamas/auth/SET_ERROR_MESSAGE";
+const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL';
 
 
 
@@ -12,19 +13,28 @@ const SET_ERROR_MESSAGE = "kamas/auth/SET_ERROR_MESSAGE";
 
 
 
+let initialState: initialStateType = {
 
-let initialState = {
-
-    id: '',
+    id: null,
     email: '',
     login: '',
     isAuth: false,
     isFetching: false,
     errorMessage: '',
+    captchaUrl: '1',
+};
+export type initialStateType = {
+
+    id: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean | null,
+    isFetching: boolean | null,
+    errorMessage: string | null,
+    captchaUrl: string | null,
 };
 
-
-const authReducer = function (state = initialState, action) {
+const authReducer = function (state = initialState, action: any): initialStateType {
 
     switch (action.type) {
         case SET_USER_DATA: {
@@ -45,18 +55,35 @@ const authReducer = function (state = initialState, action) {
 
             return stateCopy;
         }
+        case SET_CAPTCHA_URL: {
+            let stateCopy = { ...state, captchaUrl: action.urlCaptcha, };
+            return stateCopy;
+
+        }
+
         default:
             return state;
 
     }
 }
 
-export const setAuthUserData = function (data) {
+export const setAuthUserData = function (data): setAuthUserDataType {
     return { type: SET_USER_DATA, data, };
 }
-export const setDefaultData = function (data) {
+type setAuthUserDataType = {
+    type: typeof SET_USER_DATA,
+    data: object,
+};
+
+
+export const setDefaultData = function (data): setDefaultDataType {
     return { type: SET_DEFAULT_DATA, data, };
 }
+type setDefaultDataType = {
+    type: typeof SET_DEFAULT_DATA,
+    data: object,
+};
+
 export const getAuthUserData = function () {
     return function (dispatch) {
         return authAPI.me()
@@ -71,9 +98,10 @@ export const getAuthUserData = function () {
     }
 
 }
-export const login = (email, password, rememberMe) => {
+
+export const login = (email, password, rememberMe, captcha) => {
     return (async (dispatch) => {
-        let data = await authAPI.login(email, password, rememberMe);
+        let data = await authAPI.login(email, password, rememberMe, captcha);
 
         if (data.resultCode == 0) {
             dispatch(getAuthUserData());
@@ -85,6 +113,9 @@ export const login = (email, password, rememberMe) => {
                 dispatch(setErrorMessage(data.messages));
             }
             else {
+                if (data.resultCode === 10) {
+                    dispatch(getCaptchaUrl());
+                }
                 dispatch(stopSubmit('login', { _error: 'some warning' }));
                 dispatch(setErrorMessage('some warning'));
             }
@@ -93,6 +124,30 @@ export const login = (email, password, rememberMe) => {
 
     });
 }
+export const getCaptchaUrl = () => {
+    return (async (dispatch) => {
+
+
+        let response = await securityAPI.getSecurityCaptchaUrl();
+
+        const captchaUrl = response.data.url;
+
+        if (captchaUrl) {
+            dispatch(setCaptchaUrl(captchaUrl));
+        }
+
+
+    });
+}
+export const setCaptchaUrl = (url): setCaptchaUrl => {
+
+    return { type: SET_CAPTCHA_URL, urlCaptcha: url, };
+
+}
+type setCaptchaUrl = {
+    type: typeof SET_CAPTCHA_URL,
+    urlCaptcha: string,
+};
 export const logout = () => {
     return (function (dispatch) {
         authAPI.logout().then((data) => {
@@ -109,8 +164,11 @@ export const logout = () => {
         });
     });
 }
-export const setErrorMessage = (message) => {
+export const setErrorMessage = (message): setErrorMessage => {
     return { type: SET_ERROR_MESSAGE, message };
 }
-
+type setErrorMessage = {
+    type: typeof SET_ERROR_MESSAGE,
+    message: string,
+};
 export default authReducer;

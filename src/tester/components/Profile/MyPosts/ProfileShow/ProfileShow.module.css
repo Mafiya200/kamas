@@ -33,17 +33,7 @@ padding-bottom: 100%;
 }
 
 
-.user_data {
-    display: flex;
-    justify-content: center;
-flex-direction: column;
-    flex-basis: 50%;
-}
-@media (min-width:801px) {
-    .user_data {
-flex-basis: 75%;
-    }   
-}
+
 .user_name {
     margin-bottom: 10px;
 }
@@ -54,23 +44,3 @@ flex-basis: 75%;
 
 
 
-.user_contacts {
-}
-.user_contacts > div:not(:last-child){
-    margin-bottom: 5px;
-
-}
-.user_facebook {
-}
-.user_website {
-}
-.user_VK {
-}
-.twitter {
-}
-.instagram {
-}
-.youtube {
-}
-.github {
-}

@@ -1,4 +1,4 @@
-let initialState = {
+let initialState:initialStateType = {
     NavBarLinks: [
         'Profile',
         'Dialogs',
@@ -15,9 +15,18 @@ let initialState = {
     ],
 
 };
+type initialStateType = {
+    NavBarLinks:Array<string>,
+    friends:Array<friendsItemType>,
+};
+type friendsItemType = {
+    id: number,
+    name: string,
+    photo: string,
+};
 
 
-const NavBarReducer = function(state=initialState,active){
+const NavBarReducer = function(state=initialState,active:any){
 
     return state;
 }

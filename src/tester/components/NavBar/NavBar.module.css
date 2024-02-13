@@ -14,8 +14,8 @@ grid-row: 2 / 3;
 } */
 .item > a.active{
   color: gold;
-  pointer-events: none;
-  cursor: default;
+  /* pointer-events: none;
+  cursor: default; */
 }
 .nav__links{
   margin-bottom: 60px;

@@ -8,7 +8,9 @@ const SET_PAGE_ACTIVE = `set_page_active`;
 const SET_TOTAL_USERS = `setTotalUsers`;
 const TOGGLE_IS_FEATCHING = 'TOGGLE_IS_FEATCHING';
 const TOGGLE_SET_PROCESSING = `TOGGLE_SET_PROCESSING`;
-let initialState = {
+
+
+let initialState: initialStateType = {
     User: {
         UsersArray: [],
         pageSize: 100,
@@ -16,20 +18,36 @@ let initialState = {
         pageActive: 1,
         isFeatching: false,
         ///сюда 10
-        sizeLengthPaginationUser:5,///сколько цифр в строке навигации
+        sizeLengthPaginationUser: 5,///сколько цифр в строке навигации
         isProcessing: [],
         /* userProcessing:[], */
     },
+};
+
+type initialStateType = {
+    User: initialStateUserType,
+};
 
 
+type initialStateUserType = {
 
-
-
+    UsersArray: Array<object>,
+    pageSize: number,
+    totalItemsCount: number,
+    pageActive: number,
+    isFeatching: boolean | null,
+    ///сюда 10
+    sizeLengthPaginationUser: number,///сколько цифр в строке навигации
+    isProcessing: Array<object>,
+    /* userProcessing:[], */
 
 };
 
 
-const UsersReducer = function (state = initialState, action) {
+
+
+
+const UsersReducer = function (state = initialState, action): initialStateType {
 
 
 
@@ -155,36 +173,73 @@ const UsersReducer = function (state = initialState, action) {
 }
 
 
-export const follow = function (userId) {
+export const follow = function (userId):followType {
 
     return ({
         type: FOLLOW, id: userId,
     });
 }
-export const unFollow = function (userId) {
+type followType = {
+    type: typeof FOLLOW, id: number,
+};
+
+export const unFollow = function (userId):unFollowType {
 
     return ({
         type: unFOLLOW, id: userId,
     });
 }
-export const updateUsers = function (usersArray) {
+type unFollowType = {
+    type: typeof unFOLLOW,
+    id: number,
+};
+
+export const updateUsers = function (usersArray):updateUsersType {
     return {
         type: SET_USERS, users: usersArray,
     };
 }
-export const changeListUsers = function (numberList) {
+type updateUsersType = {
+    type:typeof SET_USERS,
+    users:Array<object>,  
+};
+
+export const changeListUsers = function (numberList):changeListUsersType {
+
+    
     return { type: SET_PAGE_ACTIVE, numberList };
 }
-export const setTotalUsers = function (totalItems) {
+type changeListUsersType = {
+    type:typeof SET_PAGE_ACTIVE,
+    numberList:number,
+};
+export const setTotalUsers = function (totalItems):setTotalUsersType {
+    
     return { type: SET_TOTAL_USERS, totalItems }
 }
-export const setFeatching = function (isActive) {
+type setTotalUsersType = {
+    type:typeof SET_TOTAL_USERS,
+    totalItems:number,
+};
+export const setFeatching = function (isActive):setFeatchingType {
     return { type: TOGGLE_IS_FEATCHING, isFeatching: isActive, }
 }
-export const setProgressing = function (isProcessing, userId) {
+type setFeatchingType = {
+    type: typeof TOGGLE_IS_FEATCHING,
+    isFeatching: boolean | null,
+};
+
+
+export const setProgressing = function (isProcessing, userId):setProgressingType {
+    console.log(isProcessing);
+    
     return { type: TOGGLE_SET_PROCESSING, isProcessing, userId, }
 }
-
+type setProgressingType = {
+    type:typeof TOGGLE_SET_PROCESSING,
+    isProcessing:Array<object>,
+    userId:number, 
+};
 
 
 

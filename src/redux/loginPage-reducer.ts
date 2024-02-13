@@ -1,11 +1,15 @@
-import { Navigate } from "react-router-dom";
-import { authAPI } from "../api/api";
+/* import { Navigate } from "react-router-dom";
+import { authAPI } from "../api/api"; */
 const SET_MESSAGE = 'SET_MESSAGE';
-const initialState = {
+
+const initialState:initialStateType = {
     message: ``,
 };
+type initialStateType = {
+    message:string,
+};
 
-const LoginPageReducer = function (state = initialState, action) {
+const LoginPageReducer = function (state = initialState, action:any):initialStateType {
 
     switch (action.type) {
         case SET_MESSAGE:
@@ -17,10 +21,14 @@ const LoginPageReducer = function (state = initialState, action) {
     }
 }
 
-export const setMessage = (message) => {
+export const setMessage = (message):setMessage => {
     
     return { type: SET_MESSAGE, message, }
 }
+type setMessage = {
+    type: typeof SET_MESSAGE,
+    message:string,   
+};
 
 /* export const checkInputData = (email, pass, rememberMe) => {
     return function (dispatch) {

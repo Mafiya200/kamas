@@ -2,7 +2,26 @@ const add_User_Message = `add-User-Message`;
 const create_Message = `create-Message`;
 
 
-let initialState = {
+////TYPE
+export type initialStateType = {
+    namesArray: Array<itemArrayType>,
+    userMessages: userMessagesType,
+};///initialStateType
+export type itemArrayType = {
+    name: string,
+    id: number,
+};///initialStateType
+export type userMessagesType = {
+    message: string,
+    messageArr: object,
+};///initialStateType
+
+
+
+
+
+////TYPE
+let initialState: initialStateType = {
 
     namesArray: [
         { name: 'andrew', id: 1, },
@@ -40,31 +59,40 @@ let initialState = {
 };
 
 
-const dialogsReducer = function (state = initialState, action) {
+
+
+
+
+
+
+
+
+const dialogsReducer = function (state = initialState, action: any): initialStateType {
 
     switch (action.type) {
 
-        
+
         case create_Message: {
-            let stateCopy= { ...state,
-                userMessages:{...state.userMessages,messageArr:{ ...state.userMessages.messageArr }, message:''},
-            
+            let stateCopy = {
+                ...state,
+                userMessages: { ...state.userMessages, messageArr: { ...state.userMessages.messageArr }, message: '' },
+
             };
 
             /* let add = { id: 0, key: 0, message: state.userMessages.message }; */
             /* state.userMessages.messageArr[action.nameItem].push(add); */
             /* stateCopy.userMessages = {...state.userMessages};
             stateCopy.userMessages.messageArr = { ...state.userMessages.messageArr }; */
-            console.log(action.textareaMessage);
-            stateCopy.userMessages.messageArr[action.nameItem] = [ ...state.userMessages.messageArr[action.nameItem],{ id: 0, key: 0, message: action.textareaMessage } ];
-           /*  stateCopy.userMessages.messageArr[action.nameItem].push(add); */
+
+            stateCopy.userMessages.messageArr[action.nameItem] = [...state.userMessages.messageArr[action.nameItem], { id: 0, key: 0, message: action.textareaMessage }];
+            /*  stateCopy.userMessages.messageArr[action.nameItem].push(add); */
             /* stateCopy.userMessages.message = ''; */
 
             return stateCopy;
         }
         case add_User_Message: {
             let stateCopy = { ...state };
-            stateCopy.userMessages = {...state.userMessages};
+            stateCopy.userMessages = { ...state.userMessages };
             stateCopy.userMessages.message = action.text;
             return stateCopy;
 
@@ -88,12 +116,19 @@ const dialogsReducer = function (state = initialState, action) {
 
 
 
-export const addUserMessageActionCreator = function (text) {
+export const addUserMessageActionCreator = function (text: string): addUserMessageActionType {
     return ({ type: add_User_Message, text: text, });
 }
+type addUserMessageActionType = {
+    type: typeof add_User_Message,
+    text: string,
+};
 
-export const createMessageActionCreator = function (nameItem,textareaMessage) {
-    
+
+
+
+export const createMessageActionCreator = function (nameItem: string, textareaMessage: string) {
+
     return ({ type: create_Message, nameItem: nameItem, textareaMessage, });
 }
 export default dialogsReducer;

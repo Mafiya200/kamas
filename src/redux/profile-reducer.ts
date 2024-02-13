@@ -1,4 +1,7 @@
+
+
 import { authAPI, profileAPI, usersAPI } from "../api/api";
+
 
 const add_Message_User = `add-Message-User`;
 /* const add_Symbol = `add-Symbol`; */
@@ -6,9 +9,19 @@ const SET_USER_PROFILE = `setUserProfile`;
 const PROFILE_STATUS = `ProfileStatus`;
 const DELETE_MESSAGE_USER = `DELETE_MESSAGE_USER`;
 const DELETE_POST = 'DELETE_POST';
-let initialState = {
+const SET_PHOTO_FILE = 'setPhotoFile';
+const SET_PROFILE = 'SET_PROFILE';
+const SET_ERROR = 'SET_ERROR';
+
+
+let initialState: initialStateType = {
     profileUser: {},
     userStatus: "",
+    errorMessage: null,
+
+
+
+    /*  photoFile: null, */
     myPosts: {
 
 
@@ -26,8 +39,23 @@ let initialState = {
 
     },
 };
+type postArrItemType = {
+    id: number,
+    message: string,
+    likes: number | null,
+    name: string,
+};
+type myPostsType = {
+    postArr: Array<postArrItemType>
+};
+type initialStateType = {
+    profileUser: Object,
+    userStatus: string | null,
+    errorMessage: string | null,
+    myPosts: myPostsType,
+};
 
-const profileReducer = function (state = initialState, action) {
+const profileReducer = function (state = initialState, action): initialStateType {
 
 
     switch (action.type) {
@@ -95,6 +123,27 @@ const profileReducer = function (state = initialState, action) {
             console.log(stateCopy);
             return stateCopy;
         }
+        case SET_PHOTO_FILE: {/////////////////////////////
+            let stateCopy = { ...state };
+            stateCopy.profileUser = { ...state.profileUser, photos: action.photos, };
+
+            return stateCopy;
+
+        }
+        case SET_PROFILE: {
+            let stateCopy = { ...state };
+
+
+
+            stateCopy.profileUser = { ...state.profileUser, ...action.data };
+            return stateCopy;
+        }
+        case SET_ERROR: {
+
+            let stateCopy = { ...state, errorMessage: action.errorMessage };
+
+            return stateCopy;
+        }
         default:
             return state;
 
@@ -107,27 +156,44 @@ const profileReducer = function (state = initialState, action) {
 
 
 
-export const addMessageUserActionCreator = function (textNewMessage) {
+export const addMessageUserActionCreator = function (textNewMessage): addMessageUserActionType {
     return (
         { type: add_Message_User, textNewMessage, }
     );
 }
-
-export const deleteMessageUserActionCreator = function () {
+type addMessageUserActionType = {
+    type: typeof add_Message_User,
+    textNewMessage: string,
+};
+export const deleteMessageUserActionCreator = function (): deleteMessageUserActionType {
     return (
         { type: DELETE_MESSAGE_USER, }
     );
 }
-export const deletePost = function (idPost) {
+type deleteMessageUserActionType = {
+    type: typeof DELETE_MESSAGE_USER,
+};
+export const deletePost = function (idPost): deletePostActionType {
+
+
     return (
         { type: DELETE_POST, idPost, }
     );
 }
-export const setUserProfile = function (userProfile) {
+type deletePostActionType = {
+    type: typeof DELETE_POST,
+    idPost: number,
+};
+export const setUserProfile = function (userProfile): setUserProfileActionType {
+
+
     return (
         { type: SET_USER_PROFILE, userProfile, }
     );
 }
+type setUserProfileActionType = {
+    type: typeof SET_USER_PROFILE, userProfile: Object,
+};
 export const getUserProfile = function (userId) {
     return async (dispatch) => {
         let data = await usersAPI.getProfile(userId);
@@ -181,10 +247,12 @@ export const getMyProfile = function () {
 }
 
 
-export const setProfileStatus = (status) => {
+export const setProfileStatus = (status): setProfileStatusActionType => {
     return { type: PROFILE_STATUS, status }
 }
-
+type setProfileStatusActionType = {
+    type: typeof PROFILE_STATUS, status: string,
+};
 
 export const getProfileStatus = (userId) => {
     return async (dispatch) => {
@@ -196,16 +264,89 @@ export const getProfileStatus = (userId) => {
 }
 export const updateProfileStatus = (status) => {
     return async (dispatch) => {
+        try {
+            let datar = await profileAPI.updateStatus(status);
+            if (datar.data.resultCode == 0) {
+                dispatch(setProfileStatus(status));
+            }
+        } catch (error) {
+            console.log(error);
+        }
 
+    }
+}
+export const savePhoto = (photo) => {
 
-        let datar = await profileAPI.updateStatus(status);
+    return async (dispatch) => {
 
+        let response = await profileAPI.setPhotoAuthUser(photo);
 
-        if (datar.data.resultCode == 0) {
-            dispatch(setProfileStatus(status));
+        if (response.data.resultCode === 0) {
+            dispatch(savePhotoFile(response.data.data.photos));
 
         }
 
     }
 }
+export const savePhotoFile = (photos): savePhotoFileActionType => {
+    return { type: SET_PHOTO_FILE, photos };
+}
+type savePhotoFileActionType = {
+    type: typeof SET_PHOTO_FILE, photos: string,
+};
+
+
+
+
+export const saveProfile = (formData) => {
+
+    return async (dispatch, getState) => {
+
+        let response = await profileAPI.setProfileAuthUser(formData);
+
+
+        if (response.data.resultCode === 0) {
+            /* dispatch(setProfile(formData)); */
+            const userId = getState().auth.id;
+            if (formData) {
+                /* dispatch(setUserProfile(formData)); */
+
+                dispatch(getUserProfile(userId));
+                dispatch(setError(null));
+            }
+        }
+        else {
+
+            if (response.data.messages[0]) {
+
+                dispatch(setError(response.data.messages[0]));
+
+            }
+
+        }
+        return response;
+
+    }
+}
+
+export const setProfile = (data):setProfileActionType => {
+    return { type: SET_PROFILE, data: data }
+}
+type setProfileActionType = {
+    type: typeof SET_PROFILE, data: Object,
+};
+
+
+
+
+
+
+
+export const setError = (errorMessage):setErrorActionType => {
+    return { type: SET_ERROR, errorMessage, };
+}
+type setErrorActionType = {
+    type:typeof SET_ERROR, errorMessage:string, 
+};
+
 export default profileReducer;

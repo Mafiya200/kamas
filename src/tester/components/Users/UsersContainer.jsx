@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React from 'react';
 import Users from './Users';
-import { updateUsers, follow, setTotalUsers, unFollow, setProgressing, getUsers, doUnFollow, doFollow } from "../../../redux/Users-reduced";
+import { updateUsers, follow, setTotalUsers, unFollow, setProgressing, getUsers, doUnFollow, doFollow } from "../../../redux/Users-reduced.ts";
 import Spiner from "../Generalis/Spiner/Spiner";
 import { getIsFeatching, getIsProcessing, getPageActive, getPageSize, getTotalUsersCount, getUserIdProcessing, getUserProcessing, getUsersStateSelector } from "../../../redux/user-selectors";
 

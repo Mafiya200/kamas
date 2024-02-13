@@ -14,7 +14,7 @@ import HeaderContainer from './tester/components/Header/HeaderContainer';
 import { connect } from 'react-redux';
 
 import { compose } from 'redux';
-import { initializeApp } from './redux/app-reducer';
+import { initializeApp } from './redux/app-reducer.ts';
 import Spiner from './tester/components/Generalis/Spiner/Spiner';
 import { Suspense } from 'react';
 
@@ -26,10 +26,23 @@ const ProfileContainer = React.lazy(() => import('./tester/components/Profile/Pr
 
 
 class App extends React.Component {
+  handleError = (rejects) => {
+    console.log(rejects);
+  }
 
 
   componentDidMount() {
     this.props.initializeApp();
+
+    /*  this.handleError(); */
+
+    window.addEventListener('rejectionhandled', this.handleError);
+
+
+
+  }
+  componentWillUnmount() {
+    window.removeEventListener('rejectionhandled', this.handleError);
   }
 
 
@@ -84,6 +97,8 @@ class App extends React.Component {
                 <Route path='music/*' element={<><Music />   </>} />
                 <Route path='settings/*' element={<><Settings />   </>} />
                 <Route path='login/*' element={<><LoginPageContainer /></>} />
+                {/* <Route path='/kamas' element={<ProfileContainer />} /> */}
+                <Route path='/' element={<ProfileContainer />} />
               </Routes>
             </Suspense>
 
