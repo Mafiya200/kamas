@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FC, FocusEvent, MouseEvent, useState } from "react";
 /* import { createStoreHook } from "react-redux";
  */
 
 
-const ProfileStatusWithHooks = (props) => {
+type propsType = {
+    isAuth: boolean,
+    userId: number | undefined,
+    profileStatus: string | undefined,
+    status?: string,
+    updateProfileStatus: (status: string | undefined | null) => void,
+    getProfileStatus: (userId: number) => void,
+
+};
+
+
+const ProfileStatusWithHooks: FC<propsType> = (props) => {
+
+
     /* let stateWithSetState = useState(false);
     let editMode = stateWithSetState[0];
     let setEditMode = stateWithSetState[1]; */
@@ -18,18 +31,18 @@ const ProfileStatusWithHooks = (props) => {
     let [editMode, setEditMode] = useState(false);
 
 
-    const activateEditMode = (e) => {
+    const activateEditMode = (e: MouseEvent<HTMLButtonElement>) => {
 
         setInputContent(props.status);
         setEditMode(true);
 
 
     }
-    const onStatusChange = (e) => {
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputContent(e.target.value);
 
     }
-    const closeEditMode = (e) => {
+    const closeEditMode = (e:FocusEvent<HTMLInputElement>) => {
         setEditMode(false);
 
         props.updateProfileStatus(e.target.value);
@@ -55,7 +68,6 @@ const ProfileStatusWithHooks = (props) => {
 
         </div >
     );
-
-
 }
+
 export default ProfileStatusWithHooks;

@@ -9,31 +9,11 @@ const User = function ({ userId, userAvatar, followed, isProcessing, name, userC
 
     const userDoFollow = function () {
        doFollow(userId);
-        /*         debugger
-         */     /*    props.setProgressing(true, props.userId);
-      
-      
-              usersAPI.userFollow(props.userId)
-                  .then((response) => {
-                      if (response.resultCode === 0) {
-                          props.follow(props.userId);
-                      }
-                      props.setProgressing(false, props.userId);
-      
-                  }); */
+    
     }
     const userDoUnFollow = function () {
         doUnFollow(userId);
-        /*   props.setProgressing(true, props.userId);
-  
-          usersAPI.userUnFollow(props.userId).then((response) => {
-              if (response.resultCode === 0) {
-                  props.unFollow(props.userId);
-              }
-              props.setProgressing(false, props.userId);
-  
-          });
-   */
+     
     }
 
 
@@ -50,7 +30,7 @@ const User = function ({ userId, userAvatar, followed, isProcessing, name, userC
 
     return (
 
-        <div className={UserStyle.user}>
+        <div key={userId} className={UserStyle.user}>
 
             <div className={UserStyle.user__body}>
                 <div className={UserStyle.subscribe__block}>

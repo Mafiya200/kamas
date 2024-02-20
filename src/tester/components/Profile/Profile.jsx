@@ -2,7 +2,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileShow from "./MyPosts/ProfileShow/ProfileShow";
 import ProfilePicture from "./ProfilePicture/ProfilePicture";
 
-import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
+import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks.tsx";
 
 
 

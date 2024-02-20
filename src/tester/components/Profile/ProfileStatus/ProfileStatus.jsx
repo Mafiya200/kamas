@@ -1,8 +1,15 @@
 import React from "react";
 
 
+type stateType = {
+    editMode: boolean,
+        status?: string, 
+}; 
+type propsType={
 
-class ProfileStatus extends React.Component {
+};
+
+class ProfileStatus extends React.Component<propsType,stateType> {
 
     componentDidMount() {
         

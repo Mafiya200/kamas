@@ -28,7 +28,7 @@ export type initialStateType = {
     id: number | null,
     email: string | null,
     login: string | null,
-    isAuth: boolean | null,
+    isAuth: boolean,
     isFetching: boolean | null,
     errorMessage: string | null,
     captchaUrl: string | null,
@@ -67,25 +67,36 @@ const authReducer = function (state = initialState, action: any): initialStateTy
     }
 }
 
-export const setAuthUserData = function (data): setAuthUserDataType {
+
+type setAuthUserDataType = {
+    email: string | null,
+    id: number | null,
+    login: string | null,
+    isAuth: boolean|null,
+    isFetching: boolean|null,
+};
+export const setAuthUserData = function (data: setAuthUserDataType): setAuthUserDataActionType {
+
+
+
     return { type: SET_USER_DATA, data, };
 }
-type setAuthUserDataType = {
+type setAuthUserDataActionType = {
     type: typeof SET_USER_DATA,
     data: object,
 };
 
 
-export const setDefaultData = function (data): setDefaultDataType {
+export const setDefaultData = function (data:setAuthUserDataType): setDefaultDataActionType {    
     return { type: SET_DEFAULT_DATA, data, };
 }
-type setDefaultDataType = {
+type setDefaultDataActionType = {
     type: typeof SET_DEFAULT_DATA,
     data: object,
 };
 
 export const getAuthUserData = function () {
-    return function (dispatch) {
+    return function (dispatch:any) {
         return authAPI.me()
             .then(data => {
 
@@ -99,8 +110,8 @@ export const getAuthUserData = function () {
 
 }
 
-export const login = (email, password, rememberMe, captcha) => {
-    return (async (dispatch) => {
+export const login = (email:string, password:string, rememberMe:boolean, captcha:any) => {
+    return (async (dispatch:any) => {
         let data = await authAPI.login(email, password, rememberMe, captcha);
 
         if (data.resultCode == 0) {
@@ -125,7 +136,7 @@ export const login = (email, password, rememberMe, captcha) => {
     });
 }
 export const getCaptchaUrl = () => {
-    return (async (dispatch) => {
+    return (async (dispatch:any) => {
 
 
         let response = await securityAPI.getSecurityCaptchaUrl();
@@ -139,21 +150,21 @@ export const getCaptchaUrl = () => {
 
     });
 }
-export const setCaptchaUrl = (url): setCaptchaUrl => {
+export const setCaptchaUrl = (url:string): setCaptchaActionUrl => {
 
     return { type: SET_CAPTCHA_URL, urlCaptcha: url, };
 
 }
-type setCaptchaUrl = {
+type setCaptchaActionUrl = {
     type: typeof SET_CAPTCHA_URL,
     urlCaptcha: string,
 };
 export const logout = () => {
-    return (function (dispatch) {
+    return (function (dispatch:any) {
         authAPI.logout().then((data) => {
             if (data.resultCode == 0) {
                 dispatch(setDefaultData({
-                    id: '',
+                    id: null,
                     email: '',
                     login: '',
                     isAuth: false,
@@ -164,10 +175,10 @@ export const logout = () => {
         });
     });
 }
-export const setErrorMessage = (message): setErrorMessage => {
+export const setErrorMessage = (message:string): setErrorMessageActionType => {
     return { type: SET_ERROR_MESSAGE, message };
 }
-type setErrorMessage = {
+type setErrorMessageActionType = {
     type: typeof SET_ERROR_MESSAGE,
     message: string,
 };

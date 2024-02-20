@@ -99,7 +99,7 @@ let store = {
 
 
     },
-    dispatch(active) {
+    dispatch(active:any) {
         this._state.NavBar = NavBarReducer(this._state.NavBar, active);
         this._state.dialogs = dialogsReducer(this._state.dialogs, active);
         this._state.profile = profileReducer(this._state.profile, active);

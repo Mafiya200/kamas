@@ -22,11 +22,11 @@ type initialStateType = {
 type friendsItemType = {
     id: number,
     name: string,
-    photo: string,
+    photo: string|null,
 };
 
 
-const NavBarReducer = function(state=initialState,active:any){
+const NavBarReducer = function(state=initialState,active:any):initialStateType{
 
     return state;
 }

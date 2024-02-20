@@ -2,12 +2,13 @@
 import { authAPI } from "../api/api"; */
 const SET_MESSAGE = 'SET_MESSAGE';
 
-const initialState:initialStateType = {
-    message: ``,
+const initialState = {
+    message: null as string|null,
 };
-type initialStateType = {
-    message:string,
-};
+type initialStateType = typeof initialState;
+
+
+
 
 const LoginPageReducer = function (state = initialState, action:any):initialStateType {
 
@@ -21,13 +22,13 @@ const LoginPageReducer = function (state = initialState, action:any):initialStat
     }
 }
 
-export const setMessage = (message):setMessage => {
+export const setMessage = (message:string|null):setMessageActionType => {
     
     return { type: SET_MESSAGE, message, }
 }
-type setMessage = {
+type setMessageActionType = {
     type: typeof SET_MESSAGE,
-    message:string,   
+    message:string|null,   
 };
 
 /* export const checkInputData = (email, pass, rememberMe) => {

@@ -21,9 +21,17 @@ let reducers = combineReducers({
     LoginPage: LoginPageReducer,
     app:AppReducer,
     form: formReducer,
+///RETURN state автомотически
 });
+type reducersType = typeof reducers;///type тир равен функция, но в этой функции return state
+export type StateType = ReturnType<reducersType>;//сделать тип из return функции, которая является типом typeof let func = ()=>{return value}, сделать тип для этого value
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+
+
 
 
 /* let store = createStore(reducers, applyMiddleware(thunk)); */

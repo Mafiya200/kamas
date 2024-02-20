@@ -8,11 +8,11 @@ export type initialStateType = {
     userMessages: userMessagesType,
 };///initialStateType
 export type itemArrayType = {
-    name: string,
-    id: number,
+    name: string | null,
+    id: number | null,
 };///initialStateType
 export type userMessagesType = {
-    message: string,
+    message: string | null,
     messageArr: object,
 };///initialStateType
 
@@ -21,7 +21,7 @@ export type userMessagesType = {
 
 
 ////TYPE
-let initialState: initialStateType = {
+let initialState : initialStateType = {
 
     namesArray: [
         { name: 'andrew', id: 1, },
@@ -66,7 +66,6 @@ let initialState: initialStateType = {
 
 
 
-
 const dialogsReducer = function (state = initialState, action: any): initialStateType {
 
     switch (action.type) {
@@ -75,7 +74,7 @@ const dialogsReducer = function (state = initialState, action: any): initialStat
         case create_Message: {
             let stateCopy = {
                 ...state,
-                userMessages: { ...state.userMessages, messageArr: { ...state.userMessages.messageArr }, message: '' },
+                userMessages: { ...state.userMessages, messageArr: { ...state.userMessages.messageArr }, message: null },
 
             };
 
@@ -110,14 +109,8 @@ const dialogsReducer = function (state = initialState, action: any): initialStat
 }
 
 
-
-
-
-
-
-
 export const addUserMessageActionCreator = function (text: string): addUserMessageActionType {
-    return ({ type: add_User_Message, text: text, });
+    return ({ type: add_User_Message, text, });
 }
 type addUserMessageActionType = {
     type: typeof add_User_Message,
@@ -127,8 +120,15 @@ type addUserMessageActionType = {
 
 
 
-export const createMessageActionCreator = function (nameItem: string, textareaMessage: string) {
+export const createMessageActionCreator = function (nameItem: string | null, textareaMessage: string | null): createMessageActionType {
 
     return ({ type: create_Message, nameItem: nameItem, textareaMessage, });
 }
+type createMessageActionType = {
+    type: typeof create_Message,
+    nameItem: string | null,
+    textareaMessage: string | null,
+};
+
+
 export default dialogsReducer;

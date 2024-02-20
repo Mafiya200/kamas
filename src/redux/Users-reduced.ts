@@ -1,5 +1,6 @@
 import { usersAPI } from "../api/api";
 import { updateObjectArray } from "../utils/validators/object-helpers";
+import { userProfileType } from "./profile-reducer";
 
 const FOLLOW = `follow`;
 const unFOLLOW = `unFollow`;
@@ -10,44 +11,50 @@ const TOGGLE_IS_FEATCHING = 'TOGGLE_IS_FEATCHING';
 const TOGGLE_SET_PROCESSING = `TOGGLE_SET_PROCESSING`;
 
 
-let initialState: initialStateType = {
+let initialState = {
     User: {
-        UsersArray: [],
+        UsersArray: [] as Array<UsersArrayType>,
+
         pageSize: 100,
         totalItemsCount: 0,
         pageActive: 1,
-        isFeatching: false,
+        isFeatching: false as boolean | null,
         ///сюда 10
-        sizeLengthPaginationUser: 5,///сколько цифр в строке навигации
-        isProcessing: [],
+        sizeLengthPaginationUser: 5 as number|undefined,///сколько цифр в строке навигации
+        isProcessing: [] as Array<number>,
+        /* userProcessing:[] as Array<number>,
+        userIdProcessing:[] as Array<number>, */
         /* userProcessing:[], */
     },
 };
 
 type initialStateType = {
-    User: initialStateUserType,
+    User: UserType,
+};
+
+type UserType = typeof initialState.User;
+
+
+export type UsersArrayType = {
+    followed: boolean,
+    id: number,
+    name: string,
+    photos: { small: null | string, large: null | string, },
+    status: null | string,
+    uniqueUrlName: null | string,
+
+    userCity?: string | null,
+    userCountry?: string | null,
+    userAboutMe?: string | null,
+
+
+
 };
 
 
-type initialStateUserType = {
-
-    UsersArray: Array<object>,
-    pageSize: number,
-    totalItemsCount: number,
-    pageActive: number,
-    isFeatching: boolean | null,
-    ///сюда 10
-    sizeLengthPaginationUser: number,///сколько цифр в строке навигации
-    isProcessing: Array<object>,
-    /* userProcessing:[], */
-
-};
 
 
-
-
-
-const UsersReducer = function (state = initialState, action): initialStateType {
+const UsersReducer = function (state = initialState, action: any): initialStateType {
 
 
 
@@ -105,7 +112,6 @@ const UsersReducer = function (state = initialState, action): initialStateType {
             }); */
             stateCopy.User.UsersArray = updateObjectArray(stateCopy.User.UsersArray, action.id, 'id', { followed: false });
 
-
             return stateCopy;
         }
         case SET_USERS: {
@@ -142,13 +148,15 @@ const UsersReducer = function (state = initialState, action): initialStateType {
             if (action.isProcessing) {
 
 
+
+
                 stateCopy.User = { ...state.User, isProcessing: [...state.User.isProcessing, action.userId], }
 
             }
             else {
 
                 stateCopy.User = {
-                    ...state.User, isProcessing: state.User.isProcessing.filter((item, index, array) => {
+                    ...state.User, isProcessing: state.User.isProcessing.filter((item) => {
 
                         if (!(item == action.userId)) {
                             return item;
@@ -173,55 +181,64 @@ const UsersReducer = function (state = initialState, action): initialStateType {
 }
 
 
-export const follow = function (userId):followType {
+export const follow = function (userId: number | null): followActionType {
 
     return ({
         type: FOLLOW, id: userId,
     });
 }
-type followType = {
-    type: typeof FOLLOW, id: number,
+type followActionType = {
+    type: typeof FOLLOW, id: number | null,
 };
 
-export const unFollow = function (userId):unFollowType {
+export const unFollow = function (userId: number | null): unFollowActionType {
 
     return ({
         type: unFOLLOW, id: userId,
     });
 }
-type unFollowType = {
+type unFollowActionType = {
     type: typeof unFOLLOW,
-    id: number,
+    id: number | null,
 };
 
-export const updateUsers = function (usersArray):updateUsersType {
+export const updateUsers = function (usersArray: Array<UsersArrayType>): updateUsersActionType {
+
+
+
     return {
         type: SET_USERS, users: usersArray,
     };
 }
-type updateUsersType = {
-    type:typeof SET_USERS,
-    users:Array<object>,  
+
+type updateUsersActionType = {
+    type: typeof SET_USERS,
+    users: Array<object>,
 };
 
-export const changeListUsers = function (numberList):changeListUsersType {
+export const changeListUsers = function (numberList: number): changeListUsersActionType {
 
-    
+
     return { type: SET_PAGE_ACTIVE, numberList };
 }
-type changeListUsersType = {
-    type:typeof SET_PAGE_ACTIVE,
-    numberList:number,
+type changeListUsersActionType = {
+    type: typeof SET_PAGE_ACTIVE,
+    numberList: number,
 };
-export const setTotalUsers = function (totalItems):setTotalUsersType {
-    
+
+
+
+//////////////////////////////
+//////////////////////////////
+export const setTotalUsers = function (totalItems: number): setTotalUsersType {
+
     return { type: SET_TOTAL_USERS, totalItems }
 }
 type setTotalUsersType = {
-    type:typeof SET_TOTAL_USERS,
-    totalItems:number,
+    type: typeof SET_TOTAL_USERS,
+    totalItems: number,
 };
-export const setFeatching = function (isActive):setFeatchingType {
+export const setFeatching = function (isActive: boolean | null): setFeatchingType {
     return { type: TOGGLE_IS_FEATCHING, isFeatching: isActive, }
 }
 type setFeatchingType = {
@@ -230,22 +247,22 @@ type setFeatchingType = {
 };
 
 
-export const setProgressing = function (isProcessing, userId):setProgressingType {
-    console.log(isProcessing);
-    
+export const setProgressing = function (isProcessing: boolean, userId: number): setProgressingType {
+
+
     return { type: TOGGLE_SET_PROCESSING, isProcessing, userId, }
 }
 type setProgressingType = {
-    type:typeof TOGGLE_SET_PROCESSING,
-    isProcessing:Array<object>,
-    userId:number, 
+    type: typeof TOGGLE_SET_PROCESSING,
+    isProcessing: boolean,
+    userId: number,
 };
 
 
 
-export const getUsers = (pageActive, pageSize) => {
+export const getUsers = (pageActive: number, pageSize: number) => {
 
-    return async (dispatch) => {
+    return async (dispatch: any) => {
 
         dispatch(changeListUsers(pageActive));
         dispatch(setFeatching(true));
@@ -253,7 +270,11 @@ export const getUsers = (pageActive, pageSize) => {
         let data = await usersAPI.getUsers(pageActive, pageSize);
 
         dispatch(updateUsers(data.items));
+
+
         dispatch(setTotalUsers(data.totalCount));
+
+
         dispatch(setFeatching(false));
 
 
@@ -262,9 +283,9 @@ export const getUsers = (pageActive, pageSize) => {
 
 
 }
-export const doUnFollow = (userId) => {
+export const doUnFollow = (userId: number) => {
 
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         /*  dispatch(setProgressing(true, userId));
  
          let data = await usersAPI.userUnFollow(userId);
@@ -281,8 +302,8 @@ export const doUnFollow = (userId) => {
 
 
 
-export const doFollow = (userId) => {
-    return async (dispatch) => {
+export const doFollow = (userId: number) => {
+    return async (dispatch: any) => {
         /* dispatch(setProgressing(true, userId));
 
         let data = await usersAPI.userFollow(userId);
@@ -299,7 +320,7 @@ export const doFollow = (userId) => {
 
 
 
-const followUnfollowFlow = async (dispatch, userId, method, AC) => {
+const followUnfollowFlow = async (dispatch: any, userId: number, method: any, AC: any) => {
 
     dispatch(setProgressing(true, userId));
 

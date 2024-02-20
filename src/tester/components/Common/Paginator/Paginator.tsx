@@ -3,14 +3,19 @@ import PaginatorStyle from './Paginator.module.css';
 import React, { useState } from 'react';
 ////changeListUsers
 
+type Props = {
+    totalItemsCount:number,
+     pageSize:number,
+      pageActive:number,
+       sizeLengthPaginationUser?: number,
+};
 
-
-const Paginator = function ({ totalItemsCount, pageSize, pageActive, sizeLengthPaginationUser}) {
+const Paginator: React.FC<Props> = function ({ totalItemsCount, pageSize, pageActive, sizeLengthPaginationUser = 10}) {
     
     let [itemLength, setItemLength] = useState(Math.ceil(pageActive/sizeLengthPaginationUser));
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
-    let pages = [];
+    let pages:Array<number> = [];
 
 
     let clickBack = (e) => {

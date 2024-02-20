@@ -16,7 +16,7 @@ const SET_ERROR = 'SET_ERROR';
 
 let initialState: initialStateType = {
     profileUser: {},
-    userStatus: "",
+    userStatus: null,
     errorMessage: null,
 
 
@@ -39,23 +39,44 @@ let initialState: initialStateType = {
 
     },
 };
-type postArrItemType = {
+export type postArrItemType = {
     id: number,
     message: string,
     likes: number | null,
     name: string,
 };
-type myPostsType = {
-    postArr: Array<postArrItemType>
-};
+
 type initialStateType = {
-    profileUser: Object,
-    userStatus: string | null,
+    profileUser: profileUserType,
+    userStatus?: string|null,
     errorMessage: string | null,
-    myPosts: myPostsType,
+    myPosts: { postArr: Array<postArrItemType> },
+
+
+
+
+
+
+
+
 };
 
-const profileReducer = function (state = initialState, action): initialStateType {
+
+
+export type profileUserType = {
+    aboutMe?: boolean | null | undefined,
+    contacts?: contactsType,
+    fullName?: string | null,
+    lookingForAJob?: boolean | null,
+    lookingForAJobDescription?: boolean | null,
+    photos?: photosType,
+    userId?: number | null,
+};
+
+
+
+
+const profileReducer = function (state = initialState, action: any): initialStateType {
 
 
     switch (action.type) {
@@ -125,6 +146,7 @@ const profileReducer = function (state = initialState, action): initialStateType
         }
         case SET_PHOTO_FILE: {/////////////////////////////
             let stateCopy = { ...state };
+
             stateCopy.profileUser = { ...state.profileUser, photos: action.photos, };
 
             return stateCopy;
@@ -156,7 +178,16 @@ const profileReducer = function (state = initialState, action): initialStateType
 
 
 
-export const addMessageUserActionCreator = function (textNewMessage): addMessageUserActionType {
+
+
+
+
+
+
+
+
+
+export const addMessageUserActionCreator = function (textNewMessage: string): addMessageUserActionType {
     return (
         { type: add_Message_User, textNewMessage, }
     );
@@ -173,7 +204,7 @@ export const deleteMessageUserActionCreator = function (): deleteMessageUserActi
 type deleteMessageUserActionType = {
     type: typeof DELETE_MESSAGE_USER,
 };
-export const deletePost = function (idPost): deletePostActionType {
+export const deletePost = (idPost: number): deletePostActionType => {
 
 
     return (
@@ -184,18 +215,45 @@ type deletePostActionType = {
     type: typeof DELETE_POST,
     idPost: number,
 };
-export const setUserProfile = function (userProfile): setUserProfileActionType {
-
+export const setUserProfile = function (userProfile: userProfileType): setUserProfileActionType {
 
     return (
         { type: SET_USER_PROFILE, userProfile, }
     );
 }
+
+
 type setUserProfileActionType = {
-    type: typeof SET_USER_PROFILE, userProfile: Object,
+    type: typeof SET_USER_PROFILE, userProfile: userProfileType,
+
+
 };
-export const getUserProfile = function (userId) {
-    return async (dispatch) => {
+export type userProfileType = {
+    aboutMe: boolean | null | undefined,
+    contacts: contactsType,
+    fullName: string | null,
+    lookingForAJob: boolean | null,
+    lookingForAJobDescription: boolean | null,
+    photos: photosType,
+    userId: number | null,
+};
+type contactsType = {
+    facebook: string | null,
+    github: string | null,
+    instagram: string | null,
+    mainLink: string | null,
+    twitter: string | null,
+    vk: string | null,
+    website: string | null,
+    youtube: string | null,
+};
+type photosType = {
+    small: string | null | undefined,
+    large: string | null | undefined,
+};
+
+export const getUserProfile = function (userId: number) {
+    return async (dispatch: any) => {
         let data = await usersAPI.getProfile(userId);
 
         dispatch(setUserProfile(data));
@@ -205,7 +263,7 @@ export const getUserProfile = function (userId) {
 }
 export const getMyProfile = function () {
 
-    return function (dispatch) {
+    return function (dispatch: any) {
 
         authAPI.me().then((data) => {
             if (data.resultCode === 1) {
@@ -247,23 +305,23 @@ export const getMyProfile = function () {
 }
 
 
-export const setProfileStatus = (status): setProfileStatusActionType => {
+export const setProfileStatus = (status: string | null| undefined): setProfileStatusActionType => {
     return { type: PROFILE_STATUS, status }
 }
 type setProfileStatusActionType = {
-    type: typeof PROFILE_STATUS, status: string,
+    type: typeof PROFILE_STATUS, status: string | null|undefined,
 };
 
-export const getProfileStatus = (userId) => {
-    return async (dispatch) => {
+export const getProfileStatus = (userId: number) => {
+    return async (dispatch: any) => {
         let data = await profileAPI.getStatus(userId);
 
         dispatch(setProfileStatus(data));
 
     }
 }
-export const updateProfileStatus = (status) => {
-    return async (dispatch) => {
+export const updateProfileStatus = (status: string | null| undefined) => {
+    return async (dispatch: any) => {
         try {
             let datar = await profileAPI.updateStatus(status);
             if (datar.data.resultCode == 0) {
@@ -275,9 +333,9 @@ export const updateProfileStatus = (status) => {
 
     }
 }
-export const savePhoto = (photo) => {
+export const savePhoto = (photo: string) => {
 
-    return async (dispatch) => {
+    return async (dispatch: any) => {
 
         let response = await profileAPI.setPhotoAuthUser(photo);
 
@@ -288,19 +346,20 @@ export const savePhoto = (photo) => {
 
     }
 }
-export const savePhotoFile = (photos): savePhotoFileActionType => {
+export const savePhotoFile = (photos: photosType): savePhotoFileActionType => {
     return { type: SET_PHOTO_FILE, photos };
 }
 type savePhotoFileActionType = {
-    type: typeof SET_PHOTO_FILE, photos: string,
+    type: typeof SET_PHOTO_FILE, photos: photosType,
 };
 
 
 
 
-export const saveProfile = (formData) => {
+export const saveProfile = (formData: userProfileType) => {
 
-    return async (dispatch, getState) => {
+
+    return async (dispatch: any, getState: Function) => {
 
         let response = await profileAPI.setProfileAuthUser(formData);
 
@@ -308,7 +367,7 @@ export const saveProfile = (formData) => {
         if (response.data.resultCode === 0) {
             /* dispatch(setProfile(formData)); */
             const userId = getState().auth.id;
-            if (formData) {
+            if (userId) {
                 /* dispatch(setUserProfile(formData)); */
 
                 dispatch(getUserProfile(userId));
@@ -329,11 +388,13 @@ export const saveProfile = (formData) => {
     }
 }
 
-export const setProfile = (data):setProfileActionType => {
-    return { type: SET_PROFILE, data: data }
+export const setProfile = (data: userProfileType): setProfileActionType => {
+
+
+    return { type: SET_PROFILE, data, }
 }
 type setProfileActionType = {
-    type: typeof SET_PROFILE, data: Object,
+    type: typeof SET_PROFILE, data: userProfileType,
 };
 
 
@@ -342,11 +403,11 @@ type setProfileActionType = {
 
 
 
-export const setError = (errorMessage):setErrorActionType => {
+export const setError = (errorMessage: string | null): setErrorActionType => {
     return { type: SET_ERROR, errorMessage, };
 }
 type setErrorActionType = {
-    type:typeof SET_ERROR, errorMessage:string, 
+    type: typeof SET_ERROR, errorMessage: string | null,
 };
 
 export default profileReducer;

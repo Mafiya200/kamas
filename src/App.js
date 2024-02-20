@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import News from './tester/components/News/News';
 import Music from './tester/components/Music/Music';
 import Settings from './tester/components/Settings/Settings';
-import UsersContainer from './tester/components/Users/UsersContainer';
+import UsersContainer from './tester/components/Users/UsersContainer.tsx';
 import LoginPageContainer from './tester/components/LoginPage/LoginPageContainer';
 /* import DialogsContainer from './tester/components/Dialogs/DialogsContainer';
  */
@@ -22,7 +22,7 @@ import { Suspense } from 'react';
 
 
 const DialogsContainer = React.lazy(() => import('./tester/components/Dialogs/DialogsContainer'));
-const ProfileContainer = React.lazy(() => import('./tester/components/Profile/ProfileContainer'));
+const ProfileContainer = React.lazy(() => import('./tester/components/Profile/ProfileContainer.tsx'));
 
 
 class App extends React.Component {
@@ -128,6 +128,7 @@ const mapStateToProps = (state) => {
     initialized: state.app.initialized,
   };
 }
+
 
 export default compose(connect(mapStateToProps, { initializeApp, }))(App);
 
